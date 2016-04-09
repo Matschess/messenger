@@ -1,0 +1,240 @@
+/*CSS zu profile.php*/
+
+#portrait {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    margin-left: -100px;
+    border-radius: 50%;
+}
+
+.portraitLoader {
+    display: none;
+    position: absolute;
+    width: 100px;
+    top: 50px;
+}
+
+#portraitImage {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -ms-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
+}
+
+#portraitUploadInput {
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+    margin-left: -40px;
+    vertical-align: middle;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+    cursor: pointer;
+}
+
+#portraitOptions {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#portraitChange {
+    position: absolute;
+    top: 20px;
+    left: 80px;
+}
+
+#portraitChange i {
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#portraitDelete {
+    position: absolute;
+    bottom: 20px;
+    left: 90px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#portraitOptions:hover {
+    opacity: 1;
+}
+
+.portraitOverlaySmall {
+    font-size: 20px;
+    opacity: 0;
+    color: #fff;
+    background-color: red;
+}
+
+#Content {
+    /*text-align: center;*/
+    position: relative;
+    margin-top: 20px;
+}
+
+#Profil {
+    font-family: Calibri;
+    font-size: 40px;
+}
+
+#profileText {
+    text-align: center;
+    font-size: 20px;
+}
+
+#myStatusEditButton {
+    margin-left: 10px;
+}
+
+#myStatusRenewButton, #myStatusCancelButton {
+    display: none;
+}
+
+.statusNone {
+    color: #848484;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.status {
+    color: #848484;
+    max-width: 50%;
+}
+
+#myStatusEdit {
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0 none;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 400;
+    width: 300px;
+    padding: 5px;
+    border-bottom: 1px solid #333;
+}
+
+#myStatusEdit:focus {
+    outline: 0 none;
+}
+
+#userID {
+    font-size: 10px;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 10px;
+    background-color: #333;
+    color: #fff;
+    vertical-align: middle;
+}
+
+#userID:hover {
+    cursor: default;
+}
+
+/* Selectbox */
+
+.selectBox {
+    text-align: left;
+    cursor: default;
+}
+
+#settings {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    text-align: left;
+}
+
+#myColor {
+    position: absolute;
+    font-size: 22px;
+    margin-left: 5px;
+}
+
+.selectBoxHeader {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 4px;
+    vertical-align: middle;
+    padding-left: 6px;
+    padding-right: 10px;
+}
+
+.selectBoxOption {
+    display: none;
+    background-color: #E6E6E6;
+    color: #333;
+    padding: 3px;
+    padding-left: 6px;
+}
+
+.selectBoxSelected {
+    background-color: #D8D8D8;
+}
+
+.button {
+    color: #fff;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 10px;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.getFriends, .acceptFriends, .endFriends, .waitFriends {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    vertical-align: middle;
+}
+
+.getFriends, .acceptFriends {
+    background-color: #27ae60;
+}
+
+.getFriends:hover, .acceptFriends:hover {
+    background-color: #2ecc71;
+}
+
+.endFriends {
+    background-color: #c0392b;
+}
+
+.endFriends:hover {
+    background-color: #e74c3c;
+}
+
+.waitFriends {
+    background-color: #333;
+}
+
+.waitFriends:hover {
+    background-color: #666;
+    cursor: default;
+}

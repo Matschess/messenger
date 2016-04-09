@@ -1,0 +1,672 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 30%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 69%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+/* Responsive Design ENDE */
+
+/* Loading effects */
+.contentLoader, .contentLoaderPattern {
+    display: none;
+    position: absolute;
+    width: 70px;
+    top: 205px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.smileyLoader {
+    position: absolute;
+    width: 60px;
+    top: 22px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    background-color: #2c3e50;
+    font-family: Roboto;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.bodyBefore {
+    opacity: 0;
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    transition: all 0.5s cubic-bezier(.15, 1.37, .42, 1.09);
+    -webkit-transition: all 0.5s cubic-bezier(.15, 1.37, .42, 1.09);
+    -moz-transition: all 0.5s cubic-bezier(.15, 1.37, .42, 1.09);
+}
+
+.bodyVisible {
+    opacity: 1;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+}
+
+/* Icons */
+.material-icons, .material-icons-small, .material-icons-tiny, .material-icons-thin {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.material-icons-small {
+    font-size: 17px;
+}
+
+.material-icons-tiny {
+    font-size: 15px;
+}
+
+.material-icons-thin {
+    font-size: 14px;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+/* Ende icons */
+
+#container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    height: 600px;
+}
+
+#containerLeft {
+    float: left;
+    background-color: #ecf0f1;
+    height: 100%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    border-bottom: 5px solid #bdc3c7;
+    border-radius: 0 0 4px 4px;
+    width: 30%;
+}
+
+#containerRight {
+    float: left;
+    background-color: #ecf0f1;
+    width: 69%;
+    height: 100%;
+    border-bottom: 5px solid #bdc3c7;
+    border-radius: 0 0 4px 4px;
+}
+
+#me {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+#mePortrait {
+    -webkit-transition: opacity 0.5s linear;
+    -moz-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+    transition: opacity 0.5s linear;
+}
+
+.meOption {
+    position: relative;
+    color: #222;
+    background-color: #E6E6E6;
+    box-shadow: 0px 1px 1px #999;
+    z-index: 99;
+}
+
+.meOption:hover {
+    background-color: #D8D8D8;
+    cursor: pointer;
+}
+
+#logout {
+    display: none;
+    position: fixed;
+    margin-top: 15px;
+    padding: 7.5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+#notifications {
+    display: none;
+    position: fixed;
+    margin-top: 65px;
+    padding: 7.5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+#enquiry {
+    display: none;
+    position: fixed;
+    margin-top: 115px;
+    padding: 7.5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+#add {
+    display: none;
+    position: fixed;
+    margin-top: 165px;
+    padding: 7.5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/*Buttons in Container left*/
+
+input {
+    border: 0 none;
+    outline: 0 none;
+}
+
+.button {
+    color: #fff;
+    padding: 8px;
+}
+
+.green {
+    background-color: #2ecc71;
+}
+
+.red {
+    background-color: #e74c3c;
+}
+
+.button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.buttonBlue {
+    float: left;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Calibri;
+    font-size: 18px;
+    line-height: 55px;
+    color: #333;
+    text-decoration: none;
+    background-color: #3498db;
+    border-top: 3px solid #3498db;
+    border-bottom: 3px solid #2980b9;
+    text-align: center;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+}
+
+.buttonBlue:hover {
+    background-color: #2C7FB6;
+    border-top: 3px solid #2C7FB6;
+    border-bottom: 3px solid #256B9A;
+    text-align: center;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.buttonBlue:active {
+    border-top: 3px solid #256B9A;
+    border-bottom: 3px solid #2C7FB6;
+}
+
+/*Buttons in Container left Ende*/
+
+#containerLeftSearch {
+    padding: 12px;
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+.button_small {
+    float: left;
+    text-transform: uppercase;
+    padding: 10px;
+    color: #333;
+    font-size: 14px;
+    background-color: #fff;
+    border: 0 none;
+}
+
+.button_small:hover {
+    color: #27ae60;
+    background-color: #ecf0f1;
+}
+
+/*Buttons in Container Right */
+
+.buttonTab {
+    float: left;
+    font-family: Calibri;
+    font-size: 18px;
+    line-height: 55px;
+    color: #333;
+    text-decoration: none;
+    background-color: #D8D8D8;
+    border-top: 3px solid #D8D8D8;
+    border-bottom: 3px solid #BDBDBD;
+    text-align: center;
+    transition: border-bottom 0.4s ease;
+    -webkit-transition: border-bottom 0.4s ease;
+    -moz-transition: border-bottom 0.4s ease;
+}
+
+.buttonTab:hover {
+    background-color: #BDBDBD;
+    border-top: 3px solid #BDBDBD;
+    border-bottom: 3px solid #2980b9;
+    cursor: pointer;
+}
+
+.buttonTab:active {
+    background-color: #A3A2A2;
+    border-top: 3px solid #818181;
+    border-bottom: 3px solid #A3A2A2;
+}
+
+.windowsLabel {
+    font-size: 14px;
+}
+
+.textbox {
+    position: relative;
+    width: 70%;
+    color: #fff;
+    border: 0;
+    padding: 10px;
+}
+
+.textbox_flat {
+    position: relative;
+    width: 70%;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    border-bottom: 1px solid #333;
+    padding: 3px;
+    padding-top: 10px;
+    display: inline-block;
+}
+
+.color_white {
+    background-color: #ecf0f1;
+    color: #333;
+}
+
+.color_grey {
+    color: #444;
+}
+
+.color_green {
+    background-color: #27ae60;
+}
+
+.textbox:focus, .button_small:focus { /* Freimachen */
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+    transition: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    outline: 0px none;
+}
+
+::-webkit-input-placeholder {
+    color: #333;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: #333;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: #333;
+}
+
+:-ms-input-placeholder {
+    color: #333;
+}
+
+.tableNavigation {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#div {
+    position: relative;
+    font-family: Roboto;
+    font-size: 17px;
+    font-weight: 400;
+    text-align: center;
+    height: 60px;
+    color: #fff;
+    background-color: #29b865;
+    opacity: 0.9;
+}
+
+#containerLeft .tableNavigation td {
+    width: 50%;
+}
+
+.tableNavigation td, #containerLeftSearch { /* Fade-effect for menu elements */
+    -webkit-transition: background-color 0.2s linear;
+    -moz-transition: background-color 0.2s linear;
+    -ms-transition: background-color 0.2s linear;
+    -o-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+}
+
+.navigationHover {
+    position: relative;
+    font-family: Roboto;
+    font-size: 17px;
+    font-weight: 400;
+    text-align: center;
+    height: 60px;
+    color: #fff;
+    background-color: #29b865;
+    opacity: 0.9;
+}
+
+.navigationHover:hover {
+    opacity: 0.8;
+}
+
+.navigationActive {
+    opacity: 1;
+}
+
+.navigationActive:hover {
+    opacity: 1;
+}
+
+.navigationNonHover {
+    padding-left: 10px;
+    width: 50px;
+    opacity: 0.9;
+}
+
+.icon_medium {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.icon_medium:hover {
+    cursor: pointer;
+}
+
+.icon_small {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.img_round {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    border-radius: 20px;
+    box-shadow: 0px 1px 1px #999;
+}
+
+.img_round_flat {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    border-radius: 20px;
+}
+
+.icon_minimal {
+    width: 14px;
+    height: 14px;
+    vertical-align: bottom;
+}
+
+.infoText {
+    font-size: 15px;
+}
+
+#portraitAlert {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 12px;
+    background-color: #e74c3c;
+    color: #fff;
+    font-weight: bold;
+    padding: 1px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 20px;
+}
+
+#enquiries {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 10px;
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 1px;
+    padding-left: 5px;
+    padding-right: 4px;
+    border-radius: 20px;
+}
+
+.portraitSmall {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.portraitTiny {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.link {
+    color: #000;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.short {
+    width: 80%;
+}
+
+.tableWide {
+    width: 100%;
+}
+
+.tdLong {
+    width: 90%;
+}
+
+.tdShort {
+    width: 10%;
+}
+
+#contacts {
+    height: 79%;
+}
+
+.contactSearchbox {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Chips */
+
+.chip, .chipGroupCreator, .chipAdministrator, .chipEmptyAdministrators, .chipEmptyMembers {
+    margin-top: 5px;
+    margin-right: 5px;
+    display: inline-block;
+    background-color: #D8D8D8;
+    border-radius: 14px;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+
+.chip, .chipAdministrator {
+    cursor: move;
+}
+
+.chip i, .chipAdministrator i {
+    cursor: default;
+}
+
+.chip img, .chipGroupCreator img, .chipAdministrator img {
+    width: 28px;
+    height: 28px;
+    border-radius: 14px;
+    vertical-align: middle;
+}
+
+.chip span, .chipGroupCreator span, .chipAdministrator span {
+    font-size: 14px;
+    color: #444;
+    vertical-align: middle;
+}
+
+.chipGroupCreator {
+    background-color: #27ae60;
+}
+
+.chipAdministrator {
+    background-color: #67CE92;
+}
+
+.chipGroupCreator span, .chipAdministrator span {
+    color: #fff;
+}
+
+.chipEmptyAdministrators, .chipEmptyMembers {
+    background-color: rgba(0, 0, 0, 0);
+    width: 50px;
+    height: 24px;
+    border: 1px dashed #BDBDBD;
+    vertical-align: middle;
+}
+
+#groupMembers {
+    display: inline;
+    margin-top: 5px;
+}
+
+#groupAdministrators {
+    display: inline;
+    vertical-align: middle;
+}
+
+#groupMemberSearch {
+    width: 20%;
+    height: 28px;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #444;
+    vertical-align: middle;
+}
+
+/* ENDE chips */
+
+/* Eomji */
+
+.emoji {
+    width: 1.5em;
+    height: 1.5em;
+    display: inline-block;
+    margin-bottom: -0.25em;
+    vertical-align: top;
+}
+
+/* Emoji ENDE */

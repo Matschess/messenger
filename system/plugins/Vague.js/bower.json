@@ -1,0 +1,15 @@
+{
+  "name": "Vague.js",
+  "version": "0.0.6",
+  "main": "Vague.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "*.jpg",
+    "*.css"
+  ],
+  "dependencies": {
+    "jquery": "*"
+  }
+}

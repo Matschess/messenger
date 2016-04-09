@@ -1,0 +1,18 @@
+#contactLoupe{
+transition: transform 0.2s ease;
+-webkit-transition: transform 0.2s ease;
+-moz-transition: transform 0.2s ease;
+}
+
+.rotated {
+    -webkit-transform: rotate(90deg);  /* Chrome, Safari 3.1+ */
+    -moz-transform: rotate(90deg);  /* Firefox 3.5-15 */
+    -ms-transform: rotate(90deg);  /* IE 9 */
+    -o-transform: rotate(90deg);  /* Opera 10.50-12.00 */
+    transform: rotate(90deg);  /* Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
+#foundContact{
+display: none;
+margin-top: 8px;
+}

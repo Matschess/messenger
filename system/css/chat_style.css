@@ -1,0 +1,346 @@
+#chatInfo {
+    text-align: left;
+    color: #fff;
+    width: 96%;
+    padding: 9px 2% 10px 2%;
+}
+
+#mediaboxInfo {
+    text-align: left;
+    color: #fff;
+    background-color: #333;
+    width: 96%;
+    padding: 10px 2% 10px 2%;
+}
+
+#userInfo {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#userstatus {
+    font-size: 12px;
+    font-style: italic;
+}
+
+#options {
+    position: absolute;
+    right: 6px;
+    top: 27px;
+}
+
+#optionsIcon {
+    margin-top: -12px;
+    vertical-align: middle;
+}
+
+#optionsIconMedia {
+    margin-top: -22px;
+    vertical-align: middle;
+}
+
+.option {
+    display: none;
+    font-size: 15px;
+    position: absolute;
+    right: 7px;
+    padding: 7.5px;
+    padding-right: 15px;
+    background-color: #FAFAFA;
+    color: #222;
+    min-width: 200px;
+    z-index: 1;
+    box-shadow: -1px 4px 8px -2px #BDBDBD;
+}
+
+.option:hover {
+    background-color: #E6E6E6;
+    cursor: pointer;
+}
+
+#deleteChat {
+    margin-top: -25px;
+    border-radius: 2px 2px 0px 0px;
+}
+
+#endFriends {
+    margin-top: 10px;
+    border-radius: 0px 0px 2px 2px;
+}
+
+#chatInput {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    background-color: #D8D8D8;
+    color: #333;
+    padding: 0 0 12px 0;
+    text-align: left;
+}
+
+#mediaboxOptions {
+    display: none;
+    position: absolute;
+    bottom: 24px;
+    background-color: #333;
+    color: #fff;
+    right: 15px;
+    padding: 15px 25px 15px 25px;
+}
+
+#chat, #mediabox {
+    position: relative;
+    height: 550px;
+}
+
+#content {
+    text-align: left;
+    padding: 2%;
+    height: 72%;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D8D8D8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Sprechblase */
+.bubble, .bubbleManuallyLeft, .bubbleManuallyRight {
+    display: inline-block;
+    padding: 5px;
+    background-color: #fff;
+    color: #333;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 3px;
+    vertical-align: middle;
+    box-shadow: 0px 1px 1px #999;
+    max-width: 60%;
+    text-align: left;
+    max-width: 70%;
+}
+
+.bubbleManuallyLeft {
+    margin-left: 50px;
+}
+
+.bubbleManuallyRight {
+    background-color: red;
+    margin-left: -20px;
+}
+
+.time {
+    color: #999;
+    font-size: 11px;
+    margin-left: 5px;
+    margin-right: 2px;
+}
+
+.thumbnail {
+    position: relative;
+    display: inline-block;
+    background-color: #3498db;
+    width: 100px;
+    height: 100px;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.thumbnail i {
+    display: none;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.thumbnail img {
+    width: 100px;
+    height: 100px;
+}
+
+.thumbnailMarked {
+    width: 80px;
+    height: 80px;
+    opacity: 0.2;
+}
+
+.chatLeft, .chatRight {
+    margin-bottom: 5px;
+}
+
+.chatRight {
+    text-align: right;
+}
+
+.chatTextBox {
+    display: inline-block;
+    font-size: 15px;
+    background-color: #E9E9E9;
+    color: #000;
+    padding: 6px;
+    margin-top: 12px;
+    width: 80%;
+    max-height: 150px;
+    margin-left: 10px;
+    border-radius: 2px;
+}
+
+.chatTextBox:focus {
+    outline: 0;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+/* Attach */
+
+#attach {
+    display: inline-block;
+}
+
+#attachButton {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+#attachNow {
+    opacity: 0;
+    width: 1px;
+}
+
+#attachFile {
+    display: none;
+    position: fixed;
+    margin-top: -90px;
+    padding: 7.5px;
+    padding-left: 0px;
+    border-radius: 20px;
+    background-color: #E6E6E6;
+    text-align: center;
+    box-shadow: 0px 1px 1px #999;
+}
+
+/* Emojis */
+
+#smileyChooser {
+    display: none;
+    background-color: #fff;
+    height: 152px;
+    padding-top: 0;
+    font-size: 0;
+}
+
+#attacher {
+    display: none;
+    background-color: #fff;
+    height: 152px;
+    padding-top: 0;
+    font-size: 0;
+}
+
+.tab {
+    display: inline-block;
+    background-color: #F2F2F2;
+    color: #333;
+    width: 20%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.tab:hover {
+    background-color: #D8D8D8;
+    cursor: pointer;
+}
+
+.tabActive {
+    background-color: #333;
+    color: #fff;
+}
+
+.tabActive:hover {
+    background-color: #333;
+}
+
+#smileyChooserContainer {
+    height: 100px;
+    padding: 8px;
+    padding-right: 20px;
+    cursor: default;
+    overflow-y: scroll;
+    font-size: 16px;
+}
+
+#smileyChooserContainer img {
+    width: 2.5em;
+    height: 2.5em;
+    display: inline-block;
+    vertical-align: top;
+    transform: scale(0.75);
+    -webkit-transform: scale(0.75);
+}
+
+#smileyChooserContainer img:hover {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+}
+
+/* Emojis ENDE */
+
+/* Material Icons */
+.material-icons, .material-icons-large {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.material-icons-large {
+    font-size: 28px;
+}
+
+/* Material Icons ENDE */
+
+#noChatActive {
+    font-size: 15px;
+    color: #222;
+    margin-top: 14px;
+}
+
+#noMessages, #noMedia {
+    font-size: 15px;
+    color: #222;
+}

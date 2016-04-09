@@ -1,0 +1,131 @@
+.divRight {
+    width: 80%;
+    float: right;
+}
+
+#portraitSmall {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+
+#profilbildSmall {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-transition: opacity 0.5s linear;
+    -moz-transition: opacity 0.2s ease;
+    -o-transition: opacity 0.2s ease;
+    transition: opacity 0.2s linear;
+}
+
+#portraitUpload {
+    opacity: 0;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    z-index: 1;
+}
+
+#portraitUpload:hover ~ #profilbildSmall {
+    opacity: 0.6;
+}
+
+#friendSuggestions {
+    display: none;
+    position: absolute;
+    font-size: 14px;
+    background-color: #E6E6E6;
+    margin-top: 30px;
+    margin-left: -20%;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.friendSuggestionsUser {
+    padding: 5px 10px 5px 5px;
+}
+
+.friendSuggestionsUser:hover {
+    background-color: #CFCFCF;
+    cursor: default;
+}
+
+.friendSuggestionsUser span {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.charCounter {
+    font-size: 12px;
+    vertical-align: bottom;
+    color: #333;
+}
+
+/* Smiley chooser */
+
+#smileyChooserBubble {
+    display: none;
+    position: absolute;
+    background-color: #e8e8e8;
+    width: 100%;
+    height: 200px;
+    margin-top: -240px;
+    padding: 8px 2% 0 1%;
+    font-size: 0;
+    z-index: 999;
+}
+
+.tab {
+    display: inline-block;
+    background-color: #D8D8D8;
+    color: #333;
+    width: 18%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    border-radius: 20px;
+    margin-left: 1%;
+}
+
+.tab i {
+    font-size: 20px;
+}
+
+.tab:hover {
+    background-color: #D8D8D8;
+    cursor: pointer;
+}
+
+.tabActive {
+    background-color: #b7b7b7;
+}
+
+.tabActive:hover {
+    background-color: #b7b7b7;
+}
+
+#smileyChooserContainer {
+    height: 150px;
+    padding: 8px;
+    padding-right: 20px;
+    padding-top: 0px;
+    margin-top: 10px;
+    cursor: default;
+    overflow-y: scroll;
+    font-size: 16px;
+}
+
+#smileyChooserContainer img {
+    width: 1.8em;
+    height: 1.8em;
+    margin: 0px 2px 4px 0px;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    cursor: pointer;
+}
+
+/* ENDE Smiley Chooser */
