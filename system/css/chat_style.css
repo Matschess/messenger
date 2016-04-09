@@ -340,7 +340,12 @@
     margin-top: 14px;
 }
 
-#noMessages, #noMedia {
+#noChat, #noMessages, #noMedia {
+    font-size: 15px;
+    color: #222;
+}
+
+#noChat, #noMessages, #noMedia {
     font-size: 15px;
     color: #222;
 }

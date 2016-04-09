@@ -35,8 +35,7 @@ $(document).ready(function () {
     });
 
     $('.thumbnail').dblclick(function () {
-        $chat_id = 1;
-        $media_id = 10;
+        $media_id = this.id;
         window.location = 'php/download_media.php?media_id[0]=' + $media_id + '&chat_id=' + $chat_id;
     });
 
@@ -49,11 +48,37 @@ $(document).ready(function () {
         $marked = markedMedia();
         $chat_id = 1;
         $media_ids = '';
-        $.each($marked, function (index, value) {
-            $media_ids = $media_ids + "&media_id[]=" + value;
-        });
-        $.get('php/delete_media.php?chat_id=' + $chat_id + $media_ids, function (data) {
+        $number = $marked.length;
+        if ($number) {
+            $.each($marked, function (index, value) {
+                $media_ids = $media_ids + "&media_id[]=" + value;
+            });
+
+            if ($number == 1) {
+                $('#popupTitle').html("Datei löschen?");
+            }
+            else {
+                $('#popupTitle').html("Datein löschen?");
+            }
+
+            window.mediaToDelete = $media_ids;
+
+            $('#popupContent').load('subpages/deleteMediaReally.php?number=' + $marked.length, function () {
+                $('#overlay').fadeIn(200);
+                $('#popup').fadeIn(200);
+            });
+
+
+        }
+    });
+
+    $('#popupContent').on("click", ".deleteMediaNow", function () {
+        $media_ids = window.mediaToDelete;
+
+        $.get('php/delete_media.php?' + $media_ids, function (data) {
             if (data == 'deleted') {
+                $('#overlay').fadeOut(200);
+                $('#popup').fadeOut(200);
                 reloadMediabox();
             }
         });

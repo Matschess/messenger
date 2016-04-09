@@ -3,7 +3,7 @@
 $file_dir = '../../data/media/'; // Directory to the medias of the chats
 
 $media_ids = $_GET["media_id"];
-$chat_id = $_GET["chat_id"];
+$chat_id = $_COOKIE["chat_id"];
 $file_dir .= $chat_id . "/";
 
 include("db_connect.php");

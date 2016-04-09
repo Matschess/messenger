@@ -10,19 +10,20 @@
 <div id="mediabox">
     <div id="mediaboxInfo">
         <?php
+        $toRoot = "../";
+        include($toRoot . "variables/user_id.php");
+
         include("db_connect.php");
 
         $chat_id = $_COOKIE["chat_id"];
 
-        $result = mysqli_query($db, "SELECT * FROM media WHERE chats_id = $chat_id");
+        $result = mysqli_query($db, "SELECT * FROM media WHERE chats_id = $chat_id && users_id = $user_id");
         $countMedias = mysqli_num_rows($result);
-        if($countMedias == 1) {
+        if ($countMedias == 1) {
             echo "1 Datei";
-        }
-        elseif($countMedias > 1) {
+        } elseif ($countMedias > 1) {
             echo $countMedias . " Dateien";
-        }
-        else {
+        } else {
             echo "Keine Dateien";
         }
         ?>
