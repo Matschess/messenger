@@ -58,13 +58,18 @@
     cursor: pointer;
 }
 
-#deleteChat, #downloadAllMedia {
+#deleteChat, #uploadNewMedia {
     margin-top: -25px;
     border-radius: 2px 2px 0px 0px;
 }
 
-#endFriends, #deleteMedia {
+#endFriends, #downloadAllMedia {
     margin-top: 8px;
+    border-radius: 0px 0px 2px 2px;
+}
+
+#deleteAllMedia {
+    margin-top: 41px;
     border-radius: 0px 0px 2px 2px;
 }
 
@@ -82,7 +87,7 @@
     display: none;
     position: absolute;
     bottom: 24px;
-    background-color: #333;
+    background-color: #555;
     color: #fff;
     right: 15px;
     padding: 15px 25px 15px 25px;

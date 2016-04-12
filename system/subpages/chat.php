@@ -51,7 +51,7 @@
 
             $color = $friendRows->color;
 
-            setcookie("messengerCurrentChatColor", $color, 0, '/'); // Set cookie until browser is closed
+            setcookie("messengerColor", $color, 0, '/'); // Set cookie until browser is closed
 
             // Online-time
             $last_seen = $friendRows->last_seen;
@@ -206,19 +206,27 @@
 
 <script>
     $(document).ready(function () {
-        $color = $.cookie('messengerCurrentChatColor');
-        if ($('#chatInfo').length) {
+        $cookieColor = $.cookie('messengerColor');
+        if ($cookieColor) {
+            $color = $cookieColor;
             if ($color) {
                 $('#containerRight .tableNavigation td, #chatInfo').css('background-color', $color);
                 $('#chat .doneAll').css('color', $color);
             }
-            else {
-                var sourceImage = document.getElementById("imgForBackground");
-                var colorThief = new ColorThief();
-                $color = colorThief.getColor(sourceImage);
-                $('#containerRight .tableNavigation td, #chatInfo').css('background-color', 'rgb(' + $color + ')');
-                $('#chat .doneAll').css('color', 'rgb(' + $color + ')');
+        }
+        else {
+            var sourceImage = document.getElementById("imgForBackground");
+            var colorThief = new ColorThief();
+            $color = colorThief.getColor(sourceImage);
+
+            if ($color[0] > 200 || $color[1] > 200 || $color[2] > 200) {
+                $color[0] = 180;
+                $color[1] = 180;
+                $color[2] = 180;
             }
+
+            $('#containerRight .tableNavigation td, #chatInfo').css('background-color', 'rgb(' + $color + ')');
+            $('#chat .doneAll').css('color', 'rgb(' + $color + ')');
         }
 
 

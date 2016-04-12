@@ -40,8 +40,18 @@ $(document).ready(function () {
     });
 
     $('#downloadAllMedia').click(function () {
-        $chat_id = 1;
         window.location = 'php/download_media.php?everything=true';
+    });
+
+    $('#deleteAllMedia').click(function () {
+        $('#popupTitle').html("Medienbox leeren?");
+
+        window.deleteAllMedia = true;
+
+        $('#popupContent').load('subpages/deleteMediaReally.php?everything=true', function () {
+            $('#overlay').fadeIn(200);
+            $('#popup').fadeIn(200);
+        });
     });
 
     $('#deleteMedia').click(function () {
@@ -61,6 +71,7 @@ $(document).ready(function () {
                 $('#popupTitle').html("Datein löschen?");
             }
 
+            window.deleteAllMedia = false;
             window.mediaToDelete = $media_ids;
 
             $('#popupContent').load('subpages/deleteMediaReally.php?number=' + $marked.length, function () {
@@ -73,9 +84,14 @@ $(document).ready(function () {
     });
 
     $('#popupContent').on("click", ".deleteMediaNow", function () {
-        $media_ids = window.mediaToDelete;
+        if (window.deleteAllMedia) {
+            $param = 'everything=true';
+        }
+        else {
+            $param = window.mediaToDelete;
+        }
 
-        $.get('php/delete_media.php?' + $media_ids, function (data) {
+        $.get('php/delete_media.php?' + $param, function (data) {
             if (data == 'deleted') {
                 $('#overlay').fadeOut(200);
                 $('#popup').fadeOut(200);
@@ -113,4 +129,12 @@ $(document).ready(function () {
         });
         return marked;
     };
+
+    $('.tooltip').tooltipster({
+        contentAsHTML: true,
+        animation: 'grow',
+        delay: 250,
+        theme: 'tooltipster-custom',
+        trigger: 'hover'
+    });
 });

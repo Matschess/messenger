@@ -29,6 +29,7 @@ $(document).ready(function () {
     });
 
     function loginNow() {
+        $('#loginNow').removeClass('loginNowWiggle');
         $username = $('#username').val();
         $password = $('#password').val();
         if ($username.trim() && $password.trim()) {
@@ -46,7 +47,7 @@ $(document).ready(function () {
                         $('#popup').fadeIn(200);
                     }
                     else {
-                        wiggle();
+                        $('#loginNow').addClass('loginNowWiggle');
                     }
                 });
         }
