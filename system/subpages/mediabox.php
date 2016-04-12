@@ -31,11 +31,11 @@
             <div id="optionsIcon">
                 <i class="material-icons hover" style="margin-right: 10px">more_vert</i>
             </div>
-            <div id="deleteChat" class="option">
-                Ordner leeren
-            </div>
-            <div id="downloadAll" class="option">
+            <div id="downloadAllMedia" class="option">
                 Alles herunterladen
+            </div>
+            <div id="deleteMedia" class="option">
+                Ordner leeren
             </div>
         </div>
     </div>

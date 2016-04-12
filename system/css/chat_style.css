@@ -58,13 +58,13 @@
     cursor: pointer;
 }
 
-#deleteChat {
+#deleteChat, #downloadAllMedia {
     margin-top: -25px;
     border-radius: 2px 2px 0px 0px;
 }
 
-#endFriends {
-    margin-top: 10px;
+#endFriends, #deleteMedia {
+    margin-top: 8px;
     border-radius: 0px 0px 2px 2px;
 }
 

@@ -39,9 +39,9 @@ $(document).ready(function () {
         window.location = 'php/download_media.php?media_id[0]=' + $media_id + '&chat_id=' + $chat_id;
     });
 
-    $('#downloadAll').dblclick(function () {
+    $('#downloadAllMedia').click(function () {
         $chat_id = 1;
-        window.location = 'php/download_media.php?media_id=ALL&chat_id=' + $chat_id;
+        window.location = 'php/download_media.php?everything=true';
     });
 
     $('#deleteMedia').click(function () {

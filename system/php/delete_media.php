@@ -2,7 +2,12 @@
 
 $file_dir = '../../data/media/'; // Directory to the medias of the chats
 
-$media_ids = $_GET["media_id"];
+if (isset($_GET["media_id"])) {
+    $media_ids = $_GET["media_id"];
+} else {
+    $everything = $_GET["everything"];
+}
+
 $chat_id = $_COOKIE["chat_id"];
 $file_dir .= $chat_id . "/";
 
