@@ -1,13 +1,10 @@
 <?php
+$toRoot = "../";
+include($toRoot . "variables/user_id.php");
+
 include("db_connect.php");
 
 $job = $_POST["job"];
-
-if (!isset($_COOKIE['messenger'])) {
-    header("location: login.php");
-} else {
-    $user_id = $_COOKIE['messenger'];
-}
 
 if ($job == "search") {
     $search = $_POST["search"];

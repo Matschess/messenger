@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41f60642-6bb3-4106-93ea-2076b74df0cf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data/download/upZsyHEvCPqDeVX.zip" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/test.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/php/findUserForGroup.php" afterPath="$PROJECT_DIR$/system/php/findUserForGroup.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/subpages/createGroupMembers.php" afterPath="$PROJECT_DIR$/system/subpages/createGroupMembers.php" />
     </list>
     <ignored path="messenger.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,34 +27,133 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mediabox.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/system/subpages/mediabox.php">
+      <file leaf-file-name="createGroup_js.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/system/js/createGroup_js.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.93793106">
-              <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.93564355">
+              <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="findUserForGroup.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/php/findUserForGroup.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
-                <marker date="1460481959787" expanded="true" signature="660:720" placeholder="SELECT * FRO... media" />
+                <marker date="1460553575327" expanded="true" signature="231:410" placeholder="SELECT users... users" />
+                <marker date="1460553575327" expanded="true" signature="990:1199" placeholder="SELECT users... users" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mediabox_js.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/js/mediabox_js.js">
+      <file leaf-file-name="createGroupMembers.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/subpages/createGroupMembers.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="127" column="39" selection-start-line="127" selection-start-column="39" selection-end-line="127" selection-end-column="39" />
-              <folding />
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <marker date="1460553503862" expanded="true" signature="691:739" placeholder="SELECT portr... users" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chat_style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/css/chat_style.css">
+      <file leaf-file-name="search_contacts.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/php/search_contacts.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
-              <folding />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1458320738651" expanded="true" signature="393:504" placeholder="SELECT frien... contacts" />
+                <marker date="1458320738651" expanded="true" signature="622:707" placeholder="SELECT usern... users" />
+                <marker date="1458320738651" expanded="true" signature="1670:1689" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_exists.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/php/user_exists.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+              <folding>
+                <marker date="1454266779411" expanded="true" signature="574:617" placeholder="SELECT id FR... users" />
+                <marker date="1454266779411" expanded="true" signature="953:1002" placeholder="SELECT id FR... users" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="idToUser.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/php/idToUser.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+              <folding>
+                <marker date="1458320570403" expanded="true" signature="125:163" placeholder="SELECT usern... users" />
+                <marker date="1458320570403" expanded="true" signature="369:450" placeholder="SELECT id, u... users" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="download_media.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/php/download_media.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+              <folding>
+                <marker date="1460553433461" expanded="true" signature="745:799" placeholder="SELECT datan... media" />
+                <marker date="1460553433461" expanded="true" signature="1330:1403" placeholder="SELECT datan... media" />
+                <marker date="1460553433461" expanded="true" signature="2219:2291" placeholder="SELECT datan... media" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="delete_media.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/php/delete_media.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="69" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="69" />
+              <folding>
+                <marker date="1460476998812" expanded="true" signature="351:409" placeholder="SELECT datan... media" />
+                <marker date="1460476998812" expanded="true" signature="720:749" placeholder="DELETE FROM " />
+                <marker date="1460476998812" expanded="true" signature="1198:1270" placeholder="SELECT datan... media" />
+                <marker date="1460476998812" expanded="true" signature="1540:1569" placeholder="DELETE FROM " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="profile_save.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/php/profile_save.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="43" />
+              <folding>
+                <marker date="1458320655433" expanded="true" signature="216:271" placeholder="UPDATE users... " />
+                <marker date="1458320655433" expanded="true" signature="470:519" placeholder="UPDATE users... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="110" column="25" selection-start-line="110" selection-start-column="13" selection-end-line="110" selection-end-column="25" />
+              <folding>
+                <marker date="1458564234313" expanded="true" signature="1466:1511" placeholder="SELECT portr... users" />
+                <marker date="1458564234313" expanded="true" signature="3105:3136" placeholder="SELECT * FRO... users" />
+                <marker date="1458564234313" expanded="true" signature="3711:3795" placeholder="SELECT COUNT... contacts" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -66,7 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/system/php/download_media.php" />
         <option value="$PROJECT_DIR$/system/subpages/deleteMediaReally.php" />
         <option value="$PROJECT_DIR$/system/php/delete_media.php" />
         <option value="$PROJECT_DIR$/system/subpages/chat.php" />
@@ -75,6 +174,15 @@
         <option value="$PROJECT_DIR$/system/js/mediabox_js.js" />
         <option value="$PROJECT_DIR$/system/css/chat_style.css" />
         <option value="$PROJECT_DIR$/system/subpages/mediabox.php" />
+        <option value="$PROJECT_DIR$/system/js/createGroup_js.js" />
+        <option value="$PROJECT_DIR$/system/js/index_js.js" />
+        <option value="$PROJECT_DIR$/system/js/contacts_js.js" />
+        <option value="$PROJECT_DIR$/system/subpages/createGroupName.php" />
+        <option value="$PROJECT_DIR$/system/php/download_media.php" />
+        <option value="$PROJECT_DIR$/system/subpages/createGroupMembers.php" />
+        <option value="$PROJECT_DIR$/system/php/idToUser.php" />
+        <option value="$PROJECT_DIR$/system/php/user_exists.php" />
+        <option value="$PROJECT_DIR$/system/php/findUserForGroup.php" />
       </list>
     </option>
   </component>
@@ -118,7 +226,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -243,6 +350,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -297,7 +405,19 @@
       <option name="project" value="LOCAL" />
       <updated>1460467332436</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="test removed">
+      <created>1460551827948</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1460551827948</updated>
+    </task>
+    <task id="LOCAL-00003" summary="test added">
+      <created>1460552606545</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1460552606545</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -306,11 +426,11 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -319,7 +439,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -337,7 +457,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New:&#10;&#10;- added button &quot;Ordner herunterladen&quot; in Mediabox" />
-    <option name="LAST_COMMIT_MESSAGE" value="New:&#10;&#10;- added button &quot;Ordner herunterladen&quot; in Mediabox" />
+    <MESSAGE value="test removed" />
+    <MESSAGE value="test added" />
+    <option name="LAST_COMMIT_MESSAGE" value="test added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -346,13 +468,121 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/system/subpages/mediabox.php">
+    <entry file="file://$PROJECT_DIR$/system/js/createGroup_js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/findUserForGroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <marker date="1460553575327" expanded="true" signature="231:410" placeholder="SELECT users... users" />
+            <marker date="1460553575327" expanded="true" signature="990:1199" placeholder="SELECT users... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/subpages/createGroupMembers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <marker date="1460553503862" expanded="true" signature="691:739" placeholder="SELECT portr... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/search_contacts.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1460481959787" expanded="true" signature="660:720" placeholder="SELECT * FRO... media" />
+            <marker date="1458320738651" expanded="true" signature="393:504" placeholder="SELECT frien... contacts" />
+            <marker date="1458320738651" expanded="true" signature="622:707" placeholder="SELECT usern... users" />
+            <marker date="1458320738651" expanded="true" signature="1670:1689" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/user_exists.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+          <folding>
+            <marker date="1454266779411" expanded="true" signature="574:617" placeholder="SELECT id FR... users" />
+            <marker date="1454266779411" expanded="true" signature="953:1002" placeholder="SELECT id FR... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/idToUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+          <folding>
+            <marker date="1458320570403" expanded="true" signature="125:163" placeholder="SELECT usern... users" />
+            <marker date="1458320570403" expanded="true" signature="369:450" placeholder="SELECT id, u... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/download_media.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+          <folding>
+            <marker date="1460553433461" expanded="true" signature="745:799" placeholder="SELECT datan... media" />
+            <marker date="1460553433461" expanded="true" signature="1330:1403" placeholder="SELECT datan... media" />
+            <marker date="1460553433461" expanded="true" signature="2219:2291" placeholder="SELECT datan... media" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/delete_media.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="69" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="69" />
+          <folding>
+            <marker date="1460476998812" expanded="true" signature="351:409" placeholder="SELECT datan... media" />
+            <marker date="1460476998812" expanded="true" signature="720:749" placeholder="DELETE FROM " />
+            <marker date="1460476998812" expanded="true" signature="1198:1270" placeholder="SELECT datan... media" />
+            <marker date="1460476998812" expanded="true" signature="1540:1569" placeholder="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/profile_save.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="43" />
+          <folding>
+            <marker date="1458320655433" expanded="true" signature="216:271" placeholder="UPDATE users... " />
+            <marker date="1458320655433" expanded="true" signature="470:519" placeholder="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="25" selection-start-line="110" selection-start-column="13" selection-end-line="110" selection-end-column="25" />
+          <folding>
+            <marker date="1458564234313" expanded="true" signature="1466:1511" placeholder="SELECT portr... users" />
+            <marker date="1458564234313" expanded="true" signature="3105:3136" placeholder="SELECT * FRO... users" />
+            <marker date="1458564234313" expanded="true" signature="3711:3795" placeholder="SELECT COUNT... contacts" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/subpages/mediabox.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -360,7 +590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="127" column="39" selection-start-line="127" selection-start-column="39" selection-end-line="127" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -368,7 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -376,6 +604,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="32" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="1" />
+          <folding>
+            <marker date="1460553433461" expanded="true" signature="745:799" placeholder="SELECT datan... media" />
+            <marker date="1460553433461" expanded="true" signature="1330:1403" placeholder="SELECT datan... media" />
+            <marker date="1460553433461" expanded="true" signature="2219:2291" placeholder="SELECT datan... media" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -390,7 +623,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -398,9 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-          <folding>
-            <marker date="1460481959787" expanded="true" signature="660:720" placeholder="SELECT * FRO... media" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -408,7 +637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="27" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -416,6 +644,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1460476998812" expanded="true" signature="351:409" placeholder="SELECT datan... media" />
+            <marker date="1460476998812" expanded="true" signature="720:749" placeholder="DELETE FROM " />
+            <marker date="1460476998812" expanded="true" signature="1198:1270" placeholder="SELECT datan... media" />
+            <marker date="1460476998812" expanded="true" signature="1540:1569" placeholder="DELETE FROM " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -444,27 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.807693">
           <caret line="15" column="59" selection-start-line="15" selection-start-column="59" selection-end-line="15" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/php/delete_media.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49827588">
-          <caret line="17" column="69" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/php/download_media.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73275864">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/js/index_js.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.551724">
-          <caret line="217" column="9" selection-start-line="217" selection-start-column="9" selection-end-line="217" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -510,29 +723,163 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/css/chat_style.css">
+    <entry file="file://$PROJECT_DIR$/system/subpages/mediabox.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
-          <folding />
+        <state vertical-scroll-proportion="0.3224138">
+          <caret line="11" column="69" selection-start-line="11" selection-start-column="69" selection-end-line="11" selection-end-column="69" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/system/js/mediabox_js.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.4950495">
           <caret line="127" column="39" selection-start-line="127" selection-start-column="39" selection-end-line="127" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/subpages/mediabox.php">
+    <entry file="file://$PROJECT_DIR$/system/css/chat_style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.93793106">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.029310346">
+          <caret line="89" column="26" selection-start-line="89" selection-start-column="26" selection-end-line="89" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/js/index_js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="281" column="28" selection-start-line="281" selection-start-column="24" selection-end-line="281" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/subpages/createGroupName.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14655173">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/js/contacts_js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.586207">
+          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/authorize_check.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="110" column="25" selection-start-line="110" selection-start-column="13" selection-end-line="110" selection-end-column="25" />
           <folding>
-            <marker date="1460481959787" expanded="true" signature="660:720" placeholder="SELECT * FRO... media" />
+            <marker date="1458564234313" expanded="true" signature="1466:1511" placeholder="SELECT portr... users" />
+            <marker date="1458564234313" expanded="true" signature="3105:3136" placeholder="SELECT * FRO... users" />
+            <marker date="1458564234313" expanded="true" signature="3711:3795" placeholder="SELECT COUNT... contacts" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/delete_media.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="69" selection-start-line="17" selection-start-column="69" selection-end-line="17" selection-end-column="69" />
+          <folding>
+            <marker date="1460476998812" expanded="true" signature="351:409" placeholder="SELECT datan... media" />
+            <marker date="1460476998812" expanded="true" signature="720:749" placeholder="DELETE FROM " />
+            <marker date="1460476998812" expanded="true" signature="1198:1270" placeholder="SELECT datan... media" />
+            <marker date="1460476998812" expanded="true" signature="1540:1569" placeholder="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/profile_save.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="43" />
+          <folding>
+            <marker date="1458320655433" expanded="true" signature="216:271" placeholder="UPDATE users... " />
+            <marker date="1458320655433" expanded="true" signature="470:519" placeholder="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/download_media.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+          <folding>
+            <marker date="1460553433461" expanded="true" signature="745:799" placeholder="SELECT datan... media" />
+            <marker date="1460553433461" expanded="true" signature="1330:1403" placeholder="SELECT datan... media" />
+            <marker date="1460553433461" expanded="true" signature="2219:2291" placeholder="SELECT datan... media" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/idToUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+          <folding>
+            <marker date="1458320570403" expanded="true" signature="125:163" placeholder="SELECT usern... users" />
+            <marker date="1458320570403" expanded="true" signature="369:450" placeholder="SELECT id, u... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/subpages/createGroupMembers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <marker date="1460553503862" expanded="true" signature="691:739" placeholder="SELECT portr... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/search_contacts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1458320738651" expanded="true" signature="393:504" placeholder="SELECT frien... contacts" />
+            <marker date="1458320738651" expanded="true" signature="622:707" placeholder="SELECT usern... users" />
+            <marker date="1458320738651" expanded="true" signature="1670:1689" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/user_exists.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+          <folding>
+            <marker date="1454266779411" expanded="true" signature="574:617" placeholder="SELECT id FR... users" />
+            <marker date="1454266779411" expanded="true" signature="953:1002" placeholder="SELECT id FR... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/php/findUserForGroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <marker date="1460553575327" expanded="true" signature="231:410" placeholder="SELECT users... users" />
+            <marker date="1460553575327" expanded="true" signature="990:1199" placeholder="SELECT users... users" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/js/createGroup_js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93564355">
+          <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

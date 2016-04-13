@@ -13,13 +13,6 @@
         <div id="groupAdministrators">
             <div id="member153" class="chipGroupCreator">
                 <?php
-                // pass to login if no cookie
-                if (!isset($_COOKIE['messenger'])) {
-                    header("location: login.php");
-                } else {
-                    $user_id = $_COOKIE['messenger'];
-                }
-
                 include("db_connect.php");
 
                 $portraitQuery = mysqli_query($db, "SELECT portrait FROM users WHERE id = '$user_id'");
