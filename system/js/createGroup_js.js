@@ -5,6 +5,7 @@ $(document).ready(function () {
         if ($groupname) {
             $.get("php/group_prepare.php?job=validateGroupName&groupName=" + $groupname, function (data) {
                 if (data == 'validated') {
+                    window.groupName = $groupname;
                     $('#popupContent').load('subpages/createGroupMembers.php');
                 }
                 else {
@@ -20,11 +21,12 @@ $(document).ready(function () {
     });
 
     $('.createGroupNow').click(function () {
+        $groupname = window.groupName;
         $groupMembers = '';
         $('.chip').each(function (index) {
             $groupMembers = $groupMembers + "&groupMembers[]=" + $(this).attr('id').substr(6);
         });
-        $.get("php/group_prepare.php?job=validateGroupMembers" + $groupMembers, function (data) {
+        $.get("php/group_prepare.php?job=validateGroupMembers&groupName=" + $groupname + $groupMembers, function (data) {
             alert(data);
         });
     });
