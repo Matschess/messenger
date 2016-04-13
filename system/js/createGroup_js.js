@@ -1,6 +1,32 @@
 $(document).ready(function () {
     $('.groupNameDone').click(function () {
-        $('#popupContent').load('subpages/createGroupMembers.php');
+        $('#groupname').removeClass('wrongInput');
+        $groupname = $('#groupname').html();
+        if ($groupname) {
+            $.get("php/group_prepare.php?job=validateGroupName&groupName=" + $groupname, function (data) {
+                if (data == 'validated') {
+                    $('#popupContent').load('subpages/createGroupMembers.php');
+                }
+                else {
+                    $('#groupname').addClass('wrongInput');
+                }
+            });
+        }
+        else {
+            window.setTimeout(function () {
+                $('#groupname').addClass('wrongInput').delay(500);
+            }, 20);
+        }
+    });
+
+    $('.createGroupNow').click(function () {
+        $groupMembers = '';
+        $('.chip').each(function (index) {
+            $groupMembers = $groupMembers + "&groupMembers[]=" + $(this).attr('id').substr(6);
+        });
+        $.get("php/group_prepare.php?job=validateGroupMembers" + $groupMembers, function (data) {
+            alert(data);
+        });
     });
 
     $('*').load(function () {
@@ -143,7 +169,7 @@ $(document).ready(function () {
         }
 
         for ($j = 0; $j < $imagesStartTag.length; $j++) {
-            if($j > 0) {
+            if ($j > 0) {
                 $imageStartTag = $imagesStartTag[$j] - $imagesStartTag[$j - 1] - 2;
                 $imageEndTag = $imagesEndTag[$j] - $imagesEndTag[$j - 1] - 2;
             }
@@ -220,9 +246,5 @@ $(document).ready(function () {
         alert($id);
         $('#' + $id).remove();
         $('#groupMemberSearch').focus();
-    });
-
-    $('.createGroupNow').click(function () {
-        alert("kkj");
     });
 });
