@@ -42,9 +42,13 @@
             $chatExistsRows = mysqli_fetch_object($chatExistsQuery);
             $user_left_id = $chatExistsRows->user_left_id;
             $user_right_id = $chatExistsRows->user_right_id;
-            if ($user_left_id == $user_id) {
-                $friend_id = $user_right_id;
-            } else $friend_id = $user_left_id;
+            if ($user_left_id && $user_right_id) {
+                if ($user_left_id == $user_id) {
+                    $friend_id = $user_right_id;
+                } else $friend_id = $user_left_id;
+            } else {
+                $isGroup = true;
+            }
         }
     } elseif (isset($_COOKIE["friend_id"])) {
         echo $friend_id;
@@ -60,11 +64,10 @@
                 $friend_name = $friendRows->username;
 
                 // Portrait
-                $portrait = $friendRows->portrait;
-                if (!file_exists("../../data/portraits/" . $portrait) || $portrait == "") {
-                    $portrait = "default.png";
+                $portrait = "portraits/" . $friendRows->portrait;
+                if (!file_exists("../../data/" . $portrait) || $portrait == "") {
+                    $portrait = "portraits/default.png";
                 }
-
 
                 $color = $friendRows->color;
 
@@ -92,13 +95,14 @@
             }
         }
     } else {
-        $getGroupMembers = mysqli_query($db, "SELECT users.firstname, users.lastname FROM users LEFT JOIN groupmembers ON groupmembers.user_id = users.id WHERE groupmembers.chat_id = $chat_id ORDER BY users.firstname, users.lastname");
+        $getGroupMembers = mysqli_query($db, "SELECT users.id, users.firstname, users.lastname FROM users LEFT JOIN groupmembers ON groupmembers.user_id = users.id WHERE groupmembers.chat_id = $chat_id ORDER BY users.firstname, users.lastname");
         if (mysqli_num_rows($getGroupMembers)) {
             $members = [];
             while ($groupMembersRows = mysqli_fetch_object($getGroupMembers)) {
+                $member_id = $groupMembersRows->id;
                 $memberFirstname = $groupMembersRows->firstname;
                 $memberLastname = $groupMembersRows->lastname;
-                $members[] = $memberFirstname . " " . $memberLastname;
+                $members[] = "<span class='linkToMember' id='linkTo" . $member_id . "'>" . $memberFirstname . " " . $memberLastname . "</span>";
             }
         }
 
@@ -107,10 +111,13 @@
             $groupRows = mysqli_fetch_object($groupQuery);
             $friend_name = $groupRows->groupname;
             // Portrait
-            $portrait = $groupRows->portrait;
 
-            if (!file_exists("../../data/groupimages/" . $portrait) || $portrait == "") {
-                $portrait = "default.png";
+            if ($contactsRows->portrait) {
+                $portrait = "groupimages/" . $groupRows->portrait;
+            }
+
+            if (!file_exists("../../data/" . $portrait) || $portrait == "") {
+                $portrait = "portraits/default.png";
             }
 
             $color = $groupRows->color;
@@ -152,7 +159,7 @@
 
     <div id="chatInfo">
         <?php
-        echo "<span id='$friend_id' class='toProfile'><img src='../data/portraits/$portrait' id='imgForBackground' class='img_round_flat' style='margin-right: 10px;'/></span>";
+        echo "<span id='$friend_id' class='toProfile'><img src='../data/$portrait' id='imgForBackground' class='img_round_flat' style='margin-right: 10px;'/></span>";
         ?>
         <div id="userInfo">
             <?php
@@ -161,7 +168,7 @@
             if ($onlineStatus) {
                 echo "<div id='userstatus'>zuletzt online $onlineStatus</div>";
             } else {
-                echo "<div id='userstatus'>$groupMembers</div>";
+                echo "<div id='userstatus'>$groupMembers <span class='moreGroupMembers'>Mehr</span></div>";
             }
             ?>
         </div>
@@ -270,30 +277,6 @@
 
 <script>
     $(document).ready(function () {
-        $cookieColor = $.cookie('messengerColor');
-        if ($cookieColor) {
-            $color = $cookieColor;
-            if ($color) {
-                $('#containerRight .tableNavigation td, #chatInfo').css('background-color', $color);
-                $('#chat .doneAll').css('color', $color);
-            }
-        }
-        else {
-            var sourceImage = document.getElementById("imgForBackground");
-            var colorThief = new ColorThief();
-            $color = colorThief.getColor(sourceImage);
-
-            if ($color[0] > 200 || $color[1] > 200 || $color[2] > 200) {
-                $color[0] = 180;
-                $color[1] = 180;
-                $color[2] = 180;
-            }
-
-            $('#containerRight .tableNavigation td, #chatInfo').css('background-color', 'rgb(' + $color + ')');
-            $('#chat .doneAll').css('color', 'rgb(' + $color + ')');
-        }
-
-
         emojify.setConfig({
             img_dir: 'plugins/emojify/images/emoji'  // Directory for emoji images
 

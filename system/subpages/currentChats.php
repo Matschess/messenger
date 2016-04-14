@@ -43,26 +43,26 @@ if (mysqli_num_rows($contactsQuery)) {
         $groupname = $contactsRows->groupname;
         $user_left_id = $contactsRows->user_left_id;
         $user_right_id = $contactsRows->user_right_id;
-        $portrait = $contactsRows->portrait;
+        if ($contactsRows->portrait) {
+            $portrait = "groupimages/" . $contactsRows->portrait;
+        }
         $last_active = $contactsRows->last_active;
         if ($user_left_id == $user_id) {
             $friend_id = $user_right_id;
         } else $friend_id = $user_left_id;
 
-        $chatDir = "portraits/";
         if ($friend_id) {
             $friendQuery = mysqli_query($db, "SELECT username, portrait FROM users WHERE id = '$friend_id'");
             $friendRows = mysqli_fetch_object($friendQuery);
             $friend_name = $friendRows->username;
-            $portrait = $friendRows->portrait;
+            $portrait = "portraits/" . $friendRows->portrait;
         } else {
             $friend_name = $groupname;
-            $chatDir = "groupimages/";
         }
 
         // Portrait
-        if (!file_exists("../../data/" . $chatDir . $portrait) || $portrait == "") {
-            $portrait = "default.png";
+        if (!file_exists("../../data/" . $portrait) || $portrait == "") {
+            $portrait = "portraits/default.png";
         }
 
         $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent FROM messages WHERE chat_id = $chat_id && sent = '$last_active' ORDER BY sent");
@@ -80,12 +80,10 @@ if (mysqli_num_rows($contactsQuery)) {
             }
             if ($last_message_user_id == $user_id) $last_message = $message . " " . "<span class='contactLastMessageSent'>$sent <i class='material-icons-tiny doneAll'>done_all</i></span>";
             else  $last_message = $message . " " . "<span class='contactLastMessageSent'>$sent</span>";
-        } else {
-            $last_message = "error";
         }
 
         echo "<div id='$chat_id' class='contact ripple'>";
-        echo "<img src='../data/portraits/$portrait' id='$friend_id' class='img_round img_margin_right toProfile'></img>";
+        echo "<img src='../data/$portrait' id='$friend_id' class='img_round img_margin_right toProfile'></img>";
         echo "<div class='contactInfo'>";
         echo $friend_name;
         echo "<div class='contactLastMessage'>$last_message</div>";

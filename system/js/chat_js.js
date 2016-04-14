@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    adjustColors();
     $('#content').scrollTop($('#content').height());
 
     $('.chatTextBox').focus();
@@ -7,12 +8,46 @@ $(document).ready(function () {
         getKeyCode();
     });
 
+    function adjustColors() {
+        $cookieColor = $.cookie('messengerColor');
+        if ($cookieColor) {
+            $color = $cookieColor;
+            if ($color) {
+                $('#containerRight .tableNavigation td, #chatInfo').css('background-color', $color);
+                $('#chat .doneAll').css('color', $color);
+            }
+        }
+        else {
+            var sourceImage = document.getElementById("imgForBackground");
+            var colorThief = new ColorThief();
+            $color = colorThief.getColor(sourceImage);
+
+            if ($color[0] > 200 || $color[1] > 200 || $color[2] > 200) {
+                $color[0] = 180;
+                $color[1] = 180;
+                $color[2] = 180;
+            }
+
+            $('#containerRight .tableNavigation td, #chatInfo').css('background-color', 'rgb(' + $color + ')');
+            $('#chat .doneAll').css('color', 'rgb(' + $color + ')');
+        }
+    }
+
     function getKeyCode(event) {
         event = event || window.event;
         if (event.ctrlKey && event.shiftKey && event.keyCode === 83) {
             showSmileyChooser();
         }
     }
+
+    $('.linkToMember').click(function () {
+        $friend_id = this.id.substr(6);
+        $('.content').load('subpages/friendsProfile.php?friend_id=' + $friend_id);
+    });
+
+    $('.moreGroupMembers').click(function () {
+        $('.content').load('subpages/groupSettings.php');
+    });
 
     $('#optionsIcon').click(function () {
         $('.option').fadeIn(200);

@@ -115,7 +115,7 @@
 
 <div id="popup">
     <div id="popupHeader"><span id="popupTitle">Kontaktsuche</span></div>
-    <div id="f"></div>
+    <div id="popupContent"></div>
 </div>
 
 <div class="loader contentLoaderPattern">

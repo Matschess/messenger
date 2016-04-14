@@ -354,3 +354,16 @@
     font-size: 15px;
     color: #222;
 }
+
+.linkToMember:hover {
+    text-decoration: underline;
+}
+
+.moreGroupMembers {
+    font-size: 10px;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-style: normal;
+    padding: 3px 5px 3px 5px;
+    margin-left: 5px;
+}
