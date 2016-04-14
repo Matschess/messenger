@@ -15,11 +15,10 @@ $(document).ready(function () {
         // Auto activate loading effects
         $('#containerRight .content .contentLoaderPattern').show();
 
-        $user_id = $('#currentUser').val();
-        $friend_id = this.id;
-        $('#currentChat').val($friend_id);
+        $chat_id = this.id;
+
         $('#containerRight .content').hide();
-        $('#containerRight .content').load('subpages/chat.php?user_id=' + $user_id + '&friend_id=' + $friend_id);
+        $('#containerRight .content').load('subpages/chat.php?chat_id=' + $chat_id);
         $('#chat').ready(function () {
             $('#containerRight .content').show();
             clearTabsRight();

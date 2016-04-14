@@ -27,9 +27,16 @@ $(document).ready(function () {
             $groupMembers = $groupMembers + "&groupMembers[]=" + $(this).attr('id').substr(6);
         });
         $.get("php/group_prepare.php?job=validateGroupMembers&groupName=" + $groupname + $groupMembers, function (data) {
-            alert(data);
+            if(data == 'validated') {
+                $('#overlay').fadeOut(200);
+                $('#popup').fadeOut(200);
+            }
         });
     });
+
+    function reloadCurrentChats() {
+        $('#containerLeft #contacts').load('subpages/currentChats.php');
+    };
 
     $('*').load(function () {
         $('#groupname').focus();

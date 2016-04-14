@@ -17,25 +17,51 @@ $maxOnline = 100; // maximum seconds since last registered on server
 
 $friend_id;
 $currentLetter;
-$contactsQuery = mysqli_query($db, "SELECT id, user_left_id, user_right_id, last_active FROM chats WHERE user_left_id = $user_id || user_right_id = $user_id ORDER BY last_active");
+
+/*
+$chat_ids = [];
+
+$hasGroups = mysqli_query($db, "SELECT chat_id FROM groupmembers WHERE used_id = $user_id");
+if (mysqli_num_rows($hasGroups)) {
+while ($groupRows = mysqli_fetch_object($hasGroups)) {
+    $chat_id = $groupRows->chat_id;
+    $chat_ids[] = $chat_id;
+}
+
+$hasChats = mysqli_query($db, "SELECT id FROM chats WHERE user_left_id = $user_id || user_right_id = $user_id");
+if (mysqli_num_rows($hasChats)) {
+while ($chatRows = mysqli_fetch_object($hasChats)) {
+    $chat_id = $chatRows->id;
+    $chat_ids[] = $chat_id;
+}
+*/
+
+$contactsQuery = mysqli_query($db, "SELECT chats.id, chats.groupname, chats.user_left_id, chats.user_right_id, chats.portrait, chats.last_active FROM chats LEFT JOIN groupmembers ON groupmembers.chat_id = chats.id WHERE user_left_id = $user_id || user_right_id = $user_id || groupmembers.user_id = $user_id ORDER BY chats.last_active DESC");
 if (mysqli_num_rows($contactsQuery)) {
     while ($contactsRows = mysqli_fetch_object($contactsQuery)) {
         $chat_id = $contactsRows->id;
+        $groupname = $contactsRows->groupname;
         $user_left_id = $contactsRows->user_left_id;
         $user_right_id = $contactsRows->user_right_id;
+        $portrait = $contactsRows->portrait;
         $last_active = $contactsRows->last_active;
-        if($user_left_id == $user_id) {
+        if ($user_left_id == $user_id) {
             $friend_id = $user_right_id;
-        }
-        else $friend_id = $user_left_id;
-        $friendQuery = mysqli_query($db, "SELECT username, portrait FROM users WHERE id = '$friend_id'");
-        $friendRows = mysqli_fetch_object($friendQuery);
+        } else $friend_id = $user_left_id;
 
-        $friend_name = $friendRows->username;
+        $chatDir = "portraits/";
+        if ($friend_id) {
+            $friendQuery = mysqli_query($db, "SELECT username, portrait FROM users WHERE id = '$friend_id'");
+            $friendRows = mysqli_fetch_object($friendQuery);
+            $friend_name = $friendRows->username;
+            $portrait = $friendRows->portrait;
+        } else {
+            $friend_name = $groupname;
+            $chatDir = "groupimages/";
+        }
 
         // Portrait
-        $portrait = $friendRows->portrait;
-        if (!file_exists("../../data/portraits/" . $portrait) || $portrait == "") {
+        if (!file_exists("../../data/" . $chatDir . $portrait) || $portrait == "") {
             $portrait = "default.png";
         }
 
@@ -49,17 +75,16 @@ if (mysqli_num_rows($contactsQuery)) {
             $sent = date_create($sent);
             $sent = date_format($sent, 'H:i');
 
-            if(strlen($message) > 43) {
+            if (strlen($message) > 43) {
                 $message = $s = substr($message, 0, 40) . "..."; // cut to long message
             }
-            if($last_message_user_id == $user_id) $last_message = $message . " " . "<span class='contactLastMessageSent'>$sent <i class='material-icons-tiny doneAll'>done_all</i></span>";
+            if ($last_message_user_id == $user_id) $last_message = $message . " " . "<span class='contactLastMessageSent'>$sent <i class='material-icons-tiny doneAll'>done_all</i></span>";
             else  $last_message = $message . " " . "<span class='contactLastMessageSent'>$sent</span>";
-        }
-        else {
+        } else {
             $last_message = "error";
         }
 
-        echo "<div id='$friend_id' class='contact ripple'>";
+        echo "<div id='$chat_id' class='contact ripple'>";
         echo "<img src='../data/portraits/$portrait' id='$friend_id' class='img_round img_margin_right toProfile'></img>";
         echo "<div class='contactInfo'>";
         echo $friend_name;

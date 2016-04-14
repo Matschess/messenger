@@ -27,16 +27,18 @@ if ($job == "validateGroupName") {
                 break;
             }
         }
-    }
-    else $error = true;
+    } else $error = true;
 
     if (!$error) {
         if ($groupCreate = mysqli_query($db, "INSERT INTO chats (groupname) VALUE ('$groupName')")) {
-            for ($i = 0; $i < count($groupMembers); $i++) {
-                $friend_id = $groupMembers[$i];
-                $addUserToGroup = mysqli_query($db, "INSERT INTO groupmembers (chat_id, user_id) VALUE (LAST_INSERT_ID(), '$friend_id')");
+            $chat_id = mysqli_insert_id($db);
+            if ($addUserToGroup = mysqli_query($db, "INSERT INTO groupmembers (chat_id, user_id, admin) VALUE ($chat_id, $user_id, true)")) {
+                for ($i = 0; $i < count($groupMembers); $i++) {
+                    $friend_id = $groupMembers[$i];
+                    $addUserToGroup = mysqli_query($db, "INSERT INTO groupmembers (chat_id, user_id) VALUE ($chat_id, $friend_id)");
+                }
+                echo "validated";
             }
-            echo "validated";
         }
     } else {
         echo "error";

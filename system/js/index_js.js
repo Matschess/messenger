@@ -140,7 +140,6 @@ $(document).ready(function () {
             $('#containerRight .content .contentLoaderPattern').show();
         }, 100);
 
-        $chat_id = $.cookie('chat_id');
         $('.content').hide();
         $('.content').load('subpages/chat.php', function () {
             $('.content').show();
