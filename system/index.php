@@ -83,6 +83,11 @@
                         <div id="logout" class="meOption">
                             <i class="material-icons tooltip" title="Ausloggen und beenden">vpn_key</i>
                         </div>
+
+                        <div id="profileSettings" class="meOption">
+                            <i class="material-icons tooltip" title="Profil-Einstellungen">settings</i>
+                        </div>
+
                         <div id="notifications" class="meOption">
                             <i class="material-icons tooltip" title="Benachrichtigungen ein/aus">volume_off</i>
                         </div>
@@ -97,6 +102,8 @@
                         <div id="add" class="meOption">
                             <i class="material-icons tooltip" title="Freund hinzufügen">add</i>
                         </div>
+
+
                     </td>
                 </tr>
             </table>
@@ -108,7 +115,7 @@
 
 <div id="popup">
     <div id="popupHeader"><span id="popupTitle">Kontaktsuche</span></div>
-    <div id="popupContent"></div>
+    <div id="f"></div>
 </div>
 
 <div class="loader contentLoaderPattern">

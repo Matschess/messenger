@@ -58,17 +58,18 @@ $(document).ready(function () {
     };
 
     $('#me').click(function () {
-        $('#logout, #notifications, #enquiry, #add').fadeToggle(200);
+        $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
     });
     $('#logout').click(function () {
         window.location = 'logout.php';
     });
-    $('#logout, #notifications, #enquiry, #add').click(function () {
-        $('#logout, #notifications, #enquiry, #add').fadeToggle(200);
+
+    $('#logout, #notifications, #enquiry, #add, #profileSettings').click(function () {
+        $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
     });
     $('#notifications').click(function () {
         alert('Mute');
-        $('#logout, #notifications, #enquiry, #add').fadeToggle(200);
+        $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
     });
     $('#enquiry').click(function () {
         $('#popupTitle').html("Freundschaftsanfragen");
@@ -171,7 +172,7 @@ $(document).ready(function () {
             });
         }, 500);
     });
-    $('#toProfile').click(function () {
+    $('#profileSettings').click(function () {
         // Prepare loading effect
         $('#containerRight .content').html('');
         $('.contentLoaderPattern').clone().appendTo($('#containerRight .content'));
@@ -191,7 +192,7 @@ $(document).ready(function () {
                     $('.content').html(data);
                 });
             clearTabsRight();
-            $('#toProfile').addClass('navigationActive');
+            $('#profileSettings').addClass('navigationActive');
         }, 500);
     });
 

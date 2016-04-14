@@ -206,7 +206,7 @@ body {
     text-align: center;
 }
 
-#notifications {
+#profileSettings {
     display: none;
     position: fixed;
     margin-top: 65px;
@@ -215,7 +215,7 @@ body {
     text-align: center;
 }
 
-#enquiry {
+#notifications {
     display: none;
     position: fixed;
     margin-top: 115px;
@@ -224,10 +224,20 @@ body {
     text-align: center;
 }
 
-#add {
+#enquiry {
     display: none;
     position: fixed;
     margin-top: 165px;
+    padding: 7.5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+#add {
+    display: none;
+    position: fixed;
+    margin-top: 215px;
     padding: 7.5px;
     border-radius: 20px;
     text-align: center;
