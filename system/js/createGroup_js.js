@@ -30,13 +30,10 @@ $(document).ready(function () {
             if(data == 'validated') {
                 $('#overlay').fadeOut(200);
                 $('#popup').fadeOut(200);
+                reloadCurrentChats();
             }
         });
     });
-
-    function reloadCurrentChats() {
-        $('#containerLeft #contacts').load('subpages/currentChats.php');
-    };
 
     $('*').load(function () {
         $('#groupname').focus();
@@ -256,4 +253,32 @@ $(document).ready(function () {
         $('#' + $id).remove();
         $('#groupMemberSearch').focus();
     });
+
+    function reloadCurrentChats() {
+        clearTabsLeft();
+        $('#toChats').addClass('navigationActive');
+
+        // Prepare loading effect
+        $('#containerLeft #contacts').html('');
+        $('.contentLoaderPattern').clone().appendTo($('#containerLeft #contacts'));
+
+        // Auto activate loading effects
+        window.setTimeout(function () {
+            $('#containerLeft #contacts .contentLoaderPattern').show();
+        }, 100);
+
+        window.setTimeout(function () {
+            $user_id = $('#currentUser').val();
+            $('#containerLeft #contacts').hide();
+            $('#containerLeft #contacts').load('subpages/currentChats.php?user_id=' + $user_id);
+            $('#chat').ready(function () {
+                $('#containerLeft #contacts').show();
+            });
+        }, 500);
+    };
+
+    function clearTabsLeft() {
+        $('#toChats').removeClass('navigationActive');
+        $('#toContacts').removeClass('navigationActive');
+    }
 });

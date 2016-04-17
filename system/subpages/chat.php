@@ -95,7 +95,7 @@
             }
         }
     } else {
-        $getGroupMembers = mysqli_query($db, "SELECT users.id, users.firstname, users.lastname FROM users LEFT JOIN groupmembers ON groupmembers.user_id = users.id WHERE groupmembers.chat_id = $chat_id ORDER BY users.firstname, users.lastname");
+        $getGroupMembers = mysqli_query($db, "SELECT users.id, users.firstname, users.lastname FROM users LEFT JOIN groupmembers ON groupmembers.user_id = users.id WHERE groupmembers.chat_id = $chat_id ORDER BY users.firstname, users.lastname LIMIT 6");
         if (mysqli_num_rows($getGroupMembers)) {
             $members = [];
             while ($groupMembersRows = mysqli_fetch_object($getGroupMembers)) {
@@ -125,8 +125,16 @@
             setcookie("messengerColor", $color, 0, '/'); // Set cookie until browser is closed
 
             $groupMembers = $members[0];
-            for ($i = 1; $i < count($members); $i++) {
-                $groupMembers .= ", " . $members[$i];
+            $countMembers = count($members);
+            if ($countMembers > 5) {
+                for ($i = 1; $i < 5; $i++) {
+                    $groupMembers .= ", " . $members[$i];
+                }
+                $groupMembers .= ", ...";
+            } else {
+                for ($i = 1; $i < $countMembers; $i++) {
+                    $groupMembers .= ", " . $members[$i];
+                }
             }
         }
     }

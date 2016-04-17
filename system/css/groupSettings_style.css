@@ -1,0 +1,49 @@
+#groupMemberSearch {
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #A4A4A4;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: pink;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+    color: pink;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: pink;
+}
+
+.memberAdd {
+    display: inline;
+}
+
+#friendSuggestions {
+    display: none;
+    position: absolute;
+    font-size: 14px;
+    background-color: #E6E6E6;
+    margin-top: 30px;
+    margin-left: -20%;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.friendSuggestionsUser {
+    padding: 5px 10px 5px 5px;
+}
+
+.friendSuggestionsUser:hover {
+    background-color: #CFCFCF;
+    cursor: default;
+}
+
+.friendSuggestionsUser span {
+    margin-left: 5px;
+    vertical-align: middle;
+}

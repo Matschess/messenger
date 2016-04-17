@@ -35,7 +35,7 @@
         <br/>
     </div>
     <div class="chipEmptyMembers"></div>
-    <input type="text" id="groupMemberSearch" autofocus></input>
+    <input type="text" id="groupMemberSearch" placeholder='Suchen' autofocus></input>
     <div id="friendSuggestions"></div>
 </div>
 <div id="popupFooter">

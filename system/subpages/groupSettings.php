@@ -2,6 +2,9 @@
 <HTML lang="de">
 <HEAD>
     <link rel="stylesheet" href="css/profile_style.css">
+    <link rel="stylesheet" href="css/groupSettings_style.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="js/groupSettings_js.js"></script>
 </HEAD>
 <BODY>
@@ -36,6 +39,7 @@ if (isset($_COOKIE["chat_id"])) {
         echo "</div>";
 
         $groupMembers = mysqli_query($db, "SELECT users.id, users.firstname, users.lastname, users.portrait FROM groupmembers LEFT JOIN users ON users.id = groupmembers.user_id WHERE groupmembers.chat_id = $chat_id && groupmembers.admin ORDER BY users.firstname, users.lastname");
+        echo "<div id='$friend_id' class='button buttonEnd leaveGroup'><i class='material-icons-small'>close</i> Gruppe verlassen</div>";
         if (mysqli_num_rows($groupMembers)) {
             echo "<br/>";
             echo "<div id='groupMembers'>";
@@ -62,15 +66,13 @@ if (isset($_COOKIE["chat_id"])) {
             echo "</div>";
 
 
-            //echo "<div class='chipEmptyAdministrators'></div>";
+           echo "<div class='chipEmptyAdministrators'></div>";
             echo "<br/>";
             echo "<br/>";
             echo "<span class='infoText''>Gruppenmitglieder:</span>";
             echo "<br/>";
             //echo "</div>";
-            //echo "<div class='chipEmptyMembers''></div>";
             //echo "<input type='text' id='groupMemberSearch' autofocus/>";
-            echo "<div id='friendSuggestions'></div>";
             $groupMembers = mysqli_query($db, "SELECT users.id, users.firstname, users.lastname, users.portrait FROM groupmembers LEFT JOIN users ON users.id = groupmembers.user_id WHERE groupmembers.chat_id = $chat_id && groupmembers.admin = false ORDER BY users.firstname, users.lastname");
             if (mysqli_num_rows($groupMembers)) {
                 while ($groupMembersRows = mysqli_fetch_object($groupMembers)) {
@@ -89,9 +91,14 @@ if (isset($_COOKIE["chat_id"])) {
                         echo "<div id='member" . $member_id . "' class='chip'><img src='" . $fullPortrait . "'/> <span>" . $firstname . " " . $lastname . " <i class='material-icons-thin groupMemberDelete'>close</i></span></div>";
                     }
                 }
-            } else {
-                echo "Keine Mitglieder";
             }
+            echo "<div class='chipEmptyMembers''></div>";
+            $defaultPortrait = "../data/portraits/default.png";
+            echo "<div class='memberAdd'>";
+            echo "<div class='chip chipMemberAdd'><img src='" . $defaultPortrait . "'/> <span>Mitglied hinzufügen</span></div>";
+            echo "<input type='text' id='groupMemberSearch' placeholder='Tippe zum Suchen' autofocus/>";
+            echo "<div id='friendSuggestions'></div>";
+            echo "</div>";
         }
 
     }

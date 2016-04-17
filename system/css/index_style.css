@@ -657,6 +657,14 @@ input {
     background-color: #CCCCCC;
 }
 
+.chipMemberAdd {
+    background-color: #B9B9B9;
+}
+
+.chipMemberAdd span {
+   text-decoration: underline;
+}
+
 #groupMembers {
     display: inline;
     margin-top: 5px;

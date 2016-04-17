@@ -207,7 +207,7 @@
     cursor: pointer;
 }
 
-.getFriends, .acceptFriends, .endFriends, .waitFriends {
+.getFriends, .acceptFriends, .endFriends, .waitFriends, .buttonEnd {
     position: absolute;
     top: 5px;
     right: 10px;
@@ -222,11 +222,11 @@
     background-color: #2ecc71;
 }
 
-.endFriends {
+.endFriends, .buttonEnd {
     background-color: #c0392b;
 }
 
-.endFriends:hover {
+.endFriends:hover, .buttonEnd {
     background-color: #e74c3c;
 }
 
