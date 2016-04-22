@@ -4,15 +4,10 @@ $(document).ready(function () {
         $('#groupMemberSearch').show().focus();
     });
 
-    $('.chip').draggable({
-        revert: "invalid",
-        revertDuration: 80,
-        zIndex: 10000,
-        drag: function (event, ui) {
-            // Adapt width of empty chip
-            $('.chipEmptyAdministrators').width(($('#' + this.id).width()));
-        }
+    $(document).load(function () {
+        $( "#profileText" ).draggable({ helper:'clone' });
     });
+
     /*
     $('.chipEmptyAdministrators').droppable({
         accept: ".chip",

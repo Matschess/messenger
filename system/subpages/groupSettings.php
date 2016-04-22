@@ -3,8 +3,9 @@
 <HEAD>
     <link rel="stylesheet" href="css/profile_style.css">
     <link rel="stylesheet" href="css/groupSettings_style.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/groupSettings_js.js"></script>
 </HEAD>
 <BODY>
@@ -42,6 +43,7 @@ if (isset($_COOKIE["chat_id"])) {
         echo "<div id='$friend_id' class='button buttonEnd leaveGroup'><i class='material-icons-small'>close</i> Gruppe verlassen</div>";
         if (mysqli_num_rows($groupMembers)) {
             echo "<br/>";
+            echo "<div id='members'>";
             echo "<div id='groupMembers'>";
             echo "<span class='infoText''>Gruppenadministratoren:</span>";
             echo "<br/>";
@@ -98,6 +100,7 @@ if (isset($_COOKIE["chat_id"])) {
             echo "<div class='chip chipMemberAdd'><img src='" . $defaultPortrait . "'/> <span>Mitglied hinzufügen</span></div>";
             echo "<input type='text' id='groupMemberSearch' placeholder='Tippe zum Suchen' autofocus/>";
             echo "<div id='friendSuggestions'></div>";
+            echo "</div>";
             echo "</div>";
         }
 
