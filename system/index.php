@@ -78,6 +78,9 @@
                             if ($enquiries) {
                                 echo "<div id='portraitAlert'>!</div>";
                             }
+                            else {
+                                echo "<div id='portraitAlert' style='display: none'>!</div>";
+                            }
                             ?>
                         </div>
                         <div id="logout" class="meOption">
@@ -95,6 +98,9 @@
                             <?php
                             if ($enquiries) {
                                 echo "<div id='enquiries'>$row->enquiries</div>";
+                            }
+                            else {
+                                echo "<div id='enquiries' style='display: none'></div>";
                             }
                             ?>
                             <i class="material-icons tooltip" title="Freundschaftsanfragen">people</i>

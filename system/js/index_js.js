@@ -1,4 +1,60 @@
 $(document).ready(function () {
+    // Websocket
+    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
+    websocket = new WebSocket(wsUri);
+
+    websocket.onopen = function(ev) { // connection is open
+		$.get('variables/user_id_var.php', function (data) {
+			$user_id = data;
+			 //prepare json data
+        var msg = {
+            type: 'user_id',
+            message: $user_id
+        };
+        //convert and send data to server
+        websocket.send(JSON.stringify(msg));
+		});
+
+
+       
+    }
+
+    websocket.onclose = function(ev) { // connection is open
+        //alert("bye");
+    }
+
+    websocket.onmessage = function(ev) {
+        var fullMsg = JSON.parse(ev.data); //PHP sends Json data
+        var type = fullMsg.type; //message type
+        var msg = fullMsg.message; //message text
+        var uname = fullMsg.name; //user name
+        var ucolor = fullMsg.color; //color
+
+        if(type == 'note')
+        {
+           $('#portraitAlert').show();
+            if(msg == 'newFriendRequest') {
+                $currentReqeusts = $('#enquiries').html();
+                if($currentReqeusts) {
+                    if ($.isNumeric($currentReqeusts)) {
+                        $requests = parseInt($currentReqeusts) + 1;
+                    }
+                    else {
+                        $requests = 1;
+                    }
+                }
+                else {
+                    $requests = 1;
+                }
+                $('#enquiries').html($requests).show();
+            }
+        }
+        if(type == 'system')
+        {
+            //alert(msg);
+        }
+    };
+
     history.pushState(null, null, location.href);
     window.onpopstate = function (event) {
         history.go(1);

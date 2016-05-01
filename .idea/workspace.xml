@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41f60642-6bb3-4106-93ea-2076b74df0cf" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/media/1/1.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/js/groupSettings_js.js" afterPath="$PROJECT_DIR$/system/js/groupSettings_js.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/subpages/createGroupMembers.php" afterPath="$PROJECT_DIR$/system/subpages/createGroupMembers.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/subpages/groupSettings.php" afterPath="$PROJECT_DIR$/system/subpages/groupSettings.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/index.php" afterPath="$PROJECT_DIR$/system/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/js/index_js.js" afterPath="$PROJECT_DIR$/system/js/index_js.js" />
     </list>
     <ignored path="messenger.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,38 +27,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="groupSettings_js.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/js/groupSettings_js.js">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+              <caret line="84" column="30" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
+              <folding>
+                <marker date="1461774918756" expanded="true" signature="1466:1511" placeholder="SELECT portr... users" />
+                <marker date="1461774918756" expanded="true" signature="3105:3136" placeholder="SELECT * FRO... users" />
+                <marker date="1461774918756" expanded="true" signature="3711:3795" placeholder="SELECT COUNT... contacts" />
+                <marker date="1461774918756" expanded="true" signature="4174:4187" placeholder="..." />
+                <marker date="1461774918756" expanded="true" signature="5251:5264" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index_js.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/system/js/index_js.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.040047113">
+              <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createGroupMembers.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/system/subpages/createGroupMembers.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2637931">
-              <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
-              <folding>
-                <marker date="1461140191233" expanded="true" signature="645:693" placeholder="SELECT portr... users" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="groupSettings.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/subpages/groupSettings.php">
+      <file leaf-file-name="user_id.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/variables/user_id.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
-              <folding>
-                <marker date="1461139251088" expanded="true" signature="686:735" placeholder="SELECT group... chats" />
-                <marker date="1461139251088" expanded="true" signature="1490:1724" placeholder="SELECT users... groupmembers" />
-                <marker date="1461139251088" expanded="true" signature="3619:3861" placeholder="SELECT users... groupmembers" />
-              </folding>
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="7" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -67,17 +67,7 @@
         <entry file="file://$PROJECT_DIR$/system/css/index_style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="669" column="20" selection-start-line="669" selection-start-column="20" selection-end-line="669" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="groupSettings_style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/system/css/groupSettings_style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+              <caret line="524" column="14" selection-start-line="524" selection-start-column="1" selection-end-line="524" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -111,10 +101,8 @@
         <option value="$PROJECT_DIR$/system/subpages/createGroupName.php" />
         <option value="$PROJECT_DIR$/system/php/group_prepare.php" />
         <option value="$PROJECT_DIR$/system/subpages/currentChats.php" />
-        <option value="$PROJECT_DIR$/system/js/index_js.js" />
         <option value="$PROJECT_DIR$/system/css/chat_style.css" />
         <option value="$PROJECT_DIR$/system/js/chat_js.js" />
-        <option value="$PROJECT_DIR$/system/index.php" />
         <option value="$PROJECT_DIR$/system/js/groupSettings.js" />
         <option value="$PROJECT_DIR$/system/subpages/deleteGroupMemberReally.php" />
         <option value="$PROJECT_DIR$/system/subpages/leaveGroupReally.php" />
@@ -129,6 +117,8 @@
         <option value="$PROJECT_DIR$/system/subpages/groupSettings.php" />
         <option value="$PROJECT_DIR$/system/js/groupSettings_js.js" />
         <option value="$PROJECT_DIR$/system/subpages/createGroupMembers.php" />
+        <option value="$PROJECT_DIR$/system/index.php" />
+        <option value="$PROJECT_DIR$/system/js/index_js.js" />
       </list>
     </option>
   </component>
@@ -143,9 +133,9 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="32" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="y" value="22" />
+    <option name="width" value="1296" />
+    <option name="height" value="1010" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -202,6 +192,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="messenger" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="messenger" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="system" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="variables" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -391,10 +399,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="32" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="22" width="1296" height="1010" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23206443" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2394822" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -450,13 +458,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/system/js/mediabox_js.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/system/subpages/mediabox.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -626,13 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="33" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/system/subpages/friendsProfile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.461538">
@@ -679,13 +673,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36468646">
           <caret line="50" column="60" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/js/index_js.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6759099">
-          <caret line="285" column="12" selection-start-line="285" selection-start-column="12" selection-end-line="287" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -775,47 +762,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/system/subpages/groupSettings.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.14441748">
           <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
-          <folding>
-            <marker date="1461139251088" expanded="true" signature="686:735" placeholder="SELECT group... chats" />
-            <marker date="1461139251088" expanded="true" signature="1490:1724" placeholder="SELECT users... groupmembers" />
-            <marker date="1461139251088" expanded="true" signature="3619:3861" placeholder="SELECT users... groupmembers" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/css/groupSettings_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.041262135">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/subpages/createGroupMembers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18567961">
+          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/js/groupSettings_js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/system/css/index_style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="669" column="20" selection-start-line="669" selection-start-column="20" selection-end-line="669" selection-end-column="20" />
+          <caret line="524" column="14" selection-start-line="524" selection-start-column="1" selection-end-line="524" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/css/groupSettings_style.css">
+    <entry file="file://$PROJECT_DIR$/system/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/js/groupSettings_js.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/subpages/createGroupMembers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2637931">
-          <caret line="9" column="57" selection-start-line="9" selection-start-column="57" selection-end-line="9" selection-end-column="57" />
+          <caret line="84" column="30" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
           <folding>
-            <marker date="1461140191233" expanded="true" signature="645:693" placeholder="SELECT portr... users" />
+            <marker date="1461774918756" expanded="true" signature="1466:1511" placeholder="SELECT portr... users" />
+            <marker date="1461774918756" expanded="true" signature="3105:3136" placeholder="SELECT * FRO... users" />
+            <marker date="1461774918756" expanded="true" signature="3711:3795" placeholder="SELECT COUNT... contacts" />
+            <marker date="1461774918756" expanded="true" signature="4174:4187" placeholder="..." />
+            <marker date="1461774918756" expanded="true" signature="5251:5264" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/variables/user_id.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/js/index_js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.040047113">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>

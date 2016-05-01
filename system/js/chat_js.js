@@ -1,4 +1,62 @@
 $(document).ready(function () {
+
+	$(document).keypress(function(e) {
+        if(e.keyCode == 13) { // Char-code for enter
+            send();
+			event.preventDefault();
+      return false;
+        }
+    });
+
+	$('#send').click(function () {
+		send();
+	});
+	
+	function send() {
+				$message = $('.chatTextBox').html();
+
+		if($message) {
+			var msg = {
+            type: 'message',
+			chat_id: '3',
+            message: $message
+        };
+		
+        //convert and send data to server
+        websocket.send(JSON.stringify(msg));
+		
+		// clear textbox and close Smiley-chooser
+		$('.chatTextBox').html('');
+		 $('#smileyChooser').slideUp(200);
+		
+		$currentTime = new Date();
+			$hours = $currentTime.getHours();
+			$minutes = $currentTime.getMinutes();
+			$portrait = $('.chatRight #myPortrait').html();
+		$('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span></div>" + $portrait + "</div>");
+		$('.chatMe').addClass('animated zoomIn');
+		$('.chatMe').removeClass('chatMe');
+	}
+	}
+	
+	websocket.onmessage = function(ev) {
+        var fullMsg = JSON.parse(ev.data); //PHP sends Json data
+        var type = fullMsg.type; //message type
+        var msg = fullMsg.message; //message text
+        var friend_id = fullMsg.friend_id; //user name
+        var ucolor = fullMsg.color; //color
+
+        if(type == 'message')
+        {
+			$currentTime = new Date();
+			$hours = $currentTime.getHours();
+			$minutes = $currentTime.getMinutes();
+			$portrait = $('.chatLeft span').html();
+			$('#content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+        $('.chatMe').addClass('animated zoomIn');
+		}
+    };
+	
     adjustColors();
     $('#content').scrollTop($('#content').height());
 

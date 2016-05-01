@@ -3,6 +3,7 @@
 <HEAD>
     <meta charset="utf-8">
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+	<link rel="stylesheet" href="plugins/animatecss/animate.css">
     <script src="js/chat_js.js"></script>
     <script src="plugins/emojify/emojify.js"></script>
     <script src="plugins/color-thief-master/src/color-thief.js"></script>
@@ -218,14 +219,18 @@
                     echo "<i class='material-icons-small doneAll'>done_all</i>";
                     echo "</div>";
                     if ($lastuser != $speaker_id) {
+						echo "<span id='myPortrait'>";
                         echo "<img src='../data/portraits/$myPortrait' class='img_round' style='margin-left: 10px;'/>";
-                    }
+						echo "</span>";
+					}
                     echo "</div>";
                 } else {
                     echo "<div class='chatLeft'>";
                     if ($lastuser != $speaker_id) {
-                        echo "<img src='../data/portraits/$portrait' class='img_round' style='margin-right: 10px;'/>";
-                        echo "<div class='bubble'>";
+						echo "<span>";
+                        echo "<img src='../data/$portrait' class='img_round' style='margin-right: 10px;'/>";
+                        echo "</span>";
+						echo "<div class='bubble'>";
                     } else {
                         echo "<div class='bubbleManuallyLeft'>";
                     }
@@ -265,10 +270,10 @@
         <div id="attacher">
             Dateien anfügen
         </div>
-        <div class="chatTextBox" contenteditable="true" placeholder="Tippe eine Nachricht">&nbsp;</div>
-        <i id="smiley" class="material-icons hover tooltip">mood</i>
-        <i id="attach" class="material-icons hover">attach_file</i>
-        <i class="material-icons" style="margin-left: 20px;">send</i>
+        <div class="chatTextBox" contenteditable="true" placeholder="Tippe eine Nachricht"></div>
+        <i id="smiley" class="material-icons hover tooltip" title="Smileys">mood</i>
+        <i id="attach" class="material-icons hover tooltip" title="Datei teilen">attach_file</i>
+        <i id="send" class="material-icons hover tooltip" title="Senden" style="margin-left: 20px;">send</i>
     </div>
 
     <?php
