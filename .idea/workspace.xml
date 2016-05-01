@@ -4,8 +4,11 @@
     <list default="true" id="41f60642-6bb3-4106-93ea-2076b74df0cf" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/data/media/1/1.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/index.php" afterPath="$PROJECT_DIR$/system/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/js/index_js.js" afterPath="$PROJECT_DIR$/system/js/index_js.js" />
+=======
+>>>>>>> 034d6997ca8153aae60a9545707830657cf9c0e8
     </list>
     <ignored path="messenger.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,6 +34,7 @@
         <entry file="file://$PROJECT_DIR$/system/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
               <caret line="84" column="30" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
               <folding>
                 <marker date="1461774918756" expanded="true" signature="1466:1511" placeholder="SELECT portr... users" />
@@ -38,16 +42,49 @@
                 <marker date="1461774918756" expanded="true" signature="3711:3795" placeholder="SELECT COUNT... contacts" />
                 <marker date="1461774918756" expanded="true" signature="4174:4187" placeholder="..." />
                 <marker date="1461774918756" expanded="true" signature="5251:5264" placeholder="..." />
+=======
+              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="createGroupMembers.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/subpages/createGroupMembers.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.230769">
+              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+              <folding>
+                <marker date="1461750434135" expanded="true" signature="645:693" placeholder="SELECT portr..users..." />
+>>>>>>> 034d6997ca8153aae60a9545707830657cf9c0e8
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="index_js.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/system/js/index_js.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.040047113">
               <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+=======
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.119382024">
+              <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="groupSettings.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/system/subpages/groupSettings.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
+>>>>>>> 034d6997ca8153aae60a9545707830657cf9c0e8
               <folding />
             </state>
           </provider>
@@ -117,8 +154,12 @@
         <option value="$PROJECT_DIR$/system/subpages/groupSettings.php" />
         <option value="$PROJECT_DIR$/system/js/groupSettings_js.js" />
         <option value="$PROJECT_DIR$/system/subpages/createGroupMembers.php" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/system/index.php" />
         <option value="$PROJECT_DIR$/system/js/index_js.js" />
+=======
+        <option value="$PROJECT_DIR$/index.html" />
+>>>>>>> 034d6997ca8153aae60a9545707830657cf9c0e8
       </list>
     </option>
   </component>
@@ -133,9 +174,15 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
+<<<<<<< HEAD
     <option name="y" value="22" />
     <option name="width" value="1296" />
     <option name="height" value="1010" />
+=======
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
+>>>>>>> 034d6997ca8153aae60a9545707830657cf9c0e8
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -162,7 +209,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -305,7 +352,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -395,15 +442,29 @@
       <option name="project" value="LOCAL" />
       <updated>1460915588714</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added&#10;&#10;comment ...">
+      <created>1461823326809</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1461823326809</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-8" y="22" width="1296" height="1010" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2394822" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.231875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> 034d6997ca8153aae60a9545707830657cf9c0e8
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -411,7 +472,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -442,7 +502,8 @@
     <MESSAGE value="Profil in Popup" />
     <MESSAGE value="New:&#10;&#10;- groups can now be opened without problems&#10;- groups have now group options" />
     <MESSAGE value="Improved&#10;&#10;- groupoptions added features (delete, leave, add)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved&#10;&#10;- groupoptions added features (delete, leave, add)" />
+    <MESSAGE value="Added&#10;&#10;comment ..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added&#10;&#10;comment ..." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -579,13 +640,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/system/logout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -764,6 +818,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14441748">
           <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
+<<<<<<< HEAD
         </state>
       </provider>
     </entry>
@@ -785,6 +840,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28">
           <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+=======
+          <folding />
+>>>>>>> 034d6997ca8153aae60a9545707830657cf9c0e8
         </state>
       </provider>
     </entry>
@@ -820,8 +878,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/system/js/index_js.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.040047113">
           <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+          <folding />
+=======
+        <state vertical-scroll-proportion="-5.230769">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding>
+            <marker date="1461750434135" expanded="true" signature="645:693" placeholder="SELECT portr..users..." />
+          </folding>
+>>>>>>> 034d6997ca8153aae60a9545707830657cf9c0e8
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.119382024">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
           <folding />
         </state>
       </provider>
