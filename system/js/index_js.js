@@ -1,41 +1,38 @@
 $(document).ready(function () {
-    // Websocket
-    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
+
+    // Connect to websocket
+    var wsUri = "ws://192.168.1.185:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
-    websocket.onopen = function(ev) { // connection is open
-		$.get('variables/user_id_var.php', function (data) {
-			$user_id = data;
-			 //prepare json data
-        var msg = {
-            type: 'user_id',
-            message: $user_id
-        };
-        //convert and send data to server
-        websocket.send(JSON.stringify(msg));
-		});
-
-
-       
+    websocket.onopen = function (ev) { // connection is open
+        $.get('variables/user_id_var.php', function (data) {
+            $user_id = data;
+            //prepare json data
+            var msg = {
+                type: 'user_id',
+                message: $user_id
+            };
+            //convert and send data to server
+            websocket.send(JSON.stringify(msg));
+        });
     }
 
-    websocket.onclose = function(ev) { // connection is open
-        //alert("bye");
-    }
+    /* websocket.onclose = function (ev) { // connection is open
+        alert("bye");
+    } */
 
-    websocket.onmessage = function(ev) {
+    websocket.onmessage = function (ev) {
         var fullMsg = JSON.parse(ev.data); //PHP sends Json data
         var type = fullMsg.type; //message type
         var msg = fullMsg.message; //message text
         var uname = fullMsg.name; //user name
         var ucolor = fullMsg.color; //color
 
-        if(type == 'note')
-        {
-           $('#portraitAlert').show();
-            if(msg == 'newFriendRequest') {
+        if (type == 'note') {
+            if (msg == 'newFriendRequest') {
+                $('#portraitAlert').show();
                 $currentReqeusts = $('#enquiries').html();
-                if($currentReqeusts) {
+                if ($currentReqeusts) {
                     if ($.isNumeric($currentReqeusts)) {
                         $requests = parseInt($currentReqeusts) + 1;
                     }
@@ -48,10 +45,6 @@ $(document).ready(function () {
                 }
                 $('#enquiries').html($requests).show();
             }
-        }
-        if(type == 'system')
-        {
-            //alert(msg);
         }
     };
 
@@ -277,7 +270,7 @@ $(document).ready(function () {
             var colorThief = new ColorThief();
             $color = colorThief.getColor(sourceImage);
 
-            if($color[0] > 200 || $color[1] > 200 || $color[2] > 200) {
+            if ($color[0] > 200 || $color[1] > 200 || $color[2] > 200) {
                 $color[0] = 180;
                 $color[1] = 180;
                 $color[2] = 180;

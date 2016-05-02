@@ -81,6 +81,19 @@ $(document).ready(function () {
             },
             function (data) {
                 if (data == 'updated' || data == 'added') {
+                        $message = $('.chatTextBox').html();
+
+                        if($message) {
+                            var msg = {
+                                type: 'message',
+                                chat_id: '3',
+                                message: $message
+                            };
+
+                            //convert and send data to server
+                            websocket.send(JSON.stringify(msg));
+                        }
+
                     $('#overlay').fadeOut(200);
                     $('#popup').fadeOut(200);
                 }
