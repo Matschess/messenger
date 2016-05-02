@@ -87,6 +87,7 @@ if (mysqli_num_rows($contactsQuery)) {
         echo "<div class='contactInfo'>";
         echo $friend_name;
         echo "<div class='contactLastMessage'>$last_message</div>";
+        echo "<span class='currentChatsBubble'></span>";
         echo "</div>";
         echo "</div>";
     }

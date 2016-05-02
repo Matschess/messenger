@@ -3,7 +3,6 @@
 <HEAD>
     <meta charset="utf-8">
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-	<link rel="stylesheet" href="plugins/animatecss/animate.css">
     <script src="js/chat_js.js"></script>
     <script src="plugins/emojify/emojify.js"></script>
     <script src="plugins/color-thief-master/src/color-thief.js"></script>

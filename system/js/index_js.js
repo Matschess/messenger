@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Connect to websocket
-    var wsUri = "ws://192.168.1.185:1414/websocket/server.php";
+    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     websocket.onopen = function (ev) { // connection is open
@@ -18,8 +18,8 @@ $(document).ready(function () {
     }
 
     /* websocket.onclose = function (ev) { // connection is open
-        alert("bye");
-    } */
+     alert("bye");
+     } */
 
     websocket.onmessage = function (ev) {
         var fullMsg = JSON.parse(ev.data); //PHP sends Json data
@@ -31,6 +31,7 @@ $(document).ready(function () {
         if (type == 'note') {
             if (msg == 'newFriendRequest') {
                 $('#portraitAlert').show();
+                $('#portraitAlert').addClass('animated zoomIn');
                 $currentReqeusts = $('#enquiries').html();
                 if ($currentReqeusts) {
                     if ($.isNumeric($currentReqeusts)) {
@@ -44,6 +45,37 @@ $(document).ready(function () {
                     $requests = 1;
                 }
                 $('#enquiries').html($requests).show();
+            }
+        }
+        else if (type == 'message') {
+            var $chat_id = fullMsg.chat_id; // id of chat with new message
+
+            $currentTime = new Date();
+            $hours = $currentTime.getHours();
+            $minutes = $currentTime.getMinutes();
+
+            $currentChat = $.cookie('chat_id');
+            if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
+                $portrait = $('.content #chat #content .chatLeft span').html();
+                $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                $('.chatMe').addClass('animated zoomIn');
+            }
+            else {
+                $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble').html();
+                if ($currentNewMessages) {
+                    if ($.isNumeric($currentNewMessages)) {
+                        $newMessages = parseInt($currentNewMessages) + 1;
+                    }
+                    else {
+                        $newMessages = 1;
+                    }
+                }
+                else {
+                    $newMessages = 1;
+                }
+                $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble').html($newMessages);
+                $('#' + $chat_id + ' .currentChatsBubble').show();
+                $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
             }
         }
     };

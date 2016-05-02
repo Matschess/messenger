@@ -80,20 +80,14 @@ $(document).ready(function () {
                 friend_id: $friend_id
             },
             function (data) {
-                if (data == 'updated' || data == 'added') {
-                        $message = $('.chatTextBox').html();
+                if (data /*== 'updated' || data == 'added'*/) {
+                    var msg = {
+                        type: 'addContact',
+                        friend_id: $friend_id
+                    };
 
-                        if($message) {
-                            var msg = {
-                                type: 'message',
-                                chat_id: '3',
-                                message: $message
-                            };
-
-                            //convert and send data to server
-                            websocket.send(JSON.stringify(msg));
-                        }
-
+                    //convert and send data to server
+                    websocket.send(JSON.stringify(msg));
                     $('#overlay').fadeOut(200);
                     $('#popup').fadeOut(200);
                 }

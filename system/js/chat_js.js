@@ -39,23 +39,7 @@ $(document).ready(function () {
 	}
 	}
 	
-	websocket.onmessage = function(ev) {
-        var fullMsg = JSON.parse(ev.data); //PHP sends Json data
-        var type = fullMsg.type; //message type
-        var msg = fullMsg.message; //message text
-        var friend_id = fullMsg.friend_id; //user name
-        var ucolor = fullMsg.color; //color
 
-        if(type == 'message')
-        {
-			$currentTime = new Date();
-			$hours = $currentTime.getHours();
-			$minutes = $currentTime.getMinutes();
-			$portrait = $('.chatLeft span').html();
-			$('#content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
-        $('.chatMe').addClass('animated zoomIn');
-		}
-    };
 	
     adjustColors();
     $('#content').scrollTop($('#content').height());

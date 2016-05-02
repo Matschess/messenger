@@ -81,3 +81,17 @@ vertical-align: middle;
     color: #222;
     margin-top: 14px;
 }
+
+.currentChatsBubble {
+    display: none;
+    position: absolute;
+    top: 40%;
+    right: 3%;
+    font-size: 12px;
+    background-color: #27ae60;
+    color: #fff;
+    padding: 1px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 20px;
+}
