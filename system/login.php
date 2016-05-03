@@ -22,6 +22,7 @@
     <!-- Latest jQuery -->
     <script type="text/javascript" src="js/login_js.js"></script>
     <script type="text/javascript" src="plugins/tooltipster/js/jquery.tooltipster.min.js"></script>
+
 </HEAD>
 <BODY>
 <div id="overlay"></div>
@@ -57,6 +58,7 @@ if (isset($_COOKIE['messenger'])) {
             <br/>
             <br/>
             <input id="loginNow" class="loginButton" type="button" value="Einloggen"/>
+
         </div>
     </div>
 </div>
