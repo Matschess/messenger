@@ -1,7 +1,6 @@
 $(document).ready(function () {
-
     // Connect to websocket
-    var wsUri = "ws://10.200.1.45:1414/websocket/server.php";
+    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     websocket.onopen = function (ev) { // connection is open
@@ -55,6 +54,8 @@ $(document).ready(function () {
             $minutes = $currentTime.getMinutes();
 
             $currentChat = $.cookie('chat_id');
+
+            // If chat window opened
             if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
                 $portrait = $('.content #chat #content .chatLeft span').html();
                 $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
@@ -63,6 +64,15 @@ $(document).ready(function () {
                 // Scroll to bottom
                 $content = $('#content');
                 $content.scrollTop($content.prop("scrollHeight"));
+
+                // Send read
+                var msg = {
+                    type: 'read',
+                    chat_id: $chat_id
+                };
+
+                //convert and send data to server
+                websocket.send(JSON.stringify(msg));
             }
             else {
                 $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html();
@@ -96,6 +106,18 @@ $(document).ready(function () {
                     $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
                     $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomOut');
                 }
+            }
+        }
+        else if (type == 'read') {
+            var $chat_id = fullMsg.chat_id; // id of chat with new message
+
+            $currentChat = $.cookie('chat_id');
+
+            // If chat window opened
+            if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
+                $('.done').addClass('doneAll');
+                $('.doneAll').html('done_all');
+                adjustColorsRead();
             }
         }
     };
@@ -329,6 +351,28 @@ $(document).ready(function () {
             }
 
             $('.tableNavigation td, #containerLeftSearch').css('background-color', 'rgb(' + $color + ')');
+        }
+    }
+
+    function adjustColorsRead() {
+        $cookieColor = $.cookie('messengerColor');
+        if ($cookieColor) {
+            $color = $cookieColor;
+            if ($color) {
+                $('#chat .doneAll').css('color', $color);
+            }
+        }
+        else {
+            var sourceImage = document.getElementById("imgForBackground");
+            var colorThief = new ColorThief();
+            $color = colorThief.getColor(sourceImage);
+
+            if ($color[0] > 200 || $color[1] > 200 || $color[2] > 200) {
+                $color[0] = 180;
+                $color[1] = 180;
+                $color[2] = 180;
+            }
+            $('#chat .doneAll').css('color', 'rgb(' + $color + ')');
         }
     }
 

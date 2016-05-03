@@ -194,13 +194,14 @@
     </div>
     <div id="content">
         <?php
-        $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent FROM messages WHERE chat_id = $chat_id");
+        $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent, 'read' FROM messages WHERE chat_id = $chat_id");
         if (mysqli_num_rows($messagesQuery)) {
             $lastuser_id;
             while ($messagesRows = mysqli_fetch_object($messagesQuery)) {
                 $speaker_id = $messagesRows->user_id;
                 $message = $messagesRows->message;
                 $sent = date_create($messagesRows->sent);
+                $read = $messagesRows->read;
                 $sentFormatted = date_format($sent, 'H:i');
                 if ($speaker_id == $user_id) {
                     echo "<div class='chatRight'>";
@@ -215,7 +216,12 @@
                     }
                     echo $message;
                     echo "<span class='time'>$sentFormatted</span>";
-                    echo "<i class='material-icons-small doneAll'>done_all</i>";
+                    if($read) {
+                        echo "<i class='material-icons-small doneAll'>done_all</i>";
+                    }
+                    else {
+                        echo "<i class='material-icons-small done'>done</i>";
+                    }
                     echo "</div>";
                     if ($lastuser != $speaker_id) {
 						echo "<span id='myPortrait'>";

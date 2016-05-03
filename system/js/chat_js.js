@@ -1,5 +1,15 @@
 $(document).ready(function () {
     $chat_id = $.cookie('chat_id');
+
+    // Send read
+    var msg = {
+        type: 'read',
+        chat_id: $chat_id
+    };
+
+    //convert and send data to server
+    websocket.send(JSON.stringify(msg));
+
     // Remove message bubble in currentChats
 
     $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomOut');
@@ -44,7 +54,7 @@ $(document).ready(function () {
                 $hours = $currentTime.getHours();
                 $minutes = $currentTime.getMinutes();
                 $portrait = $('.chatRight #myPortrait').html();
-                $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span></div>" + $portrait + "</div>");
+                $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small doneAll'>done</i></div>" + $portrait + "</div>");
                 $('.chatMe').addClass('animated zoomIn');
                 $('.chatMe').removeClass('chatMe');
 
