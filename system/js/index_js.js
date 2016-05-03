@@ -48,6 +48,7 @@ $(document).ready(function () {
         }
         else if (type == 'message') {
             var $chat_id = fullMsg.chat_id; // id of chat with new message
+            $('#chatSound').get(0).play();
 
             $currentTime = new Date();
             $hours = $currentTime.getHours();

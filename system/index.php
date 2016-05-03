@@ -40,7 +40,7 @@
 </HEAD>
 <BODY>
 
-<audio controls="controls" autoplay="autoplay" hidden="true" >
+<audio id='chatSound' controls="controls" hidden="true" >
     <source src= "http://www.jplayer.org/audio/mp3/Miaow-snip-Stirring-of-a-fool.mp3#t=0,0.1"/>
 </audio>
 
