@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Connect to websocket
-    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
+    var wsUri = "ws://10.200.1.45:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     websocket.onopen = function (ev) { // connection is open
@@ -59,12 +59,20 @@ $(document).ready(function () {
                 $portrait = $('.content #chat #content .chatLeft span').html();
                 $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
                 $('.chatMe').addClass('animated zoomIn');
+
+                // Scroll to bottom
+                $content = $('#content');
+                $content.scrollTop($content.prop("scrollHeight"));
             }
             else {
-                $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble').html();
+                $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html();
+                $animateFlash = false;
                 if ($currentNewMessages) {
                     if ($.isNumeric($currentNewMessages)) {
                         $newMessages = parseInt($currentNewMessages) + 1;
+                        if($newMessages > 1) {
+                            $animateFlash = true;
+                        }
                     }
                     else {
                         $newMessages = 1;
@@ -73,9 +81,21 @@ $(document).ready(function () {
                 else {
                     $newMessages = 1;
                 }
-                $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble').html($newMessages);
+                $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html($newMessages);
                 $('#' + $chat_id + ' .currentChatsBubble').show();
-                $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
+                if($animateFlash) {
+                    setTimeout(function () {
+                    $('#' + $chat_id + ' .currentChatsBubble span').addClass('animated flash');
+                    }, 250);
+                    $('#' + $chat_id + ' .currentChatsBubble span').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                            $('#' + $chat_id + ' .currentChatsBubble span').removeClass('animated flash');
+
+                    });
+                }
+                else {
+                    $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
+                    $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomOut');
+                }
             }
         }
     };

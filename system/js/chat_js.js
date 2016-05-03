@@ -1,48 +1,65 @@
 $(document).ready(function () {
+    $chat_id = $.cookie('chat_id');
+    // Remove message bubble in currentChats
 
-	$(document).keypress(function(e) {
-        if(e.keyCode == 13) { // Char-code for enter
+    $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomOut');
+    $('#' + $chat_id + ' .currentChatsBubble').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+        $('#' + $chat_id + ' .currentChatsBubble').hide();
+        $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomIn');
+        $('#' + $chat_id + ' .currentChatsBubble span').html('');
+    });
+
+    $(document).keypress(function (e) {
+        if (e.keyCode == 13) { // Char-code for enter
             send();
-			event.preventDefault();
-      return false;
+            event.preventDefault();
+            return false;
         }
     });
 
-	$('#send').click(function () {
-		send();
-	});
-	
-	function send() {
-				$message = $('.chatTextBox').html();
+    $('#send').click(function () {
+        send();
+    });
 
-		if($message) {
-			var msg = {
-            type: 'message',
-			chat_id: '3',
-            message: $message
-        };
-		
-        //convert and send data to server
-        websocket.send(JSON.stringify(msg));
-		
-		// clear textbox and close Smiley-chooser
-		$('.chatTextBox').html('');
-		 $('#smileyChooser').slideUp(200);
-		
-		$currentTime = new Date();
-			$hours = $currentTime.getHours();
-			$minutes = $currentTime.getMinutes();
-			$portrait = $('.chatRight #myPortrait').html();
-		$('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span></div>" + $portrait + "</div>");
-		$('.chatMe').addClass('animated zoomIn');
-		$('.chatMe').removeClass('chatMe');
-	}
-	}
-	
+    function send() {
+        $chat_id = $.cookie('chat_id');
+        if ($chat_id) {
+            $message = $('.chatTextBox').html();
 
-	
+            if ($message) {
+                var msg = {
+                    type: 'message',
+                    chat_id: $chat_id,
+                    message: $message
+                };
+
+                //convert and send data to server
+                websocket.send(JSON.stringify(msg));
+
+                // clear textbox and close Smiley-chooser
+                $('.chatTextBox').html('');
+                $('#smileyChooser').slideUp(200);
+
+                $currentTime = new Date();
+                $hours = $currentTime.getHours();
+                $minutes = $currentTime.getMinutes();
+                $portrait = $('.chatRight #myPortrait').html();
+                $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span></div>" + $portrait + "</div>");
+                $('.chatMe').addClass('animated zoomIn');
+                $('.chatMe').removeClass('chatMe');
+
+                // Scroll to bottom
+                $content = $('#content');
+                $content.scrollTop($content.prop("scrollHeight"));
+            }
+        }
+    }
+
+
     adjustColors();
-    $('#content').scrollTop($('#content').height());
+    // Scroll to bottom
+    $content = $('#content');
+    $content.scrollTop($content.prop("scrollHeight"));
 
     $('.chatTextBox').focus();
 

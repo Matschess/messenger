@@ -1,4 +1,4 @@
-/* EDITED zoomIn */
+/* EDITED flash, zoomIn */
 
 @charset "UTF-8";
 
@@ -99,28 +99,28 @@
 }
 
 @-webkit-keyframes flash {
-  from, 50%, to {
+  from, to {
     opacity: 1;
   }
 
-  25%, 75% {
+  50% {
     opacity: 0;
   }
 }
 
 @keyframes flash {
-  from, 50%, to {
+  from, to {
     opacity: 1;
   }
 
-  25%, 75% {
+  50% {
     opacity: 0;
   }
 }
 
 .flash {
-  -webkit-animation-name: flash;
-  animation-name: flash;
+  -webkit-animation: flash 0.8s;
+  animation: flash 0.8s;
 }
 
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
