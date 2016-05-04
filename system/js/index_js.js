@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Connect to websocket
-    var wsUri = "ws://localhost:1414/websocket/server.php";
+    var wsUri = "ws://10.0.0.13:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     websocket.onopen = function (ev) { // connection is open
