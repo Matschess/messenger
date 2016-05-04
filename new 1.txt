@@ -1,1 +1,1 @@
-php -q c:\xampp\htdocs\websocket\server.php
+php -q c:\xampp\htdocs\messenger\server.php

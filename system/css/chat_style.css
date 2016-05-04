@@ -23,6 +23,12 @@
     font-style: italic;
 }
 
+#typing {
+    display: none;
+    font-size: 12px;
+    font-style: italic;
+}
+
 #options {
     position: absolute;
     right: 6px;
@@ -366,4 +372,16 @@
     font-style: normal;
     padding: 3px 5px 3px 5px;
     margin-left: 5px;
+}
+
+.done {
+    color: #BDBDBD;
+}
+
+.doneAll {
+    -webkit-transition: color .5s;
+    -moz-transition: color .5s;
+    -ms-transition: color .5s;
+    -o-transition: color .5s;
+    transition: color .5s;
 }

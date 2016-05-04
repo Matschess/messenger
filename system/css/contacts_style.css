@@ -83,7 +83,6 @@ vertical-align: middle;
 }
 
 .currentChatsBubble {
-    display: none;
     position: absolute;
     top: 40%;
     right: 3%;

@@ -178,6 +178,7 @@
             } else {
                 echo "<div id='userstatus'>$groupMembers <span class='moreGroupMembers'>Mehr</span></div>";
             }
+            echo "<div id='typing'></div>";
             ?>
         </div>
         <div id="options">
@@ -194,14 +195,14 @@
     </div>
     <div id="content">
         <?php
-        $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent, 'read' FROM messages WHERE chat_id = $chat_id");
+        $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent, isRead FROM messages WHERE chat_id = $chat_id");
         if (mysqli_num_rows($messagesQuery)) {
             $lastuser_id;
             while ($messagesRows = mysqli_fetch_object($messagesQuery)) {
                 $speaker_id = $messagesRows->user_id;
                 $message = $messagesRows->message;
                 $sent = date_create($messagesRows->sent);
-                $read = $messagesRows->read;
+                $read = $messagesRows->isRead;
                 $sentFormatted = date_format($sent, 'H:i');
                 if ($speaker_id == $user_id) {
                     echo "<div class='chatRight'>";
@@ -216,8 +217,8 @@
                     }
                     echo $message;
                     echo "<span class='time'>$sentFormatted</span>";
-                    if($read) {
-                        echo "<i class='material-icons-small doneAll'>done_all</i>";
+                    if ($read == 1) {
+                        echo "<i class='material-icons-small doneAll'>done</i>";
                     }
                     else {
                         echo "<i class='material-icons-small done'>done</i>";

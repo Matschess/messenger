@@ -27,6 +27,18 @@ $(document).ready(function () {
         }
     });
 
+    $('.chatTextBox').keypress(function (e) {
+        // Send typing
+
+        var msg = {
+            type: 'typing',
+            chat_id: $chat_id
+        };
+
+        //convert and send data to server
+        websocket.send(JSON.stringify(msg));
+    });
+
     $('#send').click(function () {
         send();
     });
@@ -54,7 +66,7 @@ $(document).ready(function () {
                 $hours = $currentTime.getHours();
                 $minutes = $currentTime.getMinutes();
                 $portrait = $('.chatRight #myPortrait').html();
-                $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small doneAll'>done</i></div>" + $portrait + "</div>");
+                $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div>" + $portrait + "</div>");
                 $('.chatMe').addClass('animated zoomIn');
                 $('.chatMe').removeClass('chatMe');
 
@@ -64,7 +76,6 @@ $(document).ready(function () {
             }
         }
     }
-
 
     adjustColors();
     // Scroll to bottom

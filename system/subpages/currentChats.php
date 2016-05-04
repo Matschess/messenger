@@ -65,7 +65,7 @@ if (mysqli_num_rows($contactsQuery)) {
             $portrait = "portraits/default.png";
         }
 
-        $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent FROM messages WHERE chat_id = $chat_id && sent = '$last_active' ORDER BY sent");
+        $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent FROM messages WHERE chat_id = $chat_id ORDER BY sent DESC");
         if (mysqli_num_rows($messagesQuery)) {
             $messagesRows = mysqli_fetch_object($messagesQuery);
             $last_message_user_id = $messagesRows->user_id;
@@ -83,11 +83,17 @@ if (mysqli_num_rows($contactsQuery)) {
         }
 
         echo "<div id='$chat_id' class='contact ripple'>";
-        echo "<img src='../data/$portrait' id='$friend_id' class='img_round img_margin_right toProfile'></img>";
+        echo "<img src='../data/$portrait' id='$friend_id' class='img_round img_margin_right toProfile'/>";
         echo "<div class='contactInfo'>";
         echo $friend_name;
         echo "<div class='contactLastMessage'>$last_message</div>";
-        echo "<span class='currentChatsBubble'><span></span></span>";
+        $messagesQuery = mysqli_query($db, "SELECT id FROM messages WHERE chat_id = $chat_id && user_id != $user_id && NOT isRead");
+        $newMessages = mysqli_num_rows($messagesQuery);
+        if ($newMessages) {
+            echo "<span class='currentChatsBubble'><span>$newMessages</span></span>";
+        } else {
+            echo "<span class='currentChatsBubble' style='display: none'><span></span></span>";
+        }
         echo "</div>";
         echo "</div>";
     }

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Connect to websocket
-    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
+    var wsUri = "ws://localhost:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     websocket.onopen = function (ev) { // connection is open
@@ -117,8 +117,23 @@ $(document).ready(function () {
             // If chat window opened
             if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
                 $('.done').addClass('doneAll');
-                $('.doneAll').html('done_all');
                 adjustColorsRead();
+            }
+        }
+        else if (type == 'typing') {
+            var $chat_id = fullMsg.chat_id; // id of chat with new message
+            var $user = fullMsg.user; // id of chat with new message
+
+            $currentChat = $.cookie('chat_id');
+
+            // If chat window opened
+            if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
+
+                $('#typing').html($user + ' schreibt gerade...');
+                $('#userstatus').hide();
+                $('#typing').show();
+                $('#typing').hide();
+                $('#userstatus').show();
             }
         }
     };
