@@ -22,7 +22,7 @@
             include("db_connect.php");
 
 
-            $result = mysqli_query($db, "SELECT * FROM media WHERE chats_id = $chat_id && users_id = $user_id");
+            $result = mysqli_query($db, "SELECT * FROM media WHERE chat_id = $chat_id");
             $countMedias = mysqli_num_rows($result);
             if ($countMedias == 1) {
                 echo "1 Datei";
@@ -57,7 +57,7 @@
             if (mysqli_num_rows($result)) {
                 while ($row = mysqli_fetch_object($result)) {
                     $media_id = $row->id;
-                    $chat_id = $row->chats_id;
+                    $chat_id = $row->chat_id;
                     $dataname = $row->dataname;
                     $datatype = $row->datatype;
                     if ($datatype == 'doc' || $datatype == 'docx') {

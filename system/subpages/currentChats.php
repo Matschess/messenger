@@ -43,9 +43,15 @@ if (mysqli_num_rows($contactsQuery)) {
         $groupname = $contactsRows->groupname;
         $user_left_id = $contactsRows->user_left_id;
         $user_right_id = $contactsRows->user_right_id;
-        if ($contactsRows->portrait) {
-            $portrait = "groupimages/" . $contactsRows->portrait;
+        // Portrait
+        $portrait = $contactsRows->portrait;
+        if (!file_exists("../../data/groupimages/" . $portrait) || $portrait == "") {
+            $portrait = "portraits/default.png";
         }
+        else {
+            $portrait = "groupimages/" . $portrait;
+        }
+
         $last_active = $contactsRows->last_active;
         if ($user_left_id == $user_id) {
             $friend_id = $user_right_id;
@@ -55,14 +61,16 @@ if (mysqli_num_rows($contactsQuery)) {
             $friendQuery = mysqli_query($db, "SELECT username, portrait FROM users WHERE id = '$friend_id'");
             $friendRows = mysqli_fetch_object($friendQuery);
             $friend_name = $friendRows->username;
-            $portrait = "portraits/" . $friendRows->portrait;
+            // Portrait
+            $portrait = $friendRows->portrait;
+            if (!file_exists("../../data/portraits/" . $portrait) || $portrait == "") {
+                $portrait = "portraits/default.png";
+            }
+            else {
+                $portrait = "portraits/" . $portrait;
+            }
         } else {
             $friend_name = $groupname;
-        }
-
-        // Portrait
-        if (!file_exists("../../data/" . $portrait) || $portrait == "") {
-            $portrait = "portraits/default.png";
         }
 
         $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent FROM messages WHERE chat_id = $chat_id ORDER BY sent DESC");
@@ -75,11 +83,11 @@ if (mysqli_num_rows($contactsQuery)) {
             $sent = date_create($sent);
             $sent = date_format($sent, 'H:i');
 
-            if (strlen($message) > 43) {
-                $message = $s = substr($message, 0, 40) . "..."; // cut to long message
+            if (strlen($message) > 33) {
+                $message = substr($message, 0, 30) . "..."; // cut to long message
             }
-            if ($last_message_user_id == $user_id) $last_message = $message . " " . "<span class='contactLastMessageSent'>$sent <i class='material-icons-tiny doneAll'>done_all</i></span>";
-            else  $last_message = $message . " " . "<span class='contactLastMessageSent'>$sent</span>";
+            if ($last_message_user_id == $user_id) $last_message = $message . " <span class='contactLastMessageSent'>$sent <i class='material-icons-tiny doneAll'>done_all</i></span>";
+            else  $last_message = $message . " <span class='contactLastMessageSent'>$sent</span>";
         }
 
         echo "<div id='$chat_id' class='contact ripple'>";

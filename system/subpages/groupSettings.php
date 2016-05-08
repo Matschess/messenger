@@ -22,15 +22,19 @@ if (isset($_COOKIE["chat_id"])) {
     if (mysqli_num_rows($groupInfo)) {
         $groupInfoRow = mysqli_fetch_object($groupInfo);
         $groupname = $groupInfoRow->groupname;
+
+        // Portrait
         $portrait = $groupInfoRow->portrait;
 
-        $fullPortrait = "../data/groupimages/" . $portrait;
-        if (!file_exists("../" . $fullPortrait) || $portrait == "" || !$visibility) {
-            $fullPortrait = "../data/portraits/default.png";
+        if (!file_exists("../../data/groupimages/" . $portrait) || $portrait == "") {
+            $portrait = "portraits/default.png";
+        }
+        else {
+            $portrait = "groupimages/" . $portrait;
         }
 
         echo "<div id='portrait'>";
-        echo "<img src='$fullPortrait' id='portraitImage'/>";
+        echo "<img src='../data/$portrait' id='portraitImage'/>";
         echo "</div>";
         echo "<div id='portraitBackground'>";
         echo "<br/>";

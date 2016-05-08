@@ -76,11 +76,17 @@ while (true) {
                                 while ($groupMemberRows = mysqli_fetch_object($groupMemberQuery)) {
                                     $member_id = $groupMemberRows->user_id;
                                     if ($member_id != $user_id) {
-                                        $friend_id = $member_id;
-                                        if (isset($idToClients[$friend_id])) {
-                                            $receiverPos = $idToClients[$friend_id];
-                                            $response = mask(json_encode(array('type' => 'message', 'message' => $message, 'chat_id' => $chat_id))); //prepare json data
-                                            @socket_write($clients[$receiverPos], $response, strlen($response));
+                                        if (isset($idToClients[$member_id])) {
+                                            $memberInfoQuery = mysqli_query($db, "SELECT username, portrait FROM users WHERE id = $user_id");
+                                            $memberInfoRow = mysqli_fetch_object($memberInfoQuery);
+                                            if ($memberInfoRow) {
+                                                $member_name = $memberInfoRow->username;
+                                                $member_portrait = $memberInfoRow->portrait;
+
+                                                $receiverPos = $idToClients[$member_id];
+                                                $response = mask(json_encode(array('type' => 'message', 'message' => $message, 'chat_id' => $chat_id, 'member_name' => $member_name, 'member_portrait' => $member_portrait))); //prepare json data
+                                                @socket_write($clients[$receiverPos], $response, strlen($response));
+                                            }
                                         }
                                     }
                                 }
@@ -100,14 +106,59 @@ while (true) {
                         }
                         $insert = mysqli_query($db, "INSERT INTO messages (chat_id, user_id, message) VALUES ($chat_id, $user_id, '$message')");
                     }
-				} elseif ($tst_msg->type === "read")
-					{
+                } elseif ($tst_msg->type === "media") {
                     $chat_id = $tst_msg->chat_id;
-					
-					$socketPosition = array_search($changed_socket, $clients);
+                    $media = $tst_msg->media;
 
-                        $user_id = $userToClients[$socketPosition];
-                        $result = mysqli_query($db, "SELECT groupname, user_left_id, user_right_id FROM chats WHERE id = $chat_id");
+                    $socketPosition = array_search($changed_socket, $clients);
+                    $user_id = $userToClients[$socketPosition];
+
+                    $result = mysqli_query($db, "SELECT groupname, user_left_id, user_right_id FROM chats WHERE id = $chat_id");
+                    $row = mysqli_fetch_object($result);
+                    if ($row) {
+                        $groupname = $row->groupname;
+                        if (isset($groupname)) {
+                            $groupMemberQuery = mysqli_query($db, "SELECT user_id FROM groupmembers WHERE chat_id = $chat_id");
+                            if (mysqli_num_rows($groupMemberQuery)) {
+                                while ($groupMemberRows = mysqli_fetch_object($groupMemberQuery)) {
+                                    $member_id = $groupMemberRows->user_id;
+                                    if ($member_id != $user_id) {
+                                        if (isset($idToClients[$member_id])) {
+                                            $memberInfoQuery = mysqli_query($db, "SELECT username, portrait FROM users WHERE id = $user_id");
+                                            $memberInfoRow = mysqli_fetch_object($memberInfoQuery);
+                                            if ($memberInfoRow) {
+                                                $member_name = $memberInfoRow->username;
+                                                $member_portrait = $memberInfoRow->portrait;
+
+                                                $receiverPos = $idToClients[$member_id];
+                                                $response = mask(json_encode(array('type' => 'media', 'media' => $media, 'chat_id' => $chat_id, 'member_name' => $member_name, 'member_portrait' => $member_portrait))); //prepare json data
+                                                @socket_write($clients[$receiverPos], $response, strlen($response));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            $user_left_id = $row->user_left_id;
+                            if ($user_left_id != $user_id) {
+                                $friend_id = $user_left_id;
+                            } else {
+                                $friend_id = $row->user_right_id;
+                            }
+                            if (isset($idToClients[$friend_id])) {
+                                $receiverPos = $idToClients[$friend_id];
+                                $response = mask(json_encode(array('type' => 'media', 'media' => $media, 'chat_id' => $chat_id))); //prepare json data
+                                @socket_write($clients[$receiverPos], $response, strlen($response));
+                            }
+                        }
+                    }
+                } elseif ($tst_msg->type === "read") {
+                    $chat_id = $tst_msg->chat_id;
+
+                    $socketPosition = array_search($changed_socket, $clients);
+
+                    $user_id = $userToClients[$socketPosition];
+                    $result = mysqli_query($db, "SELECT groupname, user_left_id, user_right_id FROM chats WHERE id = $chat_id");
                     $row = mysqli_fetch_object($result);
                     if ($row) {
                         $groupname = $row->groupname;
@@ -118,17 +169,17 @@ while (true) {
                                     $member_id = $groupMemberRows->user_id;
                                     if ($member_id != $user_id) {
                                         $friend_id = $member_id;
-                                    }
-                                    $updateRead = mysqli_query($db, "UPDATE messages SET isRead = true WHERE chat_id = $chat_id && user_id = $friend_id");
-                                    if (isset($idToClients[$friend_id])) {
-                                        $receiverPos = $idToClients[$friend_id];
-                                        $response = mask(json_encode(array('type' => 'read', 'chat_id' => $chat_id))); //prepare json data
-                                        @socket_write($clients[$receiverPos], $response, strlen($response));
+                                        $updateRead = mysqli_query($db, "UPDATE messages SET isRead = true WHERE chat_id = $chat_id && user_id = $friend_id");
+                                        if (isset($idToClients[$friend_id])) {
+                                            $receiverPos = $idToClients[$friend_id];
+                                            $response = mask(json_encode(array('type' => 'read', 'chat_id' => $chat_id))); //prepare json data
+                                            @socket_write($clients[$receiverPos], $response, strlen($response));
+                                        }
                                     }
                                 }
                             }
                         } else {
-						$user_left_id = $row->user_left_id;
+                            $user_left_id = $row->user_left_id;
                             if ($user_left_id != $user_id) {
                                 $friend_id = $user_left_id;
                             } else {
@@ -143,8 +194,8 @@ while (true) {
                                 @socket_write($clients[$receiverPos], $response, strlen($response));
                             }
                         }
-					}
-                    } elseif ($tst_msg->type === "typing") {
+                    }
+                } elseif ($tst_msg->type === "typing") {
                     $chat_id = $tst_msg->chat_id;
                     $socketPosition = array_search($changed_socket, $clients);
 
@@ -170,11 +221,15 @@ while (true) {
                                 }
                             }
                         } else {
-                            $friend_id = 184;
-                            $user = "Matthias";
+                            $user_left_id = $row->user_left_id;
+                            if ($user_left_id != $user_id) {
+                                $friend_id = $user_left_id;
+                            } else {
+                                $friend_id = $row->user_right_id;
+                            }
                             if (isset($idToClients[$friend_id])) {
                                 $receiverPos = $idToClients[$friend_id];
-                                $response = mask(json_encode(array('type' => 'typing', 'chat_id' => $chat_id, 'user' => $user))); //prepare json data
+                                $response = mask(json_encode(array('type' => 'typing', 'chat_id' => $chat_id))); //prepare json data
                                 @socket_write($clients[$receiverPos], $response, strlen($response));
                             }
                         }

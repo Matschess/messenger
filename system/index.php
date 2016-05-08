@@ -41,7 +41,7 @@
 <BODY>
 
 <audio id='chatSound' controls="controls" hidden="true" >
-    <source src= "sounds/newMessage.mp3"/>
+    <source src= "sounds/newMessage.wav"/>
 </audio>
 
 <div id="overlay"></div>

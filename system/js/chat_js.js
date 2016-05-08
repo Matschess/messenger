@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $chat_id = $.cookie('chat_id');
+    var $chat_id = $.cookie('chat_id');
 
     // Send read
     var msg = {
@@ -60,15 +60,34 @@ $(document).ready(function () {
 
                 // clear textbox and close Smiley-chooser
                 $('.chatTextBox').html('');
-                $('#smileyChooser').slideUp(200);
+                $('#smileyChooser, #attacher').slideUp(200);
 
                 $currentTime = new Date();
                 $hours = $currentTime.getHours();
                 $minutes = $currentTime.getMinutes();
-                $portrait = $('.chatRight #myPortrait').html();
-                $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div>" + $portrait + "</div>");
+                $portrait = $('#mePortrait').attr('src');
+
+                // Clear 'no messages' note
+                if($('#noMessages').length) {
+                    $('#content').html('');
+                }
+
+                if ($('.content #chat #content .bubble:last').parent().hasClass("chatRight")) {
+                    $('#content').append("<div class='chatRight chatMe'><div class='bubbleManuallyRight'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div></div>");
+                }
+                else {
+                    $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div><span id='myPortrait'><img src='" + $portrait + "' class='img_round' style='margin-left: 10px;'/></span></div>");
+                }
+
                 $('.chatMe').addClass('animated zoomIn');
                 $('.chatMe').removeClass('chatMe');
+                $('.chatMe').removeClass('chatMe');
+
+
+                if ($message.length > 33) {
+                    $message = $message.substr(0, 30) + "..."; // cut to long message
+                }
+                $('#' + $chat_id + ' .contactInfo .contactLastMessage').html($message + " <span class='contactLastMessageSent'>" + $hours + ":" + $minutes + " <i class='material-icons-tiny doneAll'>done</i></span>");
 
                 // Scroll to bottom
                 $content = $('#content');
@@ -199,10 +218,114 @@ $(document).ready(function () {
         $('#attacher').slideToggle(300);
     });
 
+    $('.uploader').change(function () {
+        $('#uploadContainer').hide();
+        $('.uploadLoader').show();
+        var file_data = $('.uploader').prop('files')[0];
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        uploadMedia(form_data);
+    });
+
+    // File drop
+    $("*").on('dragover', function (e)
+    {
+        $('#attacher').slideDown(300);
+    });
+    // Avpod opening media in browser when dropping anywhere
+    $("#uploadContainer").on('dragover', function (e)
+    {
+        e.stopPropagation();
+        e.preventDefault();
+    });
+    $("#uploadContainer").on('dragenter', function (e)
+    {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('background-color', '#FAFAFA');
+    });
+    $("#uploadContainer").on('dragleave', function (e)
+    {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('background-color', '#fff');
+    });
+    $("#uploadContainer").on('drop', function (e)
+    {
+        e.preventDefault();
+
+        var file_data = e.originalEvent.dataTransfer.files[0];
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        uploadMedia(form_data);
+    });
+
+    function uploadMedia(form_data) {
+        $.ajax({
+            url: 'upload.php?job=media&chat_id=' + $chat_id, // point to server-side PHP script
+            dataType: 'text',  // what to expect back from the PHP script, if anything
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function (data) {
+                if(data.substr(0, 9) == "uploaded:") {
+                    $media = data.substr(10);
+
+                    //insert media
+                    var msg = {
+                        type: 'media',
+                        chat_id: $chat_id,
+                        media: $media
+                    };
+
+                    //convert and send data to server
+                    websocket.send(JSON.stringify(msg));
+
+                    // clear textbox and close Smiley-chooser
+                    $('#smileyChooser, #attacher').slideUp(200);
+                    $('.uploadLoader').hide();
+                    $('#uploadContainer').show();
+
+                    $currentTime = new Date();
+                    $hours = $currentTime.getHours();
+                    $minutes = $currentTime.getMinutes();
+                    $portrait = $('#mePortrait').attr('src');
+
+                    // Clear 'no messages' note
+                    if($('#noMessages').length) {
+                        $('#content').html('');
+                    }
+
+                    if ($('.content #chat #content .bubble:last').parent().hasClass("chatRight")) {
+                        $('#content').append("<div class='chatRight chatMe'><div class='bubbleManuallyRight'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div></div>");
+                    }
+                    else {
+                        $('#content').append("<div class='chatRight chatMe'><div class='bubble'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div><span id='myPortrait'><img src='" + $portrait + "' class='img_round' style='margin-left: 10px;'/></span></div>");
+                    }
+
+                    $('.chatMe').addClass('animated zoomIn');
+
+                    // Preview in Current Chats on left container
+                    $('#' + $chat_id + ' .contactInfo .contactLastMessage').html("<i class='material-icons-tiny doneAll'>attachment</i> Datei <span class='contactLastMessageSent'>" + $hours + ":" + $minutes + " <i class='material-icons-tiny doneAll'>done</i></span>");
+
+                    // Scroll to bottom when media is loaded
+                    $('.chatMe').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                        $content = $('#content');
+                        $content.animate({ scrollTop: $content.prop("scrollHeight")}, 300);
+                        $('.chatMe').removeClass('chatMe');
+                    });
+                }
+
+            }
+        });
+    }
+
     $('.tooltip').tooltipster({
         contentAsHTML: true,
         animation: 'grow',
-        delay: 1000,
+        delay: 250,
         theme: 'tooltipster-custom',
         trigger: 'hover'
     });

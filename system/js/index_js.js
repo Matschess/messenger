@@ -1,17 +1,18 @@
 $(document).ready(function () {
+
     // Connect to websocket
-    var wsUri = "ws://10.0.0.13:1414/websocket/server.php";
+    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     websocket.onopen = function (ev) { // connection is open
         $.get('variables/user_id_var.php', function (data) {
             $user_id = data;
-            //prepare json data
+
             var msg = {
                 type: 'user_id',
                 message: $user_id
             };
-            //convert and send data to server
+
             websocket.send(JSON.stringify(msg));
         });
     }
@@ -24,117 +25,244 @@ $(document).ready(function () {
         var fullMsg = JSON.parse(ev.data); //PHP sends Json data
         var type = fullMsg.type; //message type
         var msg = fullMsg.message; //message text
-        var uname = fullMsg.name; //user name
-        var ucolor = fullMsg.color; //color
 
-        if (type == 'note') {
-            if (msg == 'newFriendRequest') {
-                $('#portraitAlert').show();
-                $('#portraitAlert').addClass('animated zoomIn');
-                $currentReqeusts = $('#enquiries').html();
-                if ($currentReqeusts) {
-                    if ($.isNumeric($currentReqeusts)) {
-                        $requests = parseInt($currentReqeusts) + 1;
+        switch (type) {
+            case 'note':
+                if (msg == 'newFriendRequest') {
+                    $('#portraitAlert').show();
+                    $('#portraitAlert').addClass('animated zoomIn');
+                    $currentReqeusts = $('#enquiries').html();
+                    if ($currentReqeusts) {
+                        if ($.isNumeric($currentReqeusts)) {
+                            $requests = parseInt($currentReqeusts) + 1;
+                        }
+                        else {
+                            $requests = 1;
+                        }
                     }
                     else {
                         $requests = 1;
                     }
+                    $('#enquiries').html($requests).show();
+                }
+                break;
+            case 'message':
+                var $chat_id = fullMsg.chat_id; // id of chat with new message
+                $('#chatSound').get(0).play();
+
+                $currentTime = new Date();
+                $hours = $currentTime.getHours();
+                $minutes = $currentTime.getMinutes();
+
+                $currentChat = $.cookie('chat_id');
+
+                // If chat window opened
+                if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
+                    $('#typing').hide();
+                    $('#userstatus').show();
+
+                    var $member_name = fullMsg.member_name;
+                    var $member_portrait = fullMsg.member_portrait;
+
+                    // Clear 'no messages' note
+                    if ($('#noMessages').length) {
+                        $('#content').html('');
+                    }
+
+                    if ($member_name) { // checks if incoming is groupmessage
+                        if (!$member_portrait) {
+                            $member_portrait = 'default.png';
+                        }
+                        if ($('.content #chat #content .bubble:last').attr('title') == $member_name) {
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><div class='bubbleManuallyLeft tooltip' title='" + $member_name + "'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                        }
+                        else {
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><img src='../data/portraits/" + $member_portrait + "' class='img_round' style='margin-right: 10px;'/><div class='bubble tooltip' title='" + $member_name + "'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                        }
+                    }
+                    else {
+                        $portrait = $('#chatInfo .toProfile').html();
+                        if ($('.content #chat #content .bubble:last').parent().hasClass("chatLeft")) {
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><div class='bubbleManuallyLeft'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                        }
+                        else {
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                        }
+                    }
+                    $('.chatMe').addClass('animated zoomIn');
+                    $('.chatMe').removeClass('chatMe');
+                    // Scroll to bottom
+                    $content = $('#content');
+                    $content.scrollTop($content.prop("scrollHeight"));
+
+                    // Send read
+                    var msg = {
+                        type: 'read',
+                        chat_id: $chat_id
+                    };
+
+                    //convert and send data to server
+                    websocket.send(JSON.stringify(msg));
                 }
                 else {
-                    $requests = 1;
-                }
-                $('#enquiries').html($requests).show();
-            }
-        }
-        else if (type == 'message') {
-            var $chat_id = fullMsg.chat_id; // id of chat with new message
-            $('#chatSound').get(0).play();
-
-            $currentTime = new Date();
-            $hours = $currentTime.getHours();
-            $minutes = $currentTime.getMinutes();
-
-            $currentChat = $.cookie('chat_id');
-
-            // If chat window opened
-            if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
-                $portrait = $('.content #chat #content .chatLeft span').html();
-                $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + msg + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
-                $('.chatMe').addClass('animated zoomIn');
-
-                // Scroll to bottom
-                $content = $('#content');
-                $content.scrollTop($content.prop("scrollHeight"));
-
-                // Send read
-                var msg = {
-                    type: 'read',
-                    chat_id: $chat_id
-                };
-
-                //convert and send data to server
-                websocket.send(JSON.stringify(msg));
-            }
-            else {
-                $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html();
-                $animateFlash = false;
-                if ($currentNewMessages) {
-                    if ($.isNumeric($currentNewMessages)) {
-                        $newMessages = parseInt($currentNewMessages) + 1;
-                        if($newMessages > 1) {
-                            $animateFlash = true;
+                    $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html();
+                    $animateFlash = false;
+                    if ($currentNewMessages) {
+                        if ($.isNumeric($currentNewMessages)) {
+                            $newMessages = parseInt($currentNewMessages) + 1;
+                            if ($newMessages > 1) {
+                                $animateFlash = true;
+                            }
+                        }
+                        else {
+                            $newMessages = 1;
                         }
                     }
                     else {
                         $newMessages = 1;
                     }
-                }
-                else {
-                    $newMessages = 1;
-                }
-                $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html($newMessages);
-                $('#' + $chat_id + ' .currentChatsBubble').show();
-                if($animateFlash) {
-                    setTimeout(function () {
-                    $('#' + $chat_id + ' .currentChatsBubble span').addClass('animated flash');
-                    }, 250);
-                    $('#' + $chat_id + ' .currentChatsBubble span').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+
+                    $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html($newMessages);
+                    $('#' + $chat_id + ' .currentChatsBubble').show();
+                    if ($animateFlash) {
+                        setTimeout(function () {
+                            $('#' + $chat_id + ' .currentChatsBubble span').addClass('animated flash');
+                        }, 250);
+                        $('#' + $chat_id + ' .currentChatsBubble span').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                             $('#' + $chat_id + ' .currentChatsBubble span').removeClass('animated flash');
 
-                    });
+                        });
+                    }
+                    else {
+                        $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
+                        $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomOut');
+                    }
+                }
+                if (msg.length > 33) {
+                    msg = msg.substr(0, 30) + "..."; // cut to long message
+                }
+                $('#' + $chat_id + ' .contactInfo .contactLastMessage').html(msg + " <span class='contactLastMessageSent'>" + $hours + ":" + $minutes + "</span>");
+                break;
+            case 'media':
+                var $chat_id = fullMsg.chat_id; // id of chat with new message
+                var $media = fullMsg.media; //message text
+                $('#chatSound').get(0).play();
+
+                $currentTime = new Date();
+                $hours = $currentTime.getHours();
+                $minutes = $currentTime.getMinutes();
+
+                $currentChat = $.cookie('chat_id');
+
+                // If chat window opened
+                if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
+                    $('#typing').hide();
+                    $('#userstatus').show();
+
+                    var $member_name = fullMsg.member_name;
+                    var $member_portrait = fullMsg.member_portrait;
+
+                    // Clear 'no messages' note
+                    if ($('#noMessages').length) {
+                        $('#content').html('');
+                    }
+
+                    if ($member_name) { // checks if incoming is groupmessage
+                        if (!$member_portrait) {
+                            $member_portrait = 'default.png';
+                        }
+                        if ($('.content #chat #content .bubble:last').attr('title') == $member_name) {
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><div class='bubbleManuallyLeft tooltip' title='" + $member_name + "'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                        }
+                        else {
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><img src='../data/portraits/" + $member_portrait + "' class='img_round' style='margin-right: 10px;'/><div class='bubble tooltip' title='" + $member_name + "'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                        }
+                    }
+                    else {
+                        $portrait = $('#chatInfo .toProfile').html();
+                        if ($('.content #chat #content .bubble:last').parent().hasClass("chatLeft")) {
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><div class='bubbleManuallyLeft'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                        }
+                        else {
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                        }
+                    }
+                    $('.chatMe').addClass('animated zoomIn');
+                    $('.chatMe').removeClass('chatMe');
+                    // Scroll to bottom
+                    $content = $('#content');
+                    $content.scrollTop($content.prop("scrollHeight"));
+
+                    // Send read
+                    var msg = {
+                        type: 'read',
+                        chat_id: $chat_id
+                    };
+
+                    //convert and send data to server
+                    websocket.send(JSON.stringify(msg));
                 }
                 else {
-                    $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
-                    $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomOut');
+                    $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html();
+                    $animateFlash = false;
+                    if ($currentNewMessages) {
+                        if ($.isNumeric($currentNewMessages)) {
+                            $newMessages = parseInt($currentNewMessages) + 1;
+                            if ($newMessages > 1) {
+                                $animateFlash = true;
+                            }
+                        }
+                        else {
+                            $newMessages = 1;
+                        }
+                    }
+                    else {
+                        $newMessages = 1;
+                    }
+
+                    $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html($newMessages);
+                    $('#' + $chat_id + ' .currentChatsBubble').show();
+                    if ($animateFlash) {
+                        setTimeout(function () {
+                            $('#' + $chat_id + ' .currentChatsBubble span').addClass('animated flash');
+                        }, 250);
+                        $('#' + $chat_id + ' .currentChatsBubble span').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                            $('#' + $chat_id + ' .currentChatsBubble span').removeClass('animated flash');
+
+                        });
+                    }
+                    else {
+                        $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
+                        $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomOut');
+                    }
                 }
-            }
-        }
-        else if (type == 'read') {
-            var $chat_id = fullMsg.chat_id; // id of chat with new message
 
-            $currentChat = $.cookie('chat_id');
+                // Preview in Current Chats on left container
+                $('#' + $chat_id + ' .contactInfo .contactLastMessage').html("<i class='material-icons-tiny doneAll'>attachment</i> Datei <span class='contactLastMessageSent'>" + $hours + ":" + $minutes + "</span>");
+                break;
+            case 'read':
+                var $chat_id = fullMsg.chat_id; // id of chat with new message
 
-            // If chat window opened
-            if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
-                $('.done').addClass('doneAll');
-                adjustColorsRead();
-            }
-        }
-        else if (type == 'typing') {
-            var $chat_id = fullMsg.chat_id; // id of chat with new message
-            var $user = fullMsg.user; // id of chat with new message
+                $currentChat = $.cookie('chat_id');
 
-            $currentChat = $.cookie('chat_id');
+                // If chat window opened
+                if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
+                    $('.done').addClass('doneAll');
+                    adjustColorsRead();
+                }
+                break;
+            case 'typing':
+                var $chat_id = fullMsg.chat_id; // id of chat with new message
 
-            // If chat window opened
-            if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
+                $currentChat = $.cookie('chat_id');
 
-                $('#typing').html($user + ' schreibt gerade...');
-                $('#userstatus').hide();
-                $('#typing').show();
-                $('#typing').hide();
-                $('#userstatus').show();
-            }
+                // If chat window opened
+                if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
+                    $('#typing').html('tippt gerade...');
+                    $('#userstatus').hide();
+                    $('#typing').show();
+                }
+                break;
         }
     };
 

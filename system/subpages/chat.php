@@ -64,9 +64,11 @@
                 $friend_name = $friendRows->username;
 
                 // Portrait
-                $portrait = "portraits/" . $friendRows->portrait;
-                if (!file_exists("../../data/" . $portrait) || $portrait == "") {
+                $portrait = $friendRows->portrait;
+                if (!file_exists("../../data/portraits/" . $portrait) || $portrait == "") {
                     $portrait = "portraits/default.png";
+                } else {
+                    $portrait = "portraits/" . $portrait;
                 }
 
                 $color = $friendRows->color;
@@ -110,14 +112,13 @@
         if (mysqli_num_rows($groupQuery)) {
             $groupRows = mysqli_fetch_object($groupQuery);
             $friend_name = $groupRows->groupname;
+
             // Portrait
-
-            if ($contactsRows->portrait) {
-                $portrait = "groupimages/" . $groupRows->portrait;
-            }
-
-            if (!file_exists("../../data/" . $portrait) || $portrait == "") {
+            $portrait = $groupRows->portrait;
+            if (!$portrait || !file_exists("../../data/groupimages/" . $portrait) || $portrait == "") {
                 $portrait = "portraits/default.png";
+            } else {
+                $portrait = "groupimages/" . $portrait;
             }
 
             $color = $groupRows->color;
@@ -167,7 +168,12 @@
 
     <div id="chatInfo">
         <?php
-        echo "<span id='$friend_id' class='toProfile'><img src='../data/$portrait' id='imgForBackground' class='img_round_flat' style='margin-right: 10px;'/></span>";
+        if ($isGroup) {
+            $link = "moreGroupMembers";
+        } else {
+            $link = "toProfile";
+        }
+        echo "<span id='$friend_id' class='$link'><img src='../data/$portrait' id='imgForBackground' class='img_round_flat' style='margin-right: 10px;'/></span>";
         ?>
         <div id="userInfo">
             <?php
@@ -176,7 +182,7 @@
             if ($onlineStatus) {
                 echo "<div id='userstatus'>zuletzt online $onlineStatus</div>";
             } else {
-                echo "<div id='userstatus'>$groupMembers <span class='moreGroupMembers'>Mehr</span></div>";
+                echo "<div id='userstatus'>$groupMembers <span id='moreGroupMembersBar' class='moreGroupMembers'>Mehr</span></div>";
             }
             echo "<div id='typing'></div>";
             ?>
@@ -195,22 +201,22 @@
     </div>
     <div id="content">
         <?php
-        $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent, isRead FROM messages WHERE chat_id = $chat_id");
+        $messagesQuery = mysqli_query($db, "SELECT user_id, message, NULL as isMedia, sent, isRead FROM messages WHERE chat_id = $chat_id UNION SELECT user_id, dataname, datatype, sent, isRead FROM media WHERE chat_id = $chat_id ORDER BY sent");
         if (mysqli_num_rows($messagesQuery)) {
-            $lastuser_id;
+            $lastuser;
             while ($messagesRows = mysqli_fetch_object($messagesQuery)) {
                 $speaker_id = $messagesRows->user_id;
                 $message = $messagesRows->message;
+                $isMedia = $messagesRows->isMedia;
+                if($isMedia) {
+                    $message = "<img src='../data/media/" . $chat_id . "/" . $message . "." . $isMedia . "'/>";
+                }
                 $sent = date_create($messagesRows->sent);
                 $read = $messagesRows->isRead;
                 $sentFormatted = date_format($sent, 'H:i');
                 if ($speaker_id == $user_id) {
                     echo "<div class='chatRight'>";
-                    $myPortrait = $_COOKIE['messengerUserPortrait'];
-                    if (!file_exists("../../data/portraits/" . $myPortrait) || $myPortrait == "") {
-                        $myPortrait = "default.png";
-                    }
-                    if ($lastuser_id != $speaker_id) {
+                    if ($lastuser != $speaker_id) {
                         echo "<div class='bubble'>";
                     } else {
                         echo "<div class='bubbleManuallyRight'>";
@@ -219,24 +225,45 @@
                     echo "<span class='time'>$sentFormatted</span>";
                     if ($read == 1) {
                         echo "<i class='material-icons-small doneAll'>done</i>";
-                    }
-                    else {
+                    } else {
                         echo "<i class='material-icons-small done'>done</i>";
                     }
                     echo "</div>";
                     if ($lastuser != $speaker_id) {
-						echo "<span id='myPortrait'>";
-                        echo "<img src='../data/portraits/$myPortrait' class='img_round' style='margin-left: 10px;'/>";
-						echo "</span>";
-					}
+                        $userInfosQuery = mysqli_query($db, "SELECT portrait FROM users WHERE id = $user_id");
+                        if (mysqli_num_rows($userInfosQuery)) {
+                            $userInfosRow = mysqli_fetch_object($userInfosQuery);
+                            // Portrait
+                            $mePortrait = $userInfosRow->portrait;
+                            if (!file_exists("../../data/portraits/" . $mePortrait) || $mePortrait == "") {
+                                $mePortrait = "portraits/default.png";
+                            } else {
+                                $mePortrait = "portraits/" . $mePortrait;
+                            }
+                        }
+                        echo "<span id='myPortrait'>";
+                        echo "<img src='../data/$mePortrait' class='img_round' style='margin-left: 10px;'/>";
+                        echo "</span>";
+                    }
                     echo "</div>";
                 } else {
                     echo "<div class='chatLeft'>";
                     if ($lastuser != $speaker_id) {
-						echo "<span>";
-                        echo "<img src='../data/$portrait' class='img_round' style='margin-right: 10px;'/>";
+                        $MemberInfosQuery = mysqli_query($db, "SELECT portrait FROM users WHERE id = $speaker_id");
+                        if (mysqli_num_rows($MemberInfosQuery)) {
+                            $MemberInfosRow = mysqli_fetch_object($MemberInfosQuery);
+                            // Portrait
+                            $memberPortrait = $MemberInfosRow->portrait;
+                            if (!file_exists("../../data/portraits/" . $memberPortrait) || $memberPortrait == "") {
+                                $memberPortrait = "portraits/default.png";
+                            } else {
+                                $memberPortrait = "portraits/" . $memberPortrait;
+                            }
+                        }
+                        echo "<span>";
+                        echo "<img src='../data/$memberPortrait' class='img_round' style='margin-right: 10px;'/>";
                         echo "</span>";
-						echo "<div class='bubble'>";
+                        echo "<div class='bubble'>";
                     } else {
                         echo "<div class='bubbleManuallyLeft'>";
                     }
@@ -247,6 +274,7 @@
                 }
                 $lastuser = $speaker_id;
             }
+
         } else {
             echo "<div id='noMessages'><i class='material-icons'>chat_bubble_outline</i> Sag Hallo und starte eine Konversation</div>";
         }
@@ -274,7 +302,26 @@
             <div id="smileyChooserContainer"></div>
         </div>
         <div id="attacher">
-            Dateien anfügen
+            <div id="attacherHeader">
+                <i class="material-icons-large">file_upload</i> <span>Datei hochladen</span>
+            </div>
+            <div id="attacherBody">
+                <!-- Loader -->
+                <div class="loader uploadLoader">
+                    <svg class="circular" viewBox="25 25 50 50">
+                        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3"
+                                stroke-miterlimit="10"/>
+                    </svg>
+                </div>
+
+                <div id="uploadContainer">
+                    <div id="uploadFile" class="uploadButton">
+                        <input type="file" class="uploader"/>
+                        <i class="material-icons">add</i>
+                    </div>
+                    <span>Klicken oder Drag-and-Drop fallen lassen (Erlaubte Formate: jpg, png, gif)</span>
+                </div>
+            </div>
         </div>
         <div class="chatTextBox" contenteditable="true" placeholder="Tippe eine Nachricht"></div>
         <i id="smiley" class="material-icons hover tooltip" title="Smileys">mood</i>

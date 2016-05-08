@@ -145,8 +145,11 @@
 }
 
 .bubbleManuallyRight {
-    background-color: red;
-    margin-left: -20px;
+    margin-right: 50px;
+}
+
+.bubble img, .bubbleManuallyLeft img, .bubbleManuallyRight img {
+    max-width: 300px;
 }
 
 .time {
@@ -257,7 +260,7 @@
     background-color: #fff;
     height: 152px;
     padding-top: 0;
-    font-size: 0;
+    color: #333;
 }
 
 .tab {
@@ -284,6 +287,18 @@
     background-color: #333;
 }
 
+#attacherHeader {
+    display: inline-block;
+    background-color: #F2F2F2;
+    color: #333;
+    width: 100%;
+    padding: 5px;
+}
+
+#attacherHeader span {
+    vertical-align: middle;
+}
+
 #smileyChooserContainer {
     height: 100px;
     padding: 8px;
@@ -300,6 +315,39 @@
     vertical-align: top;
     transform: scale(0.75);
     -webkit-transform: scale(0.75);
+}
+
+#uploadContainer {
+    height: 116px;
+}
+
+#uploadContainer span {
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.uploader {
+    width: 23px;
+    position: absolute;
+    opacity: 0;
+}
+
+.uploadLoader {
+    display: none;
+    position: absolute;
+    width: 80px;
+    top: 20px;
+}
+
+.uploadButton {
+    background-color: #2ecc71;
+    color: #fff;
+    margin: 10px 0 0 10px;
+    width: 34px;
+    padding: 5px 0 5px 0;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
 }
 
 #smileyChooserContainer img:hover {
@@ -365,7 +413,7 @@
     text-decoration: underline;
 }
 
-.moreGroupMembers {
+#moreGroupMembersBar {
     font-size: 10px;
     text-transform: uppercase;
     background-color: rgba(255, 255, 255, 0.3);

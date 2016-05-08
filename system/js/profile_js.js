@@ -22,17 +22,16 @@ $(document).ready(function () {
         var form_data = new FormData();
         $user_id = $('#currentUser').val();
         form_data.append('file', file_data);
-        form_data.append('user', $user_id);
         $.ajax({
-            url: 'upload.php', // point to server-side PHP script
+            url: 'upload.php?job=portrait', // point to server-side PHP script
             dataType: 'text',  // what to expect back from the PHP script, if anything
             cache: false,
             contentType: false,
             processData: false,
             data: form_data,
             type: 'post',
-            success: function (php_script_response) {
-                $filename = php_script_response;
+            success: function (data) {
+                $filename = data;
                 $('#mePortrait').attr('src', '../data/portraits/' + $filename);
                 $('#portraitImage').attr('src', '../data/portraits/' + $filename);
                 $('#portraitImage').load(function () {
