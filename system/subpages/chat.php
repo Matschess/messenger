@@ -209,7 +209,12 @@
                 $message = $messagesRows->message;
                 $isMedia = $messagesRows->isMedia;
                 if($isMedia) {
-                    $message = "<img src='../data/media/" . $chat_id . "/" . $message . "." . $isMedia . "'/>";
+                    if($isMedia == "mp4") {
+                        $message = "<video width='320' height='240' autoplay><source src='" . $message . " . " . $isMedia . "' type='video/mp4'>Your browser does not support the video tag.</video>";
+                    }
+                    else {
+                        $message = "<img src='../data/media/" . $chat_id . "/" . $message . "." . $isMedia . "'/>";
+                    }
                 }
                 $sent = date_create($messagesRows->sent);
                 $read = $messagesRows->isRead;

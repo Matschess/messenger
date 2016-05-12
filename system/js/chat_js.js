@@ -1,4 +1,8 @@
 $(document).ready(function () {
+
+    $('.bubbleManuallyRight').on('click', '.mediaVideo', function() {
+        alert("kkj");
+    });
     var $chat_id = $.cookie('chat_id');
 
     // Send read
@@ -68,7 +72,7 @@ $(document).ready(function () {
                 $portrait = $('#mePortrait').attr('src');
 
                 // Clear 'no messages' note
-                if($('#noMessages').length) {
+                if ($('#noMessages').length) {
                     $('#content').html('');
                 }
 
@@ -95,11 +99,6 @@ $(document).ready(function () {
             }
         }
     }
-
-    adjustColors();
-    // Scroll to bottom
-    $content = $('#content');
-    $content.scrollTop($content.prop("scrollHeight"));
 
     $('.chatTextBox').focus();
 
@@ -228,30 +227,25 @@ $(document).ready(function () {
     });
 
     // File drop
-    $("*").on('dragover', function (e)
-    {
+    $("*").on('dragover', function (e) {
         $('#attacher').slideDown(300);
     });
     // Avpod opening media in browser when dropping anywhere
-    $("#uploadContainer").on('dragover', function (e)
-    {
+    $("#uploadContainer").on('dragover', function (e) {
         e.stopPropagation();
         e.preventDefault();
     });
-    $("#uploadContainer").on('dragenter', function (e)
-    {
+    $("#uploadContainer").on('dragenter', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        $(this).css('background-color', '#FAFAFA');
+        $(this).css('background-color', 'red');
     });
-    $("#uploadContainer").on('dragleave', function (e)
-    {
+    $("#uploadContainer").on('dragleave', function (e) {
         e.stopPropagation();
         e.preventDefault();
         $(this).css('background-color', '#fff');
     });
-    $("#uploadContainer").on('drop', function (e)
-    {
+    $("#uploadContainer").on('drop', function (e) {
         e.preventDefault();
 
         var file_data = e.originalEvent.dataTransfer.files[0];
@@ -270,8 +264,9 @@ $(document).ready(function () {
             data: form_data,
             type: 'post',
             success: function (data) {
-                if(data.substr(0, 9) == "uploaded:") {
+                if (data.substr(0, 9) == "uploaded:") {
                     $media = data.substr(10);
+                    $mediaType = data.substr(data.lastIndexOf('.') + 1);
 
                     //insert media
                     var msg = {
@@ -294,15 +289,22 @@ $(document).ready(function () {
                     $portrait = $('#mePortrait').attr('src');
 
                     // Clear 'no messages' note
-                    if($('#noMessages').length) {
+                    if ($('#noMessages').length) {
                         $('#content').html('');
                     }
 
-                    if ($('.content #chat #content .bubble:last').parent().hasClass("chatRight")) {
-                        $('#content').append("<div class='chatRight chatMe'><div class='bubbleManuallyRight'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div></div>");
+                    if ($mediaType == 'mp4') {
+                        $mediaOutput = "<video width='320' height='240' autoplay><source src='" + $media + "' type='video/mp4'>Your browser does not support the video tag.</video>";
                     }
                     else {
-                        $('#content').append("<div class='chatRight chatMe'><div class='bubble'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div><span id='myPortrait'><img src='" + $portrait + "' class='img_round' style='margin-left: 10px;'/></span></div>");
+                        $mediaOutput = "<img src='" + $media + "'/>";
+                    }
+
+                    if ($('.content #chat #content .bubble:last').parent().hasClass("chatRight")) {
+                        $('#content').append("<div class='chatRight chatMe'><div class='bubbleManuallyRight'>" + $mediaOutput + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div></div>");
+                    }
+                    else {
+                        $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $mediaOutput + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div><span id='myPortrait'><img src='" + $portrait + "' class='img_round' style='margin-left: 10px;'/></span></div>");
                     }
 
                     $('.chatMe').addClass('animated zoomIn');
@@ -313,7 +315,7 @@ $(document).ready(function () {
                     // Scroll to bottom when media is loaded
                     $('.chatMe').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                         $content = $('#content');
-                        $content.animate({ scrollTop: $content.prop("scrollHeight")}, 300);
+                        $content.animate({scrollTop: $content.prop("scrollHeight")}, 300);
                         $('.chatMe').removeClass('chatMe');
                     });
                 }
@@ -329,4 +331,9 @@ $(document).ready(function () {
         theme: 'tooltipster-custom',
         trigger: 'hover'
     });
+
+    adjustColors();
+    // Scroll to bottom
+    $content = $('#content');
+    $content.scrollTop($content.prop("scrollHeight"));
 });
