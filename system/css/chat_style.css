@@ -152,6 +152,27 @@
     max-width: 300px;
 }
 
+.bubble video, .bubbleManuallyLeft video, .bubbleManuallyRight video {
+    max-width: 300px;
+}
+
+.mediaVideo {
+    position: relative;
+}
+
+.videoControls {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -30px;
+}
+
+.videoPlayButton i {
+    font-size: 60px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
 .time {
     color: #999;
     font-size: 11px;

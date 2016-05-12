@@ -1,7 +1,21 @@
 $(document).ready(function () {
 
-    $('.bubbleManuallyRight').on('click', '.mediaVideo', function() {
-        alert("kkj");
+    // on is required for new videos
+    $('#content').on('click', 'video', function () {
+        $(this).siblings('.videoControls').removeClass('animated zoomIn, animated zoomOut');
+        if (this.paused) {
+            // pause all videos
+            $('video').each(function () {
+                $(this).get(0).pause();
+                $(this).siblings('.videoControls').removeClass('animated zoomIn');
+            });
+            this.play();
+            $(this).siblings('.videoControls').addClass('animated zoomOut');
+        }
+        else {
+            this.pause();
+            $(this).siblings('.videoControls').addClass('animated zoomIn');
+        }
     });
     var $chat_id = $.cookie('chat_id');
 
@@ -294,7 +308,7 @@ $(document).ready(function () {
                     }
 
                     if ($mediaType == 'mp4') {
-                        $mediaOutput = "<video width='320' height='240' autoplay><source src='" + $media + "' type='video/mp4'>Your browser does not support the video tag.</video>";
+                        $mediaOutput = "<div class='mediaVideo'><div class='videoControls'><div class='videoPlayButton'><i class='material-icons'>play_arrow</i></div></div><video><source src='" + $media + "' type='video/mp4'>Your browser does not support the video tag.</video></div>";
                     }
                     else {
                         $mediaOutput = "<img src='" + $media + "'/>";

@@ -208,12 +208,12 @@
                 $speaker_id = $messagesRows->user_id;
                 $message = $messagesRows->message;
                 $isMedia = $messagesRows->isMedia;
-                if($isMedia) {
-                    if($isMedia == "mp4") {
-                        $message = "<video width='320' height='240' autoplay><source src='" . $message . " . " . $isMedia . "' type='video/mp4'>Your browser does not support the video tag.</video>";
-                    }
-                    else {
-                        $message = "<img src='../data/media/" . $chat_id . "/" . $message . "." . $isMedia . "'/>";
+                if ($isMedia) {
+                    $path = "../data/media/" . $chat_id . "/";
+                    if ($isMedia == "mp4") {
+                        $message = "<div class='mediaVideo'><div class='videoControls'><div class='videoPlayButton'><i class='material-icons'>play_arrow</i></div></div><video><source src='" . $path . $message . "." . $isMedia . "' type='video/mp4'>Your browser does not support the video tag.</video></div>";
+                    } else {
+                        $message = "<img src='" . $path . $message . "." . $isMedia . "'/>";
                     }
                 }
                 $sent = date_create($messagesRows->sent);

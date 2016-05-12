@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Connect to websocket
-    var wsUri = "ws://localhost:1414/websocket/server.php";
+    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     websocket.onopen = function (ev) { // connection is open
@@ -146,6 +146,8 @@ $(document).ready(function () {
             case 'media':
                 var $chat_id = fullMsg.chat_id; // id of chat with new message
                 var $media = fullMsg.media; //message text
+                $mediaType = $media.substr($media.lastIndexOf('.') + 1);
+
                 $('#chatSound').get(0).play();
 
                 $currentTime = new Date();
@@ -167,24 +169,32 @@ $(document).ready(function () {
                         $('#content').html('');
                     }
 
+                    if ($mediaType == 'mp4') {
+                        $mediaOutput = "<div class='mediaVideo'><div class='videoControls'><div class='videoPlayButton'><i class='material-icons'>play_arrow</i></div></div><video><source src='" + $media + "' type='video/mp4'>Your browser does not support the video tag.</video></div>";
+                    }
+                    else {
+                        $mediaOutput = "<img src='" + $media + "'/>";
+                    }
+
+
                     if ($member_name) { // checks if incoming is groupmessage
                         if (!$member_portrait) {
                             $member_portrait = 'default.png';
                         }
                         if ($('.content #chat #content .bubble:last').attr('title') == $member_name) {
-                            $('.content #chat #content').append("<div class='chatLeft chatMe'><div class='bubbleManuallyLeft tooltip' title='" + $member_name + "'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><div class='bubbleManuallyLeft tooltip' title='" + $member_name + "'>" + $mediaOutput + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
                         }
                         else {
-                            $('.content #chat #content').append("<div class='chatLeft chatMe'><img src='../data/portraits/" + $member_portrait + "' class='img_round' style='margin-right: 10px;'/><div class='bubble tooltip' title='" + $member_name + "'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><img src='../data/portraits/" + $member_portrait + "' class='img_round' style='margin-right: 10px;'/><div class='bubble tooltip' title='" + $member_name + "'>" + $mediaOutput + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
                         }
                     }
                     else {
                         $portrait = $('#chatInfo .toProfile').html();
                         if ($('.content #chat #content .bubble:last').parent().hasClass("chatLeft")) {
-                            $('.content #chat #content').append("<div class='chatLeft chatMe'><div class='bubbleManuallyLeft'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'><div class='bubbleManuallyLeft'>" + $mediaOutput + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
                         }
                         else {
-                            $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'><img src='" + $media + "'/><span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
+                            $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + $mediaOutput + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
                         }
                     }
                     $('.chatMe').addClass('animated zoomIn');
