@@ -64,6 +64,15 @@
     margin-right: auto;
 }
 
+.loaderMessages {
+
+    position: absolute;
+    width: 30px;
+    top: 205px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .smileyLoader {
     position: absolute;
     width: 60px;

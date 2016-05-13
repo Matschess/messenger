@@ -100,7 +100,7 @@ function validateUpload()
         $uploadOk = 0;
     }
 // Check file formats
-    if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "mp4") {
+    if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "mp4" && $fileType != "mp3") {
         $uploadOk = 0;
     }
 }

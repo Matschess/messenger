@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Connect to websocket
-    var wsUri = "ws://localhost:1414/websocket/server.php";
+    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     websocket.onopen = function (ev) { // connection is open
@@ -171,6 +171,9 @@ $(document).ready(function () {
 
                     if ($mediaType == 'mp4') {
                         $mediaOutput = "<div class='mediaVideo'><div class='videoControls'><div class='videoPlayButton'><i class='material-icons'>play_arrow</i></div></div><video><source src='" + $media + "' type='video/mp4'>Your browser does not support the video tag.</video></div>";
+                    }
+                    else if ($mediaType == 'mp3') {
+                        $mediaOutput = "<div class='mediaAudio'><div class='audioControls'><div class='audioPlayButton'><i class='material-icons'>play_arrow</i></div></div><audio><source src='" + $media + "' type='audio/mp3'>Your browser does not support the video tag.</audio></div>";
                     }
                     else {
                         $mediaOutput = "<img src='" + $media + "'/>";

@@ -109,7 +109,7 @@ while (true) {
                 } elseif ($tst_msg->type === "media") {
                     $chat_id = $tst_msg->chat_id;
                     $media = $tst_msg->media;
-
+                    
                     $socketPosition = array_search($changed_socket, $clients);
                     $user_id = $userToClients[$socketPosition];
 

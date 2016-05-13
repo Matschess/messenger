@@ -1,26 +1,23 @@
 $(document).ready(function () {
 
     // on is required for new videos
-    $('#content').on('mouseover', 'video', function () {
-        $(this).siblings('.videoControls').removeClass('animated zoomIn, animated zoomOut');
-        if (this.paused) {
-            // pause all videos
-            $('video').each(function () {
-                $(this).get(0).pause();
-                $(this).siblings('.videoControls').removeClass('animated zoomIn');
+    // play video and audio
+    $('#content').on('mouseover', '.mediaVideo, .mediaAudio', function () {
+        $(this).children('.videoControls, .audioControls').removeClass('animated zoomIn');
+        $loader = $('.loaderMessages').html();
+        $this = $(this);
+        $this.children('video, audio').get(0).play();
+        var video = document.getElementById('video1');
+        video.addEventListener("waiting", function() {
+            alert("Wait! I need to buffer the next frame");
             });
-            this.play();
-            $(this).siblings('.videoControls').addClass('animated zoomOut');
-        }
-        else {
-            this.pause();
-            $(this).siblings('.videoControls').addClass('animated zoomIn');
-        }
+
     });
-    $('#content').on('mouseleave', 'video', function () {
-        $(this).siblings('.videoControls').removeClass('animated zoomIn, animated zoomOut');
-        this.pause();
-        $(this).siblings('.videoControls').addClass('animated zoomIn');
+
+    $('#content').on('mouseleave', '.mediaVideo, .mediaAudio', function () {
+        $(this).children('.videoControls, .audioControls').removeClass('animated zoomOut');
+        $(this).children('video, audio').get(0).pause();
+        $(this).children('.videoControls, .audioControls').addClass('animated zoomIn');
     });
     var $chat_id = $.cookie('chat_id');
 
@@ -314,6 +311,9 @@ $(document).ready(function () {
 
                     if ($mediaType == 'mp4') {
                         $mediaOutput = "<div class='mediaVideo'><div class='videoControls'><div class='videoPlayButton'><i class='material-icons'>play_arrow</i></div></div><video><source src='" + $media + "' type='video/mp4'>Your browser does not support the video tag.</video></div>";
+                    }
+                    else if ($mediaType == 'mp3') {
+                        $mediaOutput = "<div class='mediaAudio'><div class='audioControls'><div class='audioPlayButton'><i class='material-icons'>play_arrow</i></div></div><audio><source src='" + $media + "' type='audio/mp3'>Your browser does not support the video tag.</audio></div>";
                     }
                     else {
                         $mediaOutput = "<img src='" + $media + "'/>";

@@ -211,7 +211,9 @@
                 if ($isMedia) {
                     $path = "../data/media/" . $chat_id . "/";
                     if ($isMedia == "mp4") {
-                        $message = "<div class='mediaVideo'><div class='videoControls'><div class='videoPlayButton'><i class='material-icons'>play_arrow</i></div></div><video><source src='" . $path . $message . "." . $isMedia . "' type='video/mp4'>Your browser does not support the video tag.</video></div>";
+                        $message = "<div class='mediaVideo'><div class='videoControls'><div class='videoPlayButton'><i class='material-icons'>play_arrow</i></div></div><video id='video1' preload='metadata'><source src='" . $path . $message . "." . $isMedia . "' type='video/mp4'>Your browser does not support the video tag.</video></div>";
+                    } elseif ($isMedia == "mp3") {
+                        $message = "<div class='mediaAudio'><div class='audioControls'><div class='audioPlayButton'><i class='material-icons'>play_arrow</i></div></div><audio preload='none' preload='metadata'><source src='" . $path . $message . "." . $isMedia . "' type='audio/mp3'>Your browser does not support the video tag.</audio></div>";
                     } else {
                         $message = "<img src='" . $path . $message . "." . $isMedia . "'/>";
                     }

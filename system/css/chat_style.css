@@ -160,6 +160,19 @@
     position: relative;
 }
 
+.equalizer {
+    width: 30px;
+}
+
+.mediaAudio {
+    position: relative;
+    background-color: #e67e22;
+    border-radius: 50%;
+    width: 30px;
+    padding: 5px;
+    text-align: center;
+}
+
 .videoControls {
     position: absolute;
     top: 50%;
@@ -170,6 +183,11 @@
 
 .videoPlayButton i {
     font-size: 60px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.audioPlayButton i {
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.9);
 }
 
