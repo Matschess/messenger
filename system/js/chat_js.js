@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // on is required for new videos
-    $('#content').on('click', 'video', function () {
+    $('#content').on('mouseover', 'video', function () {
         $(this).siblings('.videoControls').removeClass('animated zoomIn, animated zoomOut');
         if (this.paused) {
             // pause all videos
@@ -16,6 +16,11 @@ $(document).ready(function () {
             this.pause();
             $(this).siblings('.videoControls').addClass('animated zoomIn');
         }
+    });
+    $('#content').on('mouseleave', 'video', function () {
+        $(this).siblings('.videoControls').removeClass('animated zoomIn, animated zoomOut');
+        this.pause();
+        $(this).siblings('.videoControls').addClass('animated zoomIn');
     });
     var $chat_id = $.cookie('chat_id');
 
