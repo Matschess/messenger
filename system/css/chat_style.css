@@ -472,3 +472,37 @@
     -o-transition: color .5s;
     transition: color .5s;
 }
+
+.audioPlayingEffect {
+    -webkit-animation: audioPlayingEffect 3s 0.5s infinite;
+    animation: audioPlayingEffect 3s 0.5s infinite;
+}
+
+@-webkit-keyframes audioPlayingEffect {
+    0% {
+        transform: scale(1) skew(5deg);
+    }
+
+    50% {
+
+        transform: scale(0.9) skew(0deg);
+    }
+
+    100% {
+        transform: scale(1) skew(5deg);
+    }
+}
+
+@keyframes audioPlayingEffect {
+    0% {
+        transform: scale(1) skew(5deg);
+    }
+
+    50% {
+        transform: scale(0.9) skew(0deg);
+    }
+
+    100% {
+        transform: scale(1) skew(5deg);
+    }
+}

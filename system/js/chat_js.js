@@ -4,20 +4,38 @@ $(document).ready(function () {
     // play video and audio
     $('#content').on('mouseover', '.mediaVideo, .mediaAudio', function () {
         $(this).children('.videoControls, .audioControls').removeClass('animated zoomIn');
+        $(this).children('video, audio').get(0).play();
+
+        if ($(this).children('audio').length) {
+            $(this).children('.audioControls').find('i').html('music_note');
+            $(this).children('.audioControls').addClass('animated flipInY, audioPlayingEffect');
+        }
+else {
+            $(this).children('.videoControls').addClass('animated zoomOut');
+        }
+
         $loader = $('.loaderMessages').html();
         $this = $(this);
-        $this.children('video, audio').get(0).play();
-        var video = document.getElementById('video1');
-        video.addEventListener("waiting", function() {
-            alert("Wait! I need to buffer the next frame");
-            });
 
+        // Watch if video plays after buffering
+        $(this).children('video, audio').get(0).addEventListener("playing", function () {
+            $('.circular').remove();
+        });
+
+        // Watch if video buffers --> loading spinner
+        $(this).children('video, audio').get(0).addEventListener("stalled", function () {
+            $this.append($loader);
+        });
     });
 
     $('#content').on('mouseleave', '.mediaVideo, .mediaAudio', function () {
         $(this).children('.videoControls, .audioControls').removeClass('animated zoomOut');
         $(this).children('video, audio').get(0).pause();
-        $(this).children('.videoControls, .audioControls').addClass('animated zoomIn');
+        if ($(this).children('audio').length) {
+            $(this.id + " .audioControls i").html('play_arrow');
+            $(this).children('.audioControls').addClass('animated zoomIn');
+        }
+        $(this).children('.videoControls').addClass('animated zoomIn');
     });
     var $chat_id = $.cookie('chat_id');
 
