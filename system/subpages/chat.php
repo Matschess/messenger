@@ -201,7 +201,7 @@
     </div>
     <div id="content">
         <?php
-        $messagesQuery = mysqli_query($db, "SELECT user_id, message, NULL as isMedia, sent, isRead FROM messages WHERE chat_id = $chat_id UNION SELECT user_id, dataname, datatype, sent, isRead FROM media WHERE chat_id = $chat_id ORDER BY sent");
+        $messagesQuery = mysqli_query($db, "SELECT NULL as id, user_id, message, NULL as isMedia, sent, isRead FROM messages WHERE chat_id = $chat_id UNION SELECT id, user_id, dataname, datatype, sent, isRead FROM media WHERE chat_id = $chat_id ORDER BY sent");
         if (mysqli_num_rows($messagesQuery)) {
             $lastuser;
             while ($messagesRows = mysqli_fetch_object($messagesQuery)) {
@@ -214,9 +214,29 @@
                         $message = "<div class='mediaVideo'><div class='videoControls'><div class='videoPlayButton'><i class='material-icons'>play_arrow</i></div></div><video preload='metadata'><source src='" . $path . $message . "." . $isMedia . "' type='video/mp4'>Your browser does not support the video tag.</video></div>";
                     } elseif ($isMedia == "mp3") {
                         $message = "<div class='mediaAudio'><div class='audioControls'><div class='audioPlayButton'><i class='material-icons'>play_arrow</i></div></div><audio preload='metadata'><source src='" . $path . $message . "." . $isMedia . "' type='audio/mp3'>Your browser does not support the video tag.</audio></div>";
+                    } elseif ($isMedia == "docx") {
+                        $media_id = $messagesRows->id;
+                        $message = "<a href='php/download_media.php?media_id=$media_id'><img class='mediaDocumentThn' src='img/word_thn.png'/></a>";
+                    } elseif ($isMedia == "xlsx") {
+                        $media_id = $messagesRows->id;
+                        $message = "<a href='php/download_media.php?media_id=$media_id'><img class='mediaDocumentThn' src='img/excel_thn.png'/></a>";
+                    } elseif ($isMedia == "pptx") {
+                        $media_id = $messagesRows->id;
+                        $message = "<a href='php/download_media.php?media_id=$media_id'><img class='mediaDocumentThn' src='img/powerpoint_thn.png'/></a>";
+                    } elseif ($isMedia == "pdf") {
+                        $media_id = $messagesRows->id;
+                        $message = "<a href='php/download_media.php?media_id=$media_id'><img class='mediaDocumentThn' src='img/pdf_thn.png'/></a>";
+                    } elseif ($isMedia == "zip") {
+                        $media_id = $messagesRows->id;
+                        $message = "<a href='php/download_media.php?media_id=$media_id'><img class='mediaDocumentThn' src='img/zip_thn.png'/></a>";
+                    } elseif ($isMedia == "exe") {
+                        $media_id = $messagesRows->id;
+                        $message = "<a class='exeHint' href='php/download_media.php?media_id=$media_id'><img class='mediaDocumentThn' src='img/application_thn.png'/></a>";
                     } else {
                         $message = "<img src='" . $path . $message . "." . $isMedia . "'/>";
                     }
+                } else {
+                    $message = "<span class='messageText'>$message</span>";
                 }
                 $sent = date_create($messagesRows->sent);
                 $read = $messagesRows->isRead;
@@ -326,7 +346,7 @@
                         <input type="file" class="uploader"/>
                         <i class="material-icons">add</i>
                     </div>
-                    <span>Klicken oder Drag-and-Drop fallen lassen (Erlaubte Formate: jpg, png, gif)</span>
+                    <span>Klicken oder per Drag-and-Drop fallen lassen</span>
                 </div>
             </div>
         </div>

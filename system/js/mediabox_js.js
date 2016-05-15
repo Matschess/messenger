@@ -35,8 +35,27 @@ $(document).ready(function () {
     });
 
     $('.thumbnail').dblclick(function () {
-        $media_id = this.id;
+        if ($(this).hasClass('exeHint')) {
+            window.exeMediaId = this.id;
+            $('#popupTitle').html("Pass auf!");
+
+            $('#popupContent').load('subpages/exeHint.php', function () {
+                $('#overlay').fadeIn(200);
+                $('#popup').fadeIn(200);
+            });
+        }
+        else {
+            var $chat_id = $.cookie('chat_id');
+            $media_id = this.id;
+            window.location = 'php/download_media.php?media_id[0]=' + $media_id + '&chat_id=' + $chat_id;
+        }
+    });
+
+    $('#popupContent').on("click", ".downloadExeNow", function () {
+        $media_id = window.exeMediaId;
         window.location = 'php/download_media.php?media_id[0]=' + $media_id + '&chat_id=' + $chat_id;
+        $('#overlay').fadeOut(200);
+        $('#popup').fadeOut(200);
     });
 
     $('#downloadAllMedia').click(function () {
@@ -114,12 +133,22 @@ $(document).ready(function () {
 
     $('#downloadMedia').click(function () {
         $marked = markedMedia();
-        $chat_id = 1;
-        $media_ids = '';
-        $.each($marked, function (index, value) {
-            $media_ids = $media_ids + "&media_id[]=" + value;
-        });
-        window.location = 'php/download_media.php?chat_id=' + $chat_id + $media_ids;
+        if ($marked.length == 1 && $('#' + $marked[0]).hasClass('exeHint')) {
+            window.exeMediaId = $marked[0];
+            $('#popupTitle').html("Pass auf!");
+
+            $('#popupContent').load('subpages/exeHint.php', function () {
+                $('#overlay').fadeIn(200);
+                $('#popup').fadeIn(200);
+            });
+        } else {
+            $chat_id = 1;
+            $media_ids = '';
+            $.each($marked, function (index, value) {
+                $media_ids = $media_ids + "&media_id[]=" + value;
+            });
+            window.location = 'php/download_media.php?chat_id=' + $chat_id + $media_ids;
+        }
     });
 
     function markedMedia() {

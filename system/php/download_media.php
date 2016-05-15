@@ -27,7 +27,7 @@ if (count($media_ids) > 1 || $everything) {
     $res = $zip->open("$zipPath", ZipArchive::CREATE);
     if ($res) {
         if ($everything) {
-            $mediaAll = mysqli_query($db, "SELECT dataname, datatype FROM media WHERE chats_id = $chat_id");
+            $mediaAll = mysqli_query($db, "SELECT dataname, datatype FROM media WHERE chat_id = $chat_id");
             if (mysqli_num_rows($mediaAll)) {
                 while ($mediaRow = mysqli_fetch_object($mediaAll)) {
                     $dataname = $mediaRow->dataname;
@@ -39,7 +39,7 @@ if (count($media_ids) > 1 || $everything) {
             }
         } else {
             for ($i = 0; $i < count($files); $i++) {
-                $mediaExistsQuery = mysqli_query($db, "SELECT dataname, datatype FROM media WHERE id = $files[$i] && chats_id = $chat_id");
+                $mediaExistsQuery = mysqli_query($db, "SELECT dataname, datatype FROM media WHERE id = $files[$i] && chat_id = $chat_id");
                 if (mysqli_num_rows($mediaExistsQuery)) {
                     $mediaRows = mysqli_fetch_object($mediaExistsQuery);
                     $dataname = $mediaRows->dataname;
@@ -59,13 +59,19 @@ if (count($media_ids) > 1 || $everything) {
         echo "Fehler beim Erstellen der ZIP-Datei.";
     }
 } else {
-    $media_id = $media_ids[0];
-    $mediaExistsQuery = mysqli_query($db, "SELECT dataname, datatype FROM media WHERE id = $media_id && chats_id = $chat_id");
+    $media_id = $media_ids;
+
+    if(is_array($media_id)) {
+        $media_id = $media_ids[0];
+    }
+
+    $mediaExistsQuery = mysqli_query($db, "SELECT dataname, datatype FROM media WHERE id = $media_id && chat_id = $chat_id");
     if (mysqli_num_rows($mediaExistsQuery)) {
         $mediaRows = mysqli_fetch_object($mediaExistsQuery);
         $dataname = $mediaRows->dataname;
         $datatype = $mediaRows->datatype;
         $file = $file_dir . $dataname . "." . $datatype;
+
 
         $downloadname = createRandom();
 

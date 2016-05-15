@@ -10,7 +10,7 @@ $(document).ready(function () {
             $(this).children('.audioControls').find('i').html('music_note');
             $(this).children('.audioControls').addClass('animated flipInY, audioPlayingEffect');
         }
-else {
+        else {
             $(this).children('.videoControls').addClass('animated zoomOut');
         }
 
@@ -111,10 +111,10 @@ else {
                 }
 
                 if ($('.content #chat #content .bubble:last').parent().hasClass("chatRight")) {
-                    $('#content').append("<div class='chatRight chatMe'><div class='bubbleManuallyRight'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div></div>");
+                    $('#content').append("<div class='chatRight chatMe'><div class='bubbleManuallyRight'><span class='messageText'>" + $message + "</span><span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div></div>");
                 }
                 else {
-                    $('#content').append("<div class='chatRight chatMe'><div class='bubble'>" + $message + "<span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div><span id='myPortrait'><img src='" + $portrait + "' class='img_round' style='margin-left: 10px;'/></span></div>");
+                    $('#content').append("<div class='chatRight chatMe'><div class='bubble'><span class='messageText'>" + $message + "</span><span class='time'>" + $hours + ":" + $minutes + "</span><i class='material-icons-small done'>done</i></div><span id='myPortrait'><img src='" + $portrait + "' class='img_round' style='margin-left: 10px;'/></span></div>");
                 }
 
                 $('.chatMe').addClass('animated zoomIn');
@@ -254,7 +254,9 @@ else {
     $('.uploader').change(function () {
         $('#uploadContainer').hide();
         $('.uploadLoader').show();
+
         var file_data = $('.uploader').prop('files')[0];
+        $('.uploader').val('');
         var form_data = new FormData();
         form_data.append('file', file_data);
         uploadMedia(form_data);
@@ -333,6 +335,30 @@ else {
                     else if ($mediaType == 'mp3') {
                         $mediaOutput = "<div class='mediaAudio'><div class='audioControls'><div class='audioPlayButton'><i class='material-icons'>play_arrow</i></div></div><audio><source src='" + $media + "' type='audio/mp3'>Your browser does not support the video tag.</audio></div>";
                     }
+                    else if ($mediaType == 'docx') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/word_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'xlsx') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/excel_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'pptx') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/powerpoint_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'pdf') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/pdf_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'zip') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/zip_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'exe') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a class='exeHint' href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/application_thn.png'/></a>";
+                    }
                     else {
                         $mediaOutput = "<img src='" + $media + "'/>";
                     }
@@ -360,6 +386,23 @@ else {
             }
         });
     }
+
+    $('#content').on("click", ".exeHint", function () {
+        event.preventDefault(); // to avoid direct download before exe hint message
+        window.exeDownload = $(this).attr('href');
+        $('#popupTitle').html("Pass auf!");
+
+        $('#popupContent').load('subpages/exeHint.php', function () {
+            $('#overlay').fadeIn(200);
+            $('#popup').fadeIn(200);
+        });
+    });
+
+    $('#popupContent').on("click", ".downloadExeNow", function () {
+        window.location.href = window.exeDownload;
+        $('#overlay').fadeOut(200);
+        $('#popup').fadeOut(200);
+    });
 
     $('.tooltip').tooltipster({
         contentAsHTML: true,

@@ -13,7 +13,7 @@ $file_dir .= $chat_id . "/";
 
 include("db_connect.php");
 if ($everything) {
-    $mediaExistsQuery = mysqli_query($db, "SELECT id, dataname, datatype FROM media WHERE chats_id = $chat_id");
+    $mediaExistsQuery = mysqli_query($db, "SELECT id, dataname, datatype FROM media WHERE chat_id = $chat_id");
     if (mysqli_num_rows($mediaExistsQuery)) {
         while ($mediaRows = mysqli_fetch_object($mediaExistsQuery)) {
             $media_id = $mediaRows->id;
@@ -37,7 +37,7 @@ if ($everything) {
 } elseif ($media_ids) {
     for ($i = 0; $i < count($media_ids); $i++) {
         $media_id = $media_ids[$i];
-        $mediaExistsQuery = mysqli_query($db, "SELECT dataname, datatype FROM media WHERE id = $media_id && chats_id = $chat_id");
+        $mediaExistsQuery = mysqli_query($db, "SELECT dataname, datatype FROM media WHERE id = $media_id && chat_id = $chat_id");
         if (mysqli_num_rows($mediaExistsQuery)) {
             $mediaRows = mysqli_fetch_object($mediaExistsQuery);
             $dataname = $mediaRows->dataname;

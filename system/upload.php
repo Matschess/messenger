@@ -47,7 +47,13 @@ if ($job == "portrait") {
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $fullFilename)) {
                 // Save new Portrait name
                 if ($insert = mysqli_query($db, "INSERT INTO media (chat_id, user_id, dataname, datatype) VALUES ($chat_id, $user_id, '$rawFilename', '$fileType')")) {
-                    echo "uploaded: " . $fullFilename;
+                    if($fileType == "docx" || $fileType == "xlsx" || $fileType == "pptx" || $fileType == "pdf" || $fileType == "zip" || $fileType == "exe") { // give back media_id for documents for download
+                        $media_id = mysqli_insert_id($db);
+                        echo "uploaded: " . $media_id . "." . $fileType;
+                    }
+                    else {
+                        echo "uploaded: " . $fullFilename;
+                    }
                 }
             }
         }
@@ -100,7 +106,7 @@ function validateUpload()
         $uploadOk = 0;
     }
 // Check file formats
-    if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "mp4" && $fileType != "mp3") {
+    if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "mp4" && $fileType != "mp3" && $fileType != "docx" && $fileType != "xlsx" && $fileType != "pptx" && $fileType != "pdf" && $fileType != "zip" && $fileType != "exe") {
         $uploadOk = 0;
     }
 }

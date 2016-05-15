@@ -127,7 +127,7 @@
 /* Sprechblase */
 .bubble, .bubbleManuallyLeft, .bubbleManuallyRight {
     display: inline-block;
-    padding: 5px;
+    padding-bottom: 5px;
     background-color: #fff;
     color: #333;
     -webkit-border-radius: 0px;
@@ -148,27 +148,32 @@
     margin-right: 50px;
 }
 
+.messageText {
+    padding: 5px 0 0 5px;
+}
+
 .bubble img, .bubbleManuallyLeft img, .bubbleManuallyRight img {
-    max-width: 300px;
+    width: 300px;
 }
 
 .bubble video, .bubbleManuallyLeft video, .bubbleManuallyRight video {
-    max-width: 300px;
+    width: 300px;
+    border-radius: 3px 3px 0 0;
+}
+
+.bubble .mediaDocumentThn, .bubbleManuallyLeft .mediaDocumentThn, .bubbleManuallyRight .mediaDocumentThn {
+    width: 100px;
+    border-radius: 3px 3px 0 0;
+    display: block; /* to line break */
 }
 
 .mediaVideo {
     position: relative;
 }
 
-.equalizer {
-    width: 30px;
-}
-
 .mediaAudio {
-    position: relative;
     background-color: #e67e22;
-    border-radius: 50%;
-    width: 30px;
+    border-radius: 3px 3px 0 0;
     padding: 5px;
     text-align: center;
 }
@@ -330,7 +335,7 @@
     display: inline-block;
     background-color: #F2F2F2;
     color: #333;
-    width: 100%;
+    width: calc(100% - 10px);
     padding: 5px;
 }
 
@@ -366,9 +371,10 @@
 }
 
 .uploader {
-    width: 23px;
+    width: 350px;
     position: absolute;
     opacity: 0;
+    cursor: pointer;
 }
 
 .uploadLoader {
@@ -459,6 +465,10 @@
     font-style: normal;
     padding: 3px 5px 3px 5px;
     margin-left: 5px;
+}
+
+.done, .doneAll {
+    margin-right: 5px;
 }
 
 .done {

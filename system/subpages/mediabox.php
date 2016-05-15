@@ -72,6 +72,26 @@
                         echo "<div id='$media_id' class='thumbnail'><i class='material-icons'>done</i>";
                         echo "<img id='img$media_id' src='img/powerpoint_thn.png'/>";
                         echo "</div>";
+                    } elseif ($datatype == 'pdf') {
+                        echo "<div id='$media_id' class='thumbnail'><i class='material-icons'>done</i>";
+                        echo "<img id='img$media_id' src='img/pdf_thn.png'/>";
+                        echo "</div>";
+                    } elseif ($datatype == 'mp3') {
+                        echo "<div id='$media_id' class='thumbnail'><i class='material-icons'>done</i>";
+                        echo "<img id='img$media_id' src='img/music_thn.png'/>";
+                        echo "</div>";
+                    } elseif ($datatype == 'mp4') {
+                        echo "<div id='$media_id' class='thumbnail'><i class='material-icons'>done</i>";
+                        echo "<img id='img$media_id' src='img/video_thn.png'/>";
+                        echo "</div>";
+                    } elseif ($datatype == 'zip') {
+                        echo "<div id='$media_id' class='thumbnail'><i class='material-icons'>done</i>";
+                        echo "<img id='img$media_id' src='img/zip_thn.png'/>";
+                        echo "</div>";
+                    } elseif ($datatype == 'exe') {
+                        echo "<div id='$media_id' class='exeHint thumbnail'><i class='material-icons'>done</i>";
+                        echo "<img id='img$media_id' src='img/application_thn.png'/>";
+                        echo "</div>";
                     } else {
                         echo "<div id='$media_id' class='thumbnail'><i class='material-icons'>done</i>";
                         echo "<img id='img$media_id' src='../data/media/$chat_id/$dataname.$datatype'/>";
