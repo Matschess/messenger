@@ -4,6 +4,7 @@ $(document).ready(function () {
     var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
+
     websocket.onopen = function (ev) { // connection is open
         $.get('variables/user_id_var.php', function (data) {
             $user_id = data;
@@ -51,8 +52,8 @@ $(document).ready(function () {
                 $('#chatSound').get(0).play();
 
                 $currentTime = new Date();
-                $hours = $currentTime.getHours();
-                $minutes = $currentTime.getMinutes();
+                $hours = ("0" + $currentTime.getHours()).slice(-2);
+                $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
 
                 $currentChat = $.cookie('chat_id');
 
@@ -151,8 +152,8 @@ $(document).ready(function () {
                 $('#chatSound').get(0).play();
 
                 $currentTime = new Date();
-                $hours = $currentTime.getHours();
-                $minutes = $currentTime.getMinutes();
+                $hours = ("0" + $currentTime.getHours()).slice(-2);
+                $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
 
                 $currentChat = $.cookie('chat_id');
 

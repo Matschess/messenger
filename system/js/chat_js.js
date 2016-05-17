@@ -84,7 +84,8 @@ $(document).ready(function () {
     function send() {
         $chat_id = $.cookie('chat_id');
         if ($chat_id) {
-            $message = $('.chatTextBox').html();
+            $message = $('.chatTextBox').html().replace(/&nbsp;/g, ''); // replace &nbsp;'s
+            $.trim($message);
 
             if ($message) {
                 var msg = {
@@ -101,8 +102,8 @@ $(document).ready(function () {
                 $('#smileyChooser, #attacher').slideUp(200);
 
                 $currentTime = new Date();
-                $hours = $currentTime.getHours();
-                $minutes = $currentTime.getMinutes();
+                $hours = ("0" + $currentTime.getHours()).slice(-2);
+                $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
                 $portrait = $('#mePortrait').attr('src');
 
                 // Clear 'no messages' note
@@ -266,6 +267,10 @@ $(document).ready(function () {
     $("*").on('dragover', function (e) {
         $('#attacher').slideDown(300);
     });
+    $("*").on('drop', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+    });
     // Avpod opening media in browser when dropping anywhere
     $("#uploadContainer").on('dragover', function (e) {
         e.stopPropagation();
@@ -274,12 +279,10 @@ $(document).ready(function () {
     $("#uploadContainer").on('dragenter', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        $(this).css('background-color', 'red');
     });
     $("#uploadContainer").on('dragleave', function (e) {
         e.stopPropagation();
         e.preventDefault();
-        $(this).css('background-color', '#fff');
     });
     $("#uploadContainer").on('drop', function (e) {
         e.preventDefault();
@@ -288,6 +291,9 @@ $(document).ready(function () {
         var form_data = new FormData();
         form_data.append('file', file_data);
         uploadMedia(form_data);
+
+        $('#uploadContainer').hide();
+        $('.uploadLoader').show();
     });
 
     function uploadMedia(form_data) {
@@ -316,12 +322,10 @@ $(document).ready(function () {
 
                     // clear textbox and close Smiley-chooser
                     $('#smileyChooser, #attacher').slideUp(200);
-                    $('.uploadLoader').hide();
-                    $('#uploadContainer').show();
 
                     $currentTime = new Date();
-                    $hours = $currentTime.getHours();
-                    $minutes = $currentTime.getMinutes();
+                    $hours = ("0" + $currentTime.getHours()).slice(-2);
+                    $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
                     $portrait = $('#mePortrait').attr('src');
 
                     // Clear 'no messages' note
@@ -382,7 +386,23 @@ $(document).ready(function () {
                         $('.chatMe').removeClass('chatMe');
                     });
                 }
+                else {
+                    switch (data) {
+                        case "error[size]":
+                            $('.attachHeaderErrors').html('Die Datei ist zu groß');
+                            break;
+                        case "error[filetype]":
+                            $('.attachHeaderErrors').html('Dieser Dateityp ist nicht zugelassen');
+                            break;
+                        default:
+                            $('.attachHeaderErrors').html('Ein Fehler trat auf');
+                            break;
+                    }
 
+                    $('.attachHeaderErrors').fadeIn().delay(2000).fadeOut();
+                }
+                $('.uploadLoader').hide();
+                $('#uploadContainer').show();
             }
         });
     }

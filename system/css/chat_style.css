@@ -149,11 +149,15 @@
 }
 
 .messageText {
-    padding: 5px 0 0 5px;
+    padding: 3px 5px 3px 5px;
+    display: inline-block;
+    word-break: break-word;
 }
 
 .bubble img, .bubbleManuallyLeft img, .bubbleManuallyRight img {
     width: 300px;
+    border-radius: 3px 3px 0 0;
+    display: block; /* to line break */
 }
 
 .bubble video, .bubbleManuallyLeft video, .bubbleManuallyRight video {
@@ -365,9 +369,20 @@
     height: 116px;
 }
 
-#uploadContainer span {
+#uploadContainerText {
     font-size: 14px;
-    margin-left: 8px;
+}
+
+#uploadContainerTextForDrop {
+    display: none;
+   padding: 10px;
+}
+
+.attachHeaderErrors {
+    display: none;
+    font-size: 14px;
+    padding: 3px 5px 0 0;
+float: right;
 }
 
 .uploader {
@@ -387,7 +402,7 @@
 .uploadButton {
     background-color: #2ecc71;
     color: #fff;
-    margin: 10px 0 0 10px;
+    margin: 10px 8px 0 10px;
     width: 34px;
     padding: 5px 0 5px 0;
     border-radius: 50%;

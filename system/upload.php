@@ -59,7 +59,7 @@ if ($job == "portrait") {
         }
     }
     else {
-        echo "error[no_ChatId)";
+        echo "error[no_chat]";
     }
 }
 
@@ -72,7 +72,7 @@ function getNewName($setUsernameBefore)
     $shuffled = substr($shuffled, 0, 4);
 
     $basename = basename($_FILES["file"]["name"]);
-    $fileType = pathinfo($basename, PATHINFO_EXTENSION);
+    $fileType = strtolower(pathinfo($basename, PATHINFO_EXTENSION));
     if($setUsernameBefore) {
         $rawFilename = $user_id . $shuffled;
         $filename = $user_id . $shuffled . "." . $fileType;
@@ -104,9 +104,11 @@ function validateUpload()
 // Check file size
     if ($_FILES["file"]["size"] > 50000000) {
         $uploadOk = 0;
+        echo "error[size]";
     }
 // Check file formats
     if ($fileType != "jpg" && $fileType != "png" && $fileType != "jpeg" && $fileType != "mp4" && $fileType != "mp3" && $fileType != "docx" && $fileType != "xlsx" && $fileType != "pptx" && $fileType != "pdf" && $fileType != "zip" && $fileType != "exe") {
         $uploadOk = 0;
+        echo "error[filetype]";
     }
 }

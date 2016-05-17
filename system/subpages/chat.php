@@ -331,6 +331,7 @@
         <div id="attacher">
             <div id="attacherHeader">
                 <i class="material-icons-large">file_upload</i> <span>Datei hochladen</span>
+                <span class="attachHeaderErrors"></span>
             </div>
             <div id="attacherBody">
                 <!-- Loader -->
@@ -342,11 +343,13 @@
                 </div>
 
                 <div id="uploadContainer">
+                    <span id="uploadContainerText">
                     <div id="uploadFile" class="uploadButton">
                         <input type="file" class="uploader"/>
                         <i class="material-icons">add</i>
                     </div>
-                    <span>Klicken oder per Drag-and-Drop fallen lassen</span>
+                    Klicken oder per Drag-and-Drop fallen lassen</span>
+                    <div id="uploadContainerTextForDrop">Hier fallen lassen</div>
                 </div>
             </div>
         </div>
