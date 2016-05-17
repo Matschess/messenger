@@ -39,7 +39,7 @@
     ?>
 </HEAD>
 <BODY>
-
+<div id="somethingsWrong"><div id="somethingsWrongMessage"></div></div>
 <audio id='chatSound' controls="controls" hidden="true" >
     <source src= "sounds/newMessage.wav"/>
 </audio>

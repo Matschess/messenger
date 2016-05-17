@@ -4,6 +4,10 @@ $(document).ready(function () {
     var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
+    // refresh on error
+    $('#somethingsWrong').click(function() {
+        location.reload();
+    });
 
     websocket.onopen = function (ev) { // connection is open
         $.get('variables/user_id_var.php', function (data) {
@@ -18,9 +22,10 @@ $(document).ready(function () {
         });
     }
 
-    /* websocket.onclose = function (ev) { // connection is open
-     alert("bye");
-     } */
+    websocket.onclose = function (ev) { // connection is open
+        $('#somethingsWrong').fadeIn(200);
+        $('#somethingsWrongMessage').load('subpages/connectionLost.html');
+     }
 
     websocket.onmessage = function (ev) {
         var fullMsg = JSON.parse(ev.data); //PHP sends Json data
