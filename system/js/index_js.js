@@ -25,7 +25,7 @@ $(document).ready(function () {
                 type: 'user_id',
                 message: $user_id
             };
-
+i
             websocket.send(JSON.stringify(msg));
         });
     }
