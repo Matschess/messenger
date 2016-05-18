@@ -1,5 +1,13 @@
 $(document).ready(function () {
 
+
+    // Notloesung auf zeit !!!!!!!!!!!!!!!!
+    window.setTimeout(function() {
+        $mePositionX = $('#me').position().left;
+        $('#meOptions').offset({left: $mePositionX});
+    }, 1000);
+
+
     // Connect to websocket
     var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
@@ -23,8 +31,11 @@ $(document).ready(function () {
     }
 
     websocket.onclose = function (ev) { // connection is open
+        /*
         $('#somethingsWrong').fadeIn(200);
+        $('#somethingsWrongMessage').addClass('animated zoomIn');
         $('#somethingsWrongMessage').load('subpages/connectionLost.html');
+        */
      }
 
     websocket.onmessage = function (ev) {

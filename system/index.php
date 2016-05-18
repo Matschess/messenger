@@ -39,14 +39,41 @@
     ?>
 </HEAD>
 <BODY>
-<div id="somethingsWrong"><div id="somethingsWrongMessage"></div></div>
-<audio id='chatSound' controls="controls" hidden="true" >
-    <source src= "sounds/newMessage.wav"/>
+<div id="somethingsWrong">
+    <div id="somethingsWrongMessage"></div>
+</div>
+<audio id='chatSound' controls="controls" hidden="true">
+    <source src="sounds/newMessage.wav"/>
 </audio>
 
 <div id="overlay"></div>
 
 <div class="bodyBefore">
+    <!-- navigation out of the container because it needs to be on the very top -->
+    <div id="meOptions">
+        <div id="logout" class="meOption">
+            <i class="material-icons tooltip" title="Ausloggen und beenden">vpn_key</i>
+        </div>
+        <div id="profileSettings" class="meOption">
+            <i class="material-icons tooltip" title="Profil-Einstellungen">settings</i>
+        </div>
+        <div id="notifications" class="meOption">
+            <i class="material-icons tooltip" title="Benachrichtigungen ein/aus">volume_off</i>
+        </div>
+        <div id="enquiry" class="meOption">
+            <?php
+            if ($enquiries) {
+                echo "<div id='enquiries'>$row->enquiries</div>";
+            } else {
+                echo "<div id='enquiries' style='display: none'></div>";
+            }
+            ?>
+            <i class="material-icons tooltip" title="Freundschaftsanfragen">people</i>
+        </div>
+        <div id="add" class="meOption">
+            <i class="material-icons tooltip" title="Freund hinzufügen">add</i>
+        </div>
+    </div>
     <div id="container">
         <div id="containerLeft" class="col-4">
             <table class="tableNavigation">
@@ -83,39 +110,11 @@
                             $enquiries = $row->enquiries;
                             if ($enquiries) {
                                 echo "<div id='portraitAlert'>!</div>";
-                            }
-                            else {
+                            } else {
                                 echo "<div id='portraitAlert' style='display: none'>!</div>";
                             }
                             ?>
                         </div>
-                        <div id="logout" class="meOption">
-                            <i class="material-icons tooltip" title="Ausloggen und beenden">vpn_key</i>
-                        </div>
-
-                        <div id="profileSettings" class="meOption">
-                            <i class="material-icons tooltip" title="Profil-Einstellungen">settings</i>
-                        </div>
-
-                        <div id="notifications" class="meOption">
-                            <i class="material-icons tooltip" title="Benachrichtigungen ein/aus">volume_off</i>
-                        </div>
-                        <div id="enquiry" class="meOption">
-                            <?php
-                            if ($enquiries) {
-                                echo "<div id='enquiries'>$row->enquiries</div>";
-                            }
-                            else {
-                                echo "<div id='enquiries' style='display: none'></div>";
-                            }
-                            ?>
-                            <i class="material-icons tooltip" title="Freundschaftsanfragen">people</i>
-                        </div>
-                        <div id="add" class="meOption">
-                            <i class="material-icons tooltip" title="Freund hinzufügen">add</i>
-                        </div>
-
-
                     </td>
                 </tr>
             </table>

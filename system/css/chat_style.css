@@ -31,8 +31,8 @@
 
 #options {
     position: absolute;
-    right: 6px;
     top: 27px;
+    right: 6px;
 }
 
 #optionsIcon {
@@ -375,14 +375,14 @@
 
 #uploadContainerTextForDrop {
     display: none;
-   padding: 10px;
+    padding: 10px;
 }
 
 .attachHeaderErrors {
     display: none;
     font-size: 14px;
     padding: 3px 5px 0 0;
-float: right;
+    float: right;
 }
 
 .uploader {
