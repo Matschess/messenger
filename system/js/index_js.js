@@ -1,21 +1,21 @@
 $(document).ready(function () {
 
+    if ($.cookie('volume') == 'true') {
 
-    // Notloesung auf zeit !!!!!!!!!!!!!!!!
-    window.setTimeout(function() {
-        $mePositionX = $('#me').position().left;
-        $('#meOptions').offset({left: $mePositionX});
-    }, 1000);
 
+        $('#notifications i').html('volume_up');
+        $('#chatSound').get(0).play();
+    }
+
+    else {
+
+        $('#notifications i').html('volume_off');
+
+    }
 
     // Connect to websocket
     var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
-
-    // refresh on error
-    $('#somethingsWrong').click(function() {
-        location.reload();
-    });
 
     websocket.onopen = function (ev) { // connection is open
         $.get('variables/user_id_var.php', function (data) {
@@ -25,18 +25,14 @@ $(document).ready(function () {
                 type: 'user_id',
                 message: $user_id
             };
-i
+
             websocket.send(JSON.stringify(msg));
         });
     }
 
-    websocket.onclose = function (ev) { // connection is open
-        /*
-        $('#somethingsWrong').fadeIn(200);
-        $('#somethingsWrongMessage').addClass('animated zoomIn');
-        $('#somethingsWrongMessage').load('subpages/connectionLost.html');
-        */
-     }
+    /* websocket.onclose = function (ev) { // connection is open
+     alert("bye");
+     } */
 
     websocket.onmessage = function (ev) {
         var fullMsg = JSON.parse(ev.data); //PHP sends Json data
@@ -68,8 +64,8 @@ i
                 $('#chatSound').get(0).play();
 
                 $currentTime = new Date();
-                $hours = ("0" + $currentTime.getHours()).slice(-2);
-                $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
+                $hours = $currentTime.getHours();
+                $minutes = $currentTime.getMinutes();
 
                 $currentChat = $.cookie('chat_id');
 
@@ -168,8 +164,8 @@ i
                 $('#chatSound').get(0).play();
 
                 $currentTime = new Date();
-                $hours = ("0" + $currentTime.getHours()).slice(-2);
-                $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
+                $hours = $currentTime.getHours();
+                $minutes = $currentTime.getMinutes();
 
                 $currentChat = $.cookie('chat_id');
 
@@ -364,8 +360,34 @@ i
     $('#logout, #notifications, #enquiry, #add, #profileSettings').click(function () {
         $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
     });
+    //Cookie: volume_on/off Button
+
+
     $('#notifications').click(function () {
-        alert('Mute');
+
+
+        if ($.cookie('volume') == 'true') {
+
+            $.cookie('volume', 'false');
+
+
+            $('#notifications i').html('volume_off');
+
+            //alert( $.cookie('volume'));
+        }
+
+
+
+        else {
+
+            $.cookie('volume', 'true');
+
+            $('#notifications i').html('volume_up');
+
+
+            //alert($.cookie('volume'));
+        }
+
         $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
     });
     $('#enquiry').click(function () {
