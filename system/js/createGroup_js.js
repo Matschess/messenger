@@ -1,5 +1,19 @@
 $(document).ready(function () {
+
+    $(document).keypress(function (e) {
+        if (e.keyCode == 13) { // Char-code for enter
+            groupNameDone();
+            event.preventDefault();
+            return false;
+        }
+    });
+
     $('.groupNameDone').click(function () {
+        groupNameDone();
+
+    });
+
+    function groupNameDone() {
         $('#groupname').removeClass('wrongInput');
         $groupname = $('#groupname').html();
         if ($groupname) {
@@ -18,7 +32,7 @@ $(document).ready(function () {
                 $('#groupname').addClass('wrongInput').delay(500);
             }, 20);
         }
-    });
+    }
 
     $('.createGroupNow').click(function () {
         $groupname = window.groupName;
@@ -151,18 +165,8 @@ $(document).ready(function () {
      vague.blur();
      */
 
-    $('#groupname').keyup(function (e) {
-        if (e.keyCode == 8) { // keyCode for Backslash
-            $groupname = $('#groupname').html();
-            $groupname = $groupname.replace(/&nbsp;/g, ' ');
-            $leftChars = 60 - $groupname.length - 1;
-            $('.charCounter').html($leftChars);
-        }
-    });
-
-    $('#groupname').keypress(function (e) {
-        $groupname = $('#groupname').html();
-        $groupname = $groupname.replace(/&nbsp;/g, ' ');
+    $('#groupname').bind('DOMSubtreeModified', function() {
+        $groupname = $('#groupname').html().replace(/&nbsp;/g, ' ');
         $imagesStartTag = [];
         $imagesEndTag = [];
         for ($i = 0; $i < $groupname.length; $i++) {
@@ -186,11 +190,17 @@ $(document).ready(function () {
             $groupname = $groupname.substr(0, $imageStartTag) + ' ' + $groupname.substr($imageEndTag);
         }
 
-        $leftChars = 60 - $groupname.length - 1;
+        $leftChars = 60 - $groupname.length;
+        $('.charCounter').html($leftChars);
+
+        window.leftChars = $leftChars;
+    });
+
+    $('#groupname').keypress(function(e) {
+        $leftChars = window.leftChars;
         if ($leftChars <= 0 && ((e.charCode >= 65 && e.charCode <= 122) || e.keyCode == 32)) { // Char-code for letters
             e.preventDefault();
         }
-        $('.charCounter').html($leftChars);
     });
 
     $('#smiley').click(function () {

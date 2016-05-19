@@ -4,6 +4,15 @@ $(document).ready(function () {
     // play video and audio
     $('#content').on('mouseover', '.mediaVideo, .mediaAudio', function () {
         $(this).children('.videoControls, .audioControls').removeClass('animated zoomIn');
+
+        // Mute or unmute the media message
+        if ($.cookie('messengerMute') == 'false') {
+            $(this).children('video, audio').prop('volume', 1);
+        }
+        else {
+            $(this).children('video, audio').prop('volume', 0);
+        }
+
         $(this).children('video, audio').get(0).play();
 
         if ($(this).children('audio').length) {

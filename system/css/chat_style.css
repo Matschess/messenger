@@ -140,6 +140,10 @@
     max-width: 70%;
 }
 
+.img_round {
+    margin-bottom: -3px;
+}
+
 .bubbleManuallyLeft {
     margin-left: 50px;
 }

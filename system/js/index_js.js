@@ -1,21 +1,42 @@
 $(document).ready(function () {
-
-    if ($.cookie('volume') == 'true') {
-
-
+    
+    // Mute or unmute the chat
+    if ($.cookie('messengerMute') == 'false') {
         $('#notifications i').html('volume_up');
-        $('#chatSound').get(0).play();
     }
-
     else {
-
         $('#notifications i').html('volume_off');
-
+        $('*').prop('volume', 0);
     }
+
+    $('#notifications').click(function () {
+        if ($.cookie('messengerMute') == 'false') {
+            $.cookie('messengerMute', 'true');
+            $('#notifications i').html('volume_off');
+            $('*').prop('volume', 0);
+        }
+        else {
+            $.cookie('messengerMute', 'false');
+            $('#notifications i').html('volume_up');
+            $('*').prop('volume', 1);
+        }
+    });
+
+    // Notloesung auf zeit !!!!!!!!!!!!!!!!
+    window.setTimeout(function() {
+        $mePositionX = $('#me').position().left;
+        $('#meOptions').offset({left: $mePositionX});
+    }, 1000);
+
 
     // Connect to websocket
-    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
+    var wsUri = "ws://localhost:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
+
+    // refresh on error
+    $('#somethingsWrong').click(function() {
+        location.reload();
+    });
 
     websocket.onopen = function (ev) { // connection is open
         $.get('variables/user_id_var.php', function (data) {
@@ -25,14 +46,18 @@ $(document).ready(function () {
                 type: 'user_id',
                 message: $user_id
             };
-
+i
             websocket.send(JSON.stringify(msg));
         });
     }
 
-    /* websocket.onclose = function (ev) { // connection is open
-     alert("bye");
-     } */
+    websocket.onclose = function (ev) { // connection is open
+        /*
+        $('#somethingsWrong').fadeIn(200);
+        $('#somethingsWrongMessage').addClass('animated zoomIn');
+        $('#somethingsWrongMessage').load('subpages/connectionLost.html');
+        */
+     }
 
     websocket.onmessage = function (ev) {
         var fullMsg = JSON.parse(ev.data); //PHP sends Json data
@@ -64,8 +89,8 @@ $(document).ready(function () {
                 $('#chatSound').get(0).play();
 
                 $currentTime = new Date();
-                $hours = $currentTime.getHours();
-                $minutes = $currentTime.getMinutes();
+                $hours = ("0" + $currentTime.getHours()).slice(-2);
+                $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
 
                 $currentChat = $.cookie('chat_id');
 
@@ -164,8 +189,8 @@ $(document).ready(function () {
                 $('#chatSound').get(0).play();
 
                 $currentTime = new Date();
-                $hours = $currentTime.getHours();
-                $minutes = $currentTime.getMinutes();
+                $hours = ("0" + $currentTime.getHours()).slice(-2);
+                $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
 
                 $currentChat = $.cookie('chat_id');
 
@@ -357,37 +382,7 @@ $(document).ready(function () {
         window.location = 'logout.php';
     });
 
-    $('#logout, #notifications, #enquiry, #add, #profileSettings').click(function () {
-        $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
-    });
-    //Cookie: volume_on/off Button
-
-
-    $('#notifications').click(function () {
-
-
-        if ($.cookie('volume') == 'true') {
-
-            $.cookie('volume', 'false');
-
-
-            $('#notifications i').html('volume_off');
-
-            //alert( $.cookie('volume'));
-        }
-
-
-
-        else {
-
-            $.cookie('volume', 'true');
-
-            $('#notifications i').html('volume_up');
-
-
-            //alert($.cookie('volume'));
-        }
-
+    $('#logout, #enquiry, #add, #profileSettings').click(function () {
         $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
     });
     $('#enquiry').click(function () {
