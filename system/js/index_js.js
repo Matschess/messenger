@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    
     // Mute or unmute the chat
     if ($.cookie('messengerMute') == 'false') {
         $('#notifications i').html('volume_up');
@@ -52,11 +51,19 @@ i
     }
 
     websocket.onclose = function (ev) { // connection is open
-        /*
         $('#somethingsWrong').fadeIn(200);
         $('#somethingsWrongMessage').addClass('animated zoomIn');
         $('#somethingsWrongMessage').load('subpages/connectionLost.html');
-        */
+        var vague = $('#blur').Vague({
+            intensity: 4,      // Blur Intensity
+            forceSVGUrl: false,   // Force absolute path to the SVG filter,
+            animationOptions: {
+                duration: 200,
+                easing: 'linear' // here you can use also custom jQuery easing functions
+            }
+        });
+        vague.blur();
+
      }
 
     websocket.onmessage = function (ev) {

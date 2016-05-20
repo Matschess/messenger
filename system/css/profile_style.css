@@ -136,6 +136,13 @@
     border-bottom: 1px solid #333;
 }
 
+.charCounter {
+    display: none;
+    font-size: 12px;
+    vertical-align: bottom;
+    color: #333;
+}
+
 #myStatusEdit:focus {
     outline: 0 none;
 }

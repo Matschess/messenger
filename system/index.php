@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="plugins/animatecss/animate.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="plugins/Vague.js/Vague.js"></script>
     <script src="js/index_js.js"></script>
     <script type="text/javascript" src="plugins/tooltipster/js/jquery.tooltipster.min.js"></script>
     <script src="plugins/color-thief-master/src/color-thief.js"></script>
@@ -48,6 +49,7 @@
 
 <div id="overlay"></div>
 
+<div id="blur">
 <div class="bodyBefore">
     <!-- navigation out of the container because it needs to be on the very top -->
     <div id="meOptions">
@@ -123,7 +125,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <div id="popup">
     <div id="popupHeader"><span id="popupTitle">Kontaktsuche</span></div>
     <div id="popupContent"></div>
