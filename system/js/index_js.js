@@ -51,6 +51,7 @@ i
     }
 
     websocket.onclose = function (ev) { // connection is open
+        /*
         $('#somethingsWrong').fadeIn(200);
         $('#somethingsWrongMessage').addClass('animated zoomIn');
         $('#somethingsWrongMessage').load('subpages/connectionLost.html');
@@ -63,7 +64,7 @@ i
             }
         });
         vague.blur();
-
+*/
      }
 
     websocket.onmessage = function (ev) {

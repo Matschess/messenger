@@ -71,7 +71,6 @@ $(document).ready(function () {
         $('#myStatusEdit').show();
         $('#myStatusRenewButton').show();
         $('#myStatusCancelButton').show();
-        $('.charCounter').show();
     });
 
     var $currentStatus = $('#myStatusEdit').val();
@@ -81,20 +80,8 @@ $(document).ready(function () {
         $('#myStatusEdit').hide();
         $('#myStatusRenewButton').hide();
         $('#myStatusCancelButton').hide();
-        $('.charCounter').hide();
         $('#quote').show();
         $('#myStatus, #myStatusNone').show();
-    });
-
-    $('#myStatusEdit').keypress(function(e) {
-        $statustext = $('#myStatusEdit').val();
-        alert($statustext);
-        $leftChars = 60 - $statustext.length;
-        $('.charCounter').html($leftChars);
-        
-        if ($leftChars <= 0 && ((e.charCode >= 65 && e.charCode <= 122) || e.keyCode == 32)) { // Char-code for letters
-            e.preventDefault();
-        }
     });
 
     $('#myStatusRenewButton').click(function () {

@@ -1,8 +1,8 @@
 <HTML>
 <HEAD>
     <link rel="stylesheet" href="css/createGroup_style.css">
-    <script type="text/javascript" src="Javascript/jquery-1.3.2.min.js"></script>
-    <script type="text/javascript" src="Javascript/jquery-ui-1.7.2.custom.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="js/createGroup_js.js"></script>
 </HEAD>
 <BODY>
@@ -39,7 +39,7 @@
     <div id="friendSuggestions"></div>
 </div>
 <div id="popupFooter">
-    <input type="button" class="popupButton popupClose" value="Abbrechen"/>
+    <input type="button" class="popupButton groupCancel" value="Abbrechen"/>
     <input type="button" class="popupButton createGroupNow" value="Fertigstellen"/>
 </div>
 </BODY>

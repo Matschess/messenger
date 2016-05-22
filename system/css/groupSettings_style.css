@@ -23,6 +23,19 @@
     display: inline;
 }
 
+.chipEmptyMembers, .chipEmptyAdministrators {
+    width: 0px;
+    opacity: 0;
+}
+
+.chipEmptyAnimations {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
 #friendSuggestions {
     display: none;
     position: absolute;
@@ -46,4 +59,26 @@
 .friendSuggestionsUser span {
     margin-left: 5px;
     vertical-align: middle;
+}
+
+#groupNameRenewButton, #groupNameCancelButton {
+    display: none;
+}
+
+#groupName {
+    text-align: center;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+#groupNameEdit {
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0 none;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 400;
+    width: 300px;
+    padding: 5px;
+    border-bottom: 1px solid #333;
 }

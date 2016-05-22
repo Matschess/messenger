@@ -1,26 +1,12 @@
 $(document).ready(function () {
 
-    $(document).keypress(function (e) {
-        if (e.keyCode == 13) { // Char-code for enter
-            groupNameDone();
-            event.preventDefault();
-            return false;
-        }
-    });
-
     $('.groupNameDone').click(function () {
-        groupNameDone();
-
-    });
-
-    function groupNameDone() {
         $('#groupname').removeClass('wrongInput');
         $groupname = $('#groupname').html();
         if ($groupname) {
             $.get("php/group_prepare.php?job=validateGroupName&groupName=" + $groupname, function (data) {
-                if (data == 'validated') {
-                    window.groupName = $groupname;
-                    $('#popupContent').load('subpages/createGroupMembers.php');
+                if (data == "validated") {
+                    $('#popupContent').load('subpages/createGroupPortrait.php');
                 }
                 else {
                     $('#groupname').addClass('wrongInput');
@@ -32,21 +18,39 @@ $(document).ready(function () {
                 $('#groupname').addClass('wrongInput').delay(500);
             }, 20);
         }
-    }
+    });
 
-    $('.createGroupNow').click(function () {
-        $groupname = window.groupName;
-        $groupMembers = '';
-        $('.chip').each(function (index) {
-            $groupMembers = $groupMembers + "&groupMembers[]=" + $(this).attr('id').substr(6);
-        });
-        $.get("php/group_prepare.php?job=validateGroupMembers&groupName=" + $groupname + $groupMembers, function (data) {
-            if(data == 'validated') {
+    $('.groupPortraitDone').click(function () {
+        $('#popupContent').load('subpages/createGroupMembers.php');
+    });
+
+    $('.groupCancel').click(function () {
+        $.get('php/group_prepare.php?job=cancelGroup', function (data) {
+            if (data == "canceled") {
                 $('#overlay').fadeOut(200);
                 $('#popup').fadeOut(200);
-                reloadCurrentChats();
             }
         });
+    });
+
+    $('.createGroupNow').click(function () {
+        $groupMembers = '';
+        $groupAdministrators = '';
+        if ($('.chip').length >= 1) {
+            $('.chipAdministrator').each(function () {
+                $groupAdministrators = $groupAdministrators + "&groupAdministrators[]=" + $(this).attr('id').substr(6);
+            });
+            $('.chipMember').each(function () {
+                $groupMembers = $groupMembers + "&groupMembers[]=" + $(this).attr('id').substr(6);
+            });
+            $.get("php/group_prepare.php?job=validateGroupMembers&groupName=" + $groupname + $groupAdministrators + $groupMembers, function (data) {
+                if (data == 'validated') {
+                    $('#overlay').fadeOut(200);
+                    $('#popup').fadeOut(200);
+                    reloadCurrentChats();
+                }
+            });
+        }
     });
 
     $('*').load(function () {
@@ -103,7 +107,7 @@ $(document).ready(function () {
 
                         // Check if member is already on list
                         if (!$('#member' + $user_id).length) {
-                            $('#groupMembers').append('<div id="member' + $user_id + '" class="chip">' +
+                            $('#groupMembers').append('<div id="member' + $user_id + '" class="chip chipMember">' +
                                 '<img src="' + $portrait + '"/>' +
                                 ' <span>' + $username +
                                 ' <i class="material-icons-thin groupMemberDelete">close</i></span>' +
@@ -111,7 +115,7 @@ $(document).ready(function () {
                             $('#groupMemberSearch').val('');
                             $('#friendSuggestions').hide();
                             $('#groupMemberSearch').focus();
-                            $('.chip').draggable({
+                            $('.chipMember').draggable({
                                 revert: "invalid",
                                 revertDuration: 80,
                                 zIndex: 10000,
@@ -121,12 +125,12 @@ $(document).ready(function () {
                                 }
                             });
                             $('.chipEmptyAdministrators').droppable({
-                                accept: ".chip",
+                                accept: ".chipMember",
                                 drop: function (event, ui) {
                                     $(ui.draggable).css({'top': '0px', 'left': '0px'});
                                     $(ui.draggable).appendTo('#groupAdministrators');
                                     $(ui.draggable).addClass('chipAdministrator');
-                                    $(ui.draggable).removeClass('chip');
+                                    $(ui.draggable).removeClass('chipMember');
                                 }
                             });
                             $('.chipAdministrator').draggable({
@@ -142,7 +146,7 @@ $(document).ready(function () {
                                 drop: function (event, ui) {
                                     $(ui.draggable).css({'top': '0px', 'left': '0px'});
                                     $(ui.draggable).appendTo('#groupMembers');
-                                    $(ui.draggable).addClass('chip');
+                                    $(ui.draggable).addClass('chipMember');
                                     $(ui.draggable).removeClass('chipAdministrator');
                                 }
                             });
@@ -165,7 +169,7 @@ $(document).ready(function () {
      vague.blur();
      */
 
-    $('#groupname').bind('DOMSubtreeModified', function() {
+    $('#groupname').bind('DOMSubtreeModified', function () {
         $groupname = $('#groupname').html().replace(/&nbsp;/g, ' ');
         $imagesStartTag = [];
         $imagesEndTag = [];
@@ -196,7 +200,7 @@ $(document).ready(function () {
         window.leftChars = $leftChars;
     });
 
-    $('#groupname').keypress(function(e) {
+    $('#groupname').keypress(function (e) {
         $leftChars = window.leftChars;
         if ($leftChars <= 0 && ((e.charCode >= 65 && e.charCode <= 122) || e.keyCode == 32)) { // Char-code for letters
             e.preventDefault();
@@ -258,9 +262,7 @@ $(document).ready(function () {
     });
 
     $('#groupMembers').on("click", ".groupMemberDelete", function () {
-        $id = $(this).parent().attr('id');
-        alert($id);
-        $('#' + $id).remove();
+        $(this).parents('.chip').remove();
         $('#groupMemberSearch').focus();
     });
 
@@ -290,5 +292,39 @@ $(document).ready(function () {
     function clearTabsLeft() {
         $('#toChats').removeClass('navigationActive');
         $('#toContacts').removeClass('navigationActive');
+    }
+
+    // upload group portrait
+    $('#groupPortraitUploader').change(function () {
+        var file_data = $('#groupPortraitUploader').prop('files')[0];
+        $('#groupPortraitUploader').val('');
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        uploadGroupPortrait(form_data);
+    });
+
+    function uploadGroupPortrait(form_data) {
+        $('#groupPortraitImg').hide();
+        $('.groupPortraitLoader').show();
+        $.ajax({
+            url: 'upload.php?job=groupPortrait', // point to server-side PHP script
+            dataType: 'text',  // what to expect back from the PHP script, if anything
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function (data) {
+                if (data) {
+                    $newImage = '../data/groupportraits/' + data;
+                    $('#groupPortraitImg').attr('src', $newImage);
+                    $('#groupPortraitImg').load(function () {
+                        $('.groupPortraitLoader').hide();
+                        $('#groupPortraitImg').show();
+                    });
+                }
+            }
+
+        });
     }
 });

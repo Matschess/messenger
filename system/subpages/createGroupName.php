@@ -33,15 +33,10 @@
 		<span class="charCounter">60</span>
 		<br/>
 		<br/>
-		<div id="portraitSmall">
-			<input type="file" id="portraitUpload" title="Profilbild ändern"/>
-			<img src="../data/portraits/default.png" id="profilbildSmall">
-		</div>
-		<span class="infoText divRight">Du kannst auch ein Bild hochladen.
-		Alternativ wird das Standardbild angezeigt.</span>
+		
 	</div>
 	<div id="popupFooter">
-		<input type="button" class="popupButton popupClose" value="Abbrechen"/>
+		<input type="button" class="popupButton groupCancel" value="Abbrechen"/>
 		<input type="button" class="popupButton groupNameDone" value="Weiter"/>
 	</div>
 </BODY>

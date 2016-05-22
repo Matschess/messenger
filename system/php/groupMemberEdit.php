@@ -45,4 +45,38 @@ if ($job == "delete") {
             } else echo "error";
         } else echo "error";
     } else echo "error";
+} else if ($job == "promote") {
+    $member_id = $_GET["member_id"];
+    $chat_id = $_COOKIE["chat_id"];
+    $groupExists = mysqli_query($db, "SELECT id FROM groupmembers WHERE chat_id = $chat_id && user_id = $user_id");
+    if (mysqli_num_rows($groupExists)) {
+        $groupExists = mysqli_query($db, "SELECT id FROM groupmembers WHERE chat_id = $chat_id && user_id = $member_id");
+        if ($row = mysqli_fetch_object($groupExists)) {
+            $id = $row->id;
+            if (mysqli_query($db, "UPDATE groupmembers SET admin = true WHERE id = $id")) {
+                echo "promoted";
+            } else echo "error";
+        } else echo "error";
+    } else echo "error";
+} else if ($job == "degrade") {
+    $member_id = $_GET["member_id"];
+    $chat_id = $_COOKIE["chat_id"];
+    $groupExists = mysqli_query($db, "SELECT id FROM groupmembers WHERE chat_id = $chat_id && user_id = $user_id");
+    if (mysqli_num_rows($groupExists)) {
+        $groupExists = mysqli_query($db, "SELECT id FROM groupmembers WHERE chat_id = $chat_id && user_id = $member_id");
+        if ($row = mysqli_fetch_object($groupExists)) {
+            $id = $row->id;
+            if (mysqli_query($db, "UPDATE groupmembers SET admin = false WHERE id = $id")) {
+                echo "degraded";
+            } else echo "error";
+        } else echo "error";
+    } else echo "error";
+} else if ($job == "editGroupName") {
+    $groupName = trim($_GET["groupName"]);
+    $chat_id = $_COOKIE["chat_id"];
+    if ($groupName != "") {
+        if (mysqli_query($db, "UPDATE chats SET groupname = '$groupName' WHERE id = $chat_id")) {
+            echo "edited";
+        } else echo "error";
+    } else echo "error";
 }

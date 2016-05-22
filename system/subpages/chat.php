@@ -115,10 +115,10 @@
 
             // Portrait
             $portrait = $groupRows->portrait;
-            if (!$portrait || !file_exists("../../data/groupimages/" . $portrait) || $portrait == "") {
+            if (!$portrait || !file_exists("../../data/groupportraits/" . $portrait) || $portrait == "") {
                 $portrait = "portraits/default.png";
             } else {
-                $portrait = "groupimages/" . $portrait;
+                $portrait = "groupportraits/" . $portrait;
             }
 
             $color = $groupRows->color;

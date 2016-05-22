@@ -639,13 +639,10 @@ input {
     vertical-align: middle;
 }
 
-.chip, .chipAdministrator {
+.chipAdministrator, .chipMember, .chipAdministrator i, .chipMember i, .chipAdministrator span, .chipMember span {
     cursor: move;
 }
 
-.chip i, .chipAdministrator i {
-    cursor: default;
-}
 
 .chip img, .chipGroupCreator img, .chipAdministrator img {
     width: 28px;
@@ -682,6 +679,10 @@ input {
 
 .chipMeAdministrator {
     background-color: #50BC7D;
+}
+
+.chipMeAdministrator span {
+color: #fff;
 }
 
 .chipMeMember {

@@ -45,11 +45,11 @@ if (mysqli_num_rows($contactsQuery)) {
         $user_right_id = $contactsRows->user_right_id;
         // Portrait
         $portrait = $contactsRows->portrait;
-        if (!file_exists("../../data/groupimages/" . $portrait) || $portrait == "") {
+        if (!file_exists("../../data/groupportraits/" . $portrait) || $portrait == "") {
             $portrait = "portraits/default.png";
         }
         else {
-            $portrait = "groupimages/" . $portrait;
+            $portrait = "groupportraits/" . $portrait;
         }
 
         $last_active = $contactsRows->last_active;
@@ -58,9 +58,29 @@ if (mysqli_num_rows($contactsQuery)) {
         } else $friend_id = $user_left_id;
 
         if ($friend_id) {
-            $friendQuery = mysqli_query($db, "SELECT username, portrait FROM users WHERE id = '$friend_id'");
+            $friendQuery = mysqli_query($db, "SELECT username, firstname, lastname, portrait FROM users WHERE id = '$friend_id'");
             $friendRows = mysqli_fetch_object($friendQuery);
-            $friend_name = $friendRows->username;
+            // show full name or username
+            $firstname = $friendRows->firstname;
+            $lastname = $friendRows->lastname;
+            $username = $friendRows->username;
+            $friend_name = '';
+            if($firstname) {
+                $friend_name = $firstname;
+                if($lastname) {
+                    $friend_name .= " " . $lastname;
+                }
+            }
+            elseif($lastname) {
+                    $friend_name .= $lastname;
+
+            }
+            elseif($username) {
+                $friend_name = $username;
+            }
+            else {
+                $friend_name = "?";
+            }
             // Portrait
             $portrait = $friendRows->portrait;
             if (!file_exists("../../data/portraits/" . $portrait) || $portrait == "") {

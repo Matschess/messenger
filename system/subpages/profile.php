@@ -63,7 +63,6 @@
     }
     echo "<i class='material-icons-small hover' id='myStatusRenewButton'>done</i>";
     echo "<i class='material-icons-small hover' id='myStatusCancelButton'>clear</i>";
-    echo "<span class='charCounter'>60</span>";
     ?>
 
     <div id="settings">

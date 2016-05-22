@@ -17,26 +17,45 @@ $maxOnline = 100; // maximum seconds since last registered on server
 $searchTag = $_GET["searchTag"];
 
 $currentLetter;
-if($searchTag) $contactsQuery = mysqli_query($db, "SELECT friend_id FROM contacts WHERE user_id = $user_id && friend like '$searchTag%' && accepted ORDER BY friend");
-else $contactsQuery = mysqli_query($db, "SELECT friend_id FROM contacts WHERE user_id = $user_id && accepted ORDER BY friend");
+if ($searchTag) $contactsQuery = mysqli_query($db, "SELECT contacts.friend_id FROM contacts LEFT JOIN users ON users.id = contacts.user_id WHERE contactsuser_id = $user_id && users.username like '$searchTag%' && contactsaccepted ORDER BY users.username");
+else $contactsQuery = mysqli_query($db, "SELECT contacts.friend_id, users.firstname FROM contacts LEFT JOIN users ON users.id = contacts.friend_id WHERE contacts.user_id = $user_id && contacts.accepted ORDER BY COALESCE(NULLIF(users.firstname, ''), NULLIF(users.lastname, ''), NULLIF(users.username, ''))");
 if (mysqli_num_rows($contactsQuery)) {
-    if(!$searchTag) {
+    if (!$searchTag) {
         echo "<div id='createGroup' class='ripple'>";
         echo "<i class='material-icons'>people</i>";
         echo "<span>Neue Gruppe</span>";
         echo "</div>";
     }
-    while($contactsRows = mysqli_fetch_object($contactsQuery)) {
+    while ($contactsRows = mysqli_fetch_object($contactsQuery)) {
         $friend_id = $contactsRows->friend_id;
-        $friendQuery = mysqli_query($db, "SELECT username, portrait, statustext, last_seen FROM users WHERE id = '$friend_id'");
+        $friendQuery = mysqli_query($db, "SELECT username, firstname, lastname, portrait, statustext, last_seen FROM users WHERE id = '$friend_id'");
         $friendRows = mysqli_fetch_object($friendQuery);
-        $newCurrentLetter = strtoupper(substr($friendRows->username, 0, 1));
+
+        // show full name or username
+        $firstname = $friendRows->firstname;
+        $lastname = $friendRows->lastname;
+        $username = $friendRows->username;
+        $friend_name = '';
+        if ($firstname) {
+            $friend_name = $firstname;
+            if ($lastname) {
+                $friend_name .= " " . $lastname;
+            }
+        } elseif ($lastname) {
+            $friend_name .= $lastname;
+
+        } elseif ($username) {
+            $friend_name = $username;
+        } else {
+            $friend_name = "?";
+        }
+
+        $newCurrentLetter = strtoupper(substr($friend_name, 0, 1));
         if ($newCurrentLetter != $currentLetter) {
             $currentLetter = $newCurrentLetter;
             echo "<div class='currentLetter'>$currentLetter</div>";
         }
 
-        $friend_name = $friendRows->username;
 
         // Portrait
         $portrait = $friendRows->portrait;
@@ -76,7 +95,7 @@ if (mysqli_num_rows($contactsQuery)) {
         echo "</div>";
     }
 } else {
-    if($searchTag) echo "<div id='addFirstFriend'><i class='material-icons'>do_not_disturb</i> Keinen Freund gefunden</div>";
+    if ($searchTag) echo "<div id='addFirstFriend'><i class='material-icons'>do_not_disturb</i> Keinen Freund gefunden</div>";
     else echo "<div id='addFirstFriend'><i class='material-icons'>people</i> Füge deine ersten Freunde hinzu</div>";
 }
 ?>
