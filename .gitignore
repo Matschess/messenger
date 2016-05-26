@@ -11,6 +11,9 @@
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 
+# data folder with images and other media stuff
+data/
+
 # Sensitive or high-churn files:
 .idea/dataSources.ids
 .idea/dataSources.xml
