@@ -17,7 +17,7 @@ $maxOnline = 100; // maximum seconds since last registered on server
 $searchTag = $_GET["searchTag"];
 
 $currentLetter;
-if ($searchTag) $contactsQuery = mysqli_query($db, "SELECT contacts.friend_id FROM contacts LEFT JOIN users ON users.id = contacts.user_id WHERE contactsuser_id = $user_id && users.username like '$searchTag%' && contactsaccepted ORDER BY users.username");
+if ($searchTag) $contactsQuery = mysqli_query($db, "SELECT contacts.friend_id, users.firstname FROM contacts LEFT JOIN users ON users.id = contacts.friend_id WHERE contacts.user_id = $user_id && (users.username like '$searchTag%' || users.firstname like '$searchTag%' || users.lastname like '$searchTag%') && contacts.accepted ORDER BY COALESCE(NULLIF(users.firstname, ''), NULLIF(users.lastname, ''), NULLIF(users.username, ''))");
 else $contactsQuery = mysqli_query($db, "SELECT contacts.friend_id, users.firstname FROM contacts LEFT JOIN users ON users.id = contacts.friend_id WHERE contacts.user_id = $user_id && contacts.accepted ORDER BY COALESCE(NULLIF(users.firstname, ''), NULLIF(users.lastname, ''), NULLIF(users.username, ''))");
 if (mysqli_num_rows($contactsQuery)) {
     if (!$searchTag) {

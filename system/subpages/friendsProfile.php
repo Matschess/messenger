@@ -46,19 +46,38 @@
         $fullPortrait = "../data/portraits/default.png";
     }
     $status = $row->statustext;
-    $username = $row->username;
 
+    // show full name or username
     $firstname = $row->firstname;
     $lastname = $row->lastname;
+    $username = $row->username;
+    $name = '';
+    if($firstname) {
+        $name = $firstname;
+        if($lastname) {
+            $name .= " " . $lastname;
+        }
+    }
+    elseif($lastname) {
+        $name .= $lastname;
+
+    }
+    elseif($username) {
+        $name = $username;
+    }
+    else {
+        $name = "?";
+    }
+
     echo "<div id='portrait'>";
     echo "<img src='$fullPortrait' id='portraitImage'/>";
     echo "</div>";
     echo "<div id='portraitBackground'>";
     echo "<br/>";
-    echo "<span id='profileText'>$firstname $lastname</span>";
+    echo "<span id='profileText'>$name</span>";
     echo "<br/>";
-    if ($visibility) {
-        echo "<span id='userID' class='tooltip' title='Die ID'>$username</span>";
+    if ($visibility && $username) {
+        echo "<span id='userID' class='tooltip' title='Die ID von $name'>$username</span>";
     }
     echo "<br/>";
     echo "<br/>";

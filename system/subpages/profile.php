@@ -17,9 +17,24 @@
     $profileDataQuery = mysqli_query($db, "SELECT id, username, firstname, lastname, portrait, statustext, color, isPublic FROM users WHERE id = '$user_id'");
     $profileDataRows = mysqli_fetch_object($profileDataQuery);
 
-    $user_name = $profileDataRows->username;
+    // show full name or username
     $firstname = $profileDataRows->firstname;
     $lastname = $profileDataRows->lastname;
+    $username = $profileDataRows->username;
+    $name = '';
+    if ($firstname) {
+        $name = $firstname;
+        if ($lastname) {
+            $name .= " " . $lastname;
+        }
+    } elseif ($lastname) {
+        $name .= $lastname;
+
+    } elseif ($username) {
+        $name = $username;
+    } else {
+        $name = "?";
+    }
 
     // Portrait
     $portrait = $profileDataRows->portrait;
@@ -33,24 +48,26 @@
     $isPublic = $profileDataRows->isPublic;
 
     echo "<div id='portrait'>";
-        echo "<div class='loader portraitLoader'>";
-        echo "<svg class='circular' viewBox='25 25 50 50'>";
-        echo "<circle class='path' cx='50' cy='50' r='20' fill='none' stroke-width='3' stroke-miterlimit='10'/>";
-        echo "</svg>";
-        echo "</div>";
-        echo "<img src='$fullPortrait' id='portraitImage'/>";
-        echo "<div id='portraitOptions'>";
-            echo "<div id='portraitChange'>";
-                echo "<i class='material-icons'>photo_camera</i>";
-                echo "<input type='file' id='portraitUploadInput' class='tooltip' title='Profilbild ändern'/>";
-            echo "</div>";
-            echo "<i id='portraitDelete' class='material-icons tooltip' title='Profilbild löschen'>delete</i>";
-        echo "</div>";
+    echo "<div class='loader portraitLoader'>";
+    echo "<svg class='circular' viewBox='25 25 50 50'>";
+    echo "<circle class='path' cx='50' cy='50' r='20' fill='none' stroke-width='3' stroke-miterlimit='10'/>";
+    echo "</svg>";
+    echo "</div>";
+    echo "<img src='$fullPortrait' id='portraitImage'/>";
+    echo "<div id='portraitOptions'>";
+    echo "<div id='portraitChange'>";
+    echo "<i class='material-icons'>photo_camera</i>";
+    echo "<input type='file' id='portraitUploadInput' class='tooltip' title='Profilbild ändern'/>";
+    echo "</div>";
+    echo "<i id='portraitDelete' class='material-icons tooltip' title='Profilbild löschen'>delete</i>";
+    echo "</div>";
     echo "</div>";
     echo "<br/>";
-    echo "<span id='profileText'>$firstname $lastname</span>";
+    echo "<span id='profileText'>$name</span>";
     echo "<br/>";
-    echo "<span id='userID' class='tooltip' title='Mit dieser ID kannst du von deinen Freunden <br/> über die Kontaktsuche gefunden werden.'>$user_name</span>";
+    if ($username) {
+        echo "<span id='userID' class='tooltip' title='Mit dieser ID kannst du von deinen Freunden <br/> über die Kontaktsuche gefunden werden.'>$username</span>";
+    }
     echo "<br/>";
     echo "<br/>";
     echo "<i class='material-icons color_grey'>format_quote</i>";

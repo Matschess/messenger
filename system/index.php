@@ -127,7 +127,7 @@
 </div>
 </div>
 <div id="popup">
-    <div id="popupHeader"><span id="popupTitle">Kontaktsuche</span></div>
+    <div id="popupHeader"></div>
     <div id="popupContent"></div>
 </div>
 

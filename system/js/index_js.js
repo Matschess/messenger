@@ -45,13 +45,11 @@ $(document).ready(function () {
                 type: 'user_id',
                 message: $user_id
             };
-i
             websocket.send(JSON.stringify(msg));
         });
     }
 
     websocket.onclose = function (ev) { // connection is open
-        /*
         $('#somethingsWrong').fadeIn(200);
         $('#somethingsWrongMessage').addClass('animated zoomIn');
         $('#somethingsWrongMessage').load('subpages/connectionLost.html');
@@ -64,7 +62,6 @@ i
             }
         });
         vague.blur();
-*/
      }
 
     websocket.onmessage = function (ev) {
@@ -394,7 +391,7 @@ i
         $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
     });
     $('#enquiry').click(function () {
-        $('#popupTitle').html("Freundschaftsanfragen");
+        $('#popupHeader').html("Freundschaftsanfragen");
         $('#popupContent').load('subpages/enquiry.php', function () {
             $('#overlay').fadeIn(200);
             $('#popup').fadeIn(200);
@@ -577,7 +574,7 @@ i
 
     //add
     $('#add').click(function () {
-        $('#popupTitle').html("Kontaktsuche");
+        $('#popupHeader').html("Kontaktsuche");
         $('#popupContent').load('subpages/addContact.php', function () {
             $('#overlay').fadeIn(200);
             $('#popup').fadeIn(200);

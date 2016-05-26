@@ -41,7 +41,7 @@ $(document).ready(function(){
 	
 	$('.endFriends').click(function() {
 		$friend_id = this.id;
-		$('#popupTitle').html("Freundschaft beenden?");
+		$('#popupHeader').html("Freundschaft beenden?");
 		$('#popupContent').load('subpages/endFriendsReally.php?friend_id=' + $friend_id, function () {
 			$('#overlay').fadeIn(200);
 			$('#popup').fadeIn(200);

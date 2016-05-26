@@ -16,7 +16,6 @@ $(document).ready(function () {
         $('#containerRight .content .contentLoaderPattern').show();
 
         $chat_id = this.id;
-
         $('#containerRight .content').hide();
         $('#containerRight .content').load('subpages/chat.php?chat_id=' + $chat_id);
         $('#chat').ready(function () {

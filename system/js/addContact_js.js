@@ -23,6 +23,7 @@ $(document).ready(function () {
     });
 
     function search() {
+        $('#foundContact').slideUp(200);
         $friend = $('#contactname').val();
         $.post("php/idToUser.php",
             {
@@ -43,17 +44,10 @@ $(document).ready(function () {
                     }, 100);
                 }
                 else {
-                    if ($('#foundContact').is(':visible')) {
-                        $('#foundContact').slideUp(200);
-                        setTimeout(function () {
-                            $('#foundContact').html(data);
-                            $('#foundContact').slideDown(200);
-                        }, 200);
-                    }
-                    else {
+                    window.setTimeout(function() {
                         $('#foundContact').html(data);
                         $('#foundContact').slideDown(200);
-                    }
+                    }, 200);
                 }
             });
     };

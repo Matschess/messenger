@@ -58,10 +58,28 @@
     if (!$isGroup) {
         $isFriend = mysqli_query($db, "SELECT id FROM contacts WHERE user_id = $user_id && friend_id = $friend_id && accepted");
         if (mysqli_num_rows($isFriend)) {
-            $friendQuery = mysqli_query($db, "SELECT username, portrait, color, last_seen FROM users WHERE id = '$friend_id'");
+            $friendQuery = mysqli_query($db, "SELECT username, firstname, lastname, portrait, color, last_seen FROM users WHERE id = '$friend_id'");
             if (mysqli_num_rows($friendQuery)) {
                 $friendRows = mysqli_fetch_object($friendQuery);
-                $friend_name = $friendRows->username;
+
+                // show full name or username
+                $firstname = $friendRows->firstname;
+                $lastname = $friendRows->lastname;
+                $username = $friendRows->username;
+                $friend_name = '';
+                if ($firstname) {
+                    $friend_name = $firstname;
+                    if ($lastname) {
+                        $friend_name .= " " . $lastname;
+                    }
+                } elseif ($lastname) {
+                    $friend_name .= $lastname;
+
+                } elseif ($username) {
+                    $friend_name = $username;
+                } else {
+                    $friend_name = "?";
+                }
 
                 // Portrait
                 $portrait = $friendRows->portrait;
@@ -97,21 +115,46 @@
             }
         }
     } else {
-        $getGroupMembers = mysqli_query($db, "SELECT users.id, users.firstname, users.lastname FROM users LEFT JOIN groupmembers ON groupmembers.user_id = users.id WHERE groupmembers.chat_id = $chat_id ORDER BY users.firstname, users.lastname LIMIT 6");
+        $getGroupMembers = mysqli_query($db, "SELECT users.id, users.username, users.firstname, users.lastname FROM users LEFT JOIN groupmembers ON groupmembers.user_id = users.id WHERE groupmembers.chat_id = $chat_id ORDER BY users.firstname, users.lastname LIMIT 6");
         if (mysqli_num_rows($getGroupMembers)) {
             $members = [];
             while ($groupMembersRows = mysqli_fetch_object($getGroupMembers)) {
                 $member_id = $groupMembersRows->id;
                 $memberFirstname = $groupMembersRows->firstname;
                 $memberLastname = $groupMembersRows->lastname;
-                $members[] = "<span class='linkToMember' id='linkTo" . $member_id . "'>" . $memberFirstname . " " . $memberLastname . "</span>";
+                // show full name or username
+                $firstname = $groupMembersRows->firstname;
+                $lastname = $groupMembersRows->lastname;
+                $username = $groupMembersRows->username;
+                $member_name = '';
+                if ($firstname) {
+                    $member_name = $firstname;
+                    if ($lastname) {
+                        $member_name .= " " . $lastname;
+                    }
+                } elseif ($lastname) {
+                    $member_name .= $lastname;
+
+                } elseif ($username) {
+                    $member_name = $username;
+                } else {
+                    $member_name = "?";
+                }
+                $members[] = "<span class='linkToMember' id='linkTo" . $member_id . "'>" . $member_name . "</span>";
             }
         }
 
         $groupQuery = mysqli_query($db, "SELECT groupname, portrait, color FROM chats WHERE id = $chat_id");
         if (mysqli_num_rows($groupQuery)) {
             $groupRows = mysqli_fetch_object($groupQuery);
-            $friend_name = $groupRows->groupname;
+
+            // show full name or username
+            $groupname = $groupRows->groupname;
+            if ($groupname) {
+                $friend_name = $groupname;
+            } else {
+                $friend_name = "?";
+            }
 
             // Portrait
             $portrait = $groupRows->portrait;

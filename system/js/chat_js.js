@@ -419,7 +419,7 @@ $(document).ready(function () {
     $('#content').on("click", ".exeHint", function () {
         event.preventDefault(); // to avoid direct download before exe hint message
         window.exeDownload = $(this).attr('href');
-        $('#popupTitle').html("Pass auf!");
+        $('#popupHeader').html("Pass auf!");
 
         $('#popupContent').load('subpages/exeHint.php', function () {
             $('#overlay').fadeIn(200);

@@ -157,7 +157,7 @@ $(document).ready(function () {
     });
 
     $('#myColor').click(function () {
-        $('#popupTitle').html("Farbe auswählen");
+        $('#popupHeader').html("Farbe auswählen");
         $('#popupContent').load('subpages/colorChooser.php', function () {
             $('#overlay').fadeIn(200);
             $('#popup').fadeIn(200);

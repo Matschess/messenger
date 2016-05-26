@@ -37,7 +37,7 @@ $(document).ready(function () {
     $('.thumbnail').dblclick(function () {
         if ($(this).hasClass('exeHint')) {
             window.exeMediaId = this.id;
-            $('#popupTitle').html("Pass auf!");
+            $('#popupHeader').html("Pass auf!");
 
             $('#popupContent').load('subpages/exeHint.php', function () {
                 $('#overlay').fadeIn(200);
@@ -63,7 +63,7 @@ $(document).ready(function () {
     });
 
     $('#deleteAllMedia').click(function () {
-        $('#popupTitle').html("Medienbox leeren?");
+        $('#popupHeader').html("Medienbox leeren?");
 
         window.deleteAllMedia = true;
 
@@ -84,10 +84,10 @@ $(document).ready(function () {
             });
 
             if ($number == 1) {
-                $('#popupTitle').html("Datei löschen?");
+                $('#popupHeader').html("Datei löschen?");
             }
             else {
-                $('#popupTitle').html("Datein löschen?");
+                $('#popupHeader').html("Datein löschen?");
             }
 
             window.deleteAllMedia = false;
@@ -135,7 +135,7 @@ $(document).ready(function () {
         $marked = markedMedia();
         if ($marked.length == 1 && $('#' + $marked[0]).hasClass('exeHint')) {
             window.exeMediaId = $marked[0];
-            $('#popupTitle').html("Pass auf!");
+            $('#popupHeader').html("Pass auf!");
 
             $('#popupContent').load('subpages/exeHint.php', function () {
                 $('#overlay').fadeIn(200);

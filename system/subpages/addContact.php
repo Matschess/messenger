@@ -8,7 +8,7 @@
 			<span class="infoText">Über die Kontaktsuche kannst du neue Kontakte hinzufügen. Gib den Kontaktnamen oder die ID ein:</span>
 			<br/>
 			<br/>
-			<input type="text" id="contactname" class="textbox_flat short color_white"></input>
+			<input type="text" id="contactname" class="textbox_flat short color_white"/>
 			<i id="contactLoupe" class="material-icons hover">search</i>
 			<div id="foundContact"></div>
 		</div>
