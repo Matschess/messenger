@@ -51,7 +51,6 @@
             }
         }
     } elseif (isset($_COOKIE["friend_id"])) {
-        echo $friend_id;
         $friend_id = $_COOKIE["friend_id"];
     }
 
@@ -103,14 +102,14 @@
                 if ($timeDifference <= $maxOnline) {
                     $onlineStatus = "Online";
                 } elseif ($timeDifference <= $secondsToday) { // Seconds everyday
-                    $onlineStatus = "um " . date_format($datetimeUser, 'H:i');
+                    $onlineStatus = "zuletzt online um " . date_format($datetimeUser, 'H:i');
                 } elseif ($timeDifference <= 172800) { // Seconds of two days
-                    $onlineStatus = "gestern " . "um " . date_format($datetimeUser, 'H:i');
+                    $onlineStatus = "zuletzt online gestern " . "um " . date_format($datetimeUser, 'H:i');
                 } elseif ($timeDifference <= 604800) { // Seconds of every week
                     setlocale(LC_TIME, 'German_Austria');
-                    $onlineStatus = "am " . strftime('%A', $datetimeUser->getTimestamp()) . " um " . date_format($datetimeUser, 'H:i');
+                    $onlineStatus = "zuletzt online am " . strftime('%A', $datetimeUser->getTimestamp()) . " um " . date_format($datetimeUser, 'H:i');
                 } else {
-                    $onlineStatus = "am " . date_format($datetimeUser, 'd.m.Y') . " um " . date_format($datetimeUser, 'H:i');
+                    $onlineStatus = "zuletzt online am " . date_format($datetimeUser, 'd.m.Y') . " um " . date_format($datetimeUser, 'H:i');
                 }
             }
         }
@@ -223,7 +222,7 @@
             echo $friend_name;
 
             if ($onlineStatus) {
-                echo "<div id='userstatus'>zuletzt online $onlineStatus</div>";
+                echo "<div id='userstatus'>$onlineStatus</div>";
             } else {
                 echo "<div id='userstatus'>$groupMembers <span id='moreGroupMembersBar' class='moreGroupMembers'>Mehr</span></div>";
             }

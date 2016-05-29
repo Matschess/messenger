@@ -44,14 +44,7 @@ $(document).ready(function () {
             function (data) {
                 if (data == 'changed') {
                     $('#popupContent').load('subpages/enquiry.php')
-                    toContacts();
                 }
             });
     });
-
-    function toContacts() {
-        $user_id = $('#currentUser').val();
-        $('#contacts').load('subpages/contacts.php?user_id=' + $user_id);
-        $('#toContacts').css({'opacity': '0.9'});
-    };
 });

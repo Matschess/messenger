@@ -8,7 +8,7 @@ $job = $_POST["job"];
 
 if ($job == "status") {
     $statustext = $_POST["statustext"];
-    $update = mysqli_query($db, "UPDATE users SET statustext = '$statustext' WHERE id = $user_id");
+    $update = mysqli_query($db, "UPDATE users SET statustext = \"$statustext\" WHERE id = $user_id");
     if ($update) {
         echo "updated";
     } else {

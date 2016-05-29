@@ -110,7 +110,7 @@ if (mysqli_num_rows($contactsQuery)) {
             else  $last_message = $message . " <span class='contactLastMessageSent'>$sent</span>";
         }
 
-        echo "<div id='$chat_id' class='contact ripple'>";
+        echo "<div id='$chat_id' class='contact friendHasChat ripple'>";
         echo "<img src='../data/$portrait' id='$friend_id' class='img_round img_margin_right toProfile'/>";
         echo "<div class='contactInfo'>";
         echo $friend_name;
@@ -126,7 +126,19 @@ if (mysqli_num_rows($contactsQuery)) {
         echo "</div>";
     }
 } else {
-    echo "<div id='addFirstFriend'><i class='material-icons'>chat_bubble_outline</i> Beginne mit deiner ersten Konversation</div>";
+$hasContactsQuery = mysqli_query($db, "SELECT id FROM contacts WHERE user_id = $user_id");
+if (mysqli_num_rows($hasContactsQuery)) {
+    echo "<div id='toContacts' class='containerLeftActionButton ripple'>";
+    echo "<i class='material-icons'>chat_bubble_outline</i>";
+    echo "<span>Beginne mit einem Chat</span>";
+    echo "</div>";
+}
+    else {
+        echo "<div id='toAddContact' class='containerLeftActionButton ripple'>";
+        echo "<i class='material-icons'>people</i>";
+        echo "<span>Füge deinen ersten Freund hinzu</span>";
+        echo "</div>";
+    }
 }
 ?>
 </BODY>

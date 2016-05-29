@@ -85,7 +85,14 @@ if (mysqli_num_rows($contactsQuery)) {
             $onlineStatus = date_format($datetimeUser, 'd.m.Y') . " " . date_format($datetimeUser, 'H:i');
         }
 
-        echo "<div id='$friend_id' class='contact ripple'>";
+        // if already chat started with friend
+        $hasChatQuery = mysqli_query($db, "SELECT id FROM chats WHERE (user_left_id = $friend_id && user_right_id = $user_id) || (user_left_id = $user_id && user_right_id = $friend_id)");
+        if ($hatChatRow = mysqli_fetch_object($hasChatQuery)) {
+            $chat_id = $hatChatRow->id;
+            echo "<div id='$chat_id' class='contact friendHasChat ripple'>";
+        } else {
+            echo "<div id='$friend_id' class='contact ripple'>";
+        }
         echo "<img src='../data/portraits/$portrait' id='$friend_id' class='img_round img_margin_right toProfile'></img>";
         echo "<div class='contactInfo'>";
         echo $friend_name;
@@ -96,7 +103,12 @@ if (mysqli_num_rows($contactsQuery)) {
     }
 } else {
     if ($searchTag) echo "<div id='addFirstFriend'><i class='material-icons'>do_not_disturb</i> Keinen Freund gefunden</div>";
-    else echo "<div id='addFirstFriend'><i class='material-icons'>people</i> Füge deine ersten Freunde hinzu</div>";
+    else {
+        echo "<div id='toAddContact' class='containerLeftActionButton ripple'>";
+        echo "<i class='material-icons'>people</i>";
+        echo "<span>Füge deinen ersten Freund hinzu</span>";
+        echo "</div>";
+    }
 }
 ?>
 </BODY>

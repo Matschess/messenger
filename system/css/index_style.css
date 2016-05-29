@@ -729,3 +729,25 @@ color: #fff;
 }
 
 /* Emoji ENDE */
+
+.containerLeftActionButton{
+    position: relative;
+    font-size: 16px;
+    text-align: left;
+    color: #333;
+    width: 96%;
+    padding: 10px 2% 10px 2%;
+}
+
+.containerLeftActionButton:hover{
+    background-color: #D8D8D8;
+}
+
+.containerLeftActionButton i{
+    padding-left: 10px;
+}
+
+.containerLeftActionButton span{
+    margin-left: 10px;
+    vertical-align: middle;
+}

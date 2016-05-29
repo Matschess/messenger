@@ -19,7 +19,6 @@ $(document).ready(function(){
 			function(data){
 				if(data == 'updated' || data == 'added') {
 					$('.content').load('subpages/friendsProfile.php?user_id=' + $user_id + '&friend_id=' + $friend_id);
-					toContacts();
 				}
 			});
 	});
@@ -34,7 +33,6 @@ $(document).ready(function(){
 			function(data){
 				if(data == 'changed') {
 					$('.content').load('subpages/friendsProfile.php?friend_id=' + $friend_id);
-					toContacts();
 				}
 			});
 	});
@@ -62,14 +60,7 @@ $(document).ready(function(){
 					$('.content').load('subpages/friendsProfile.php?user_id=' + $user_id + '&friend_id=' + $friend_id);
 					$('#overlay').fadeOut(200);
 					$('#popup').fadeOut(200);
-					toContacts();
 				}
 			});
 	});
-	
-	function toContacts() {
-		$user_id = $('#currentUser').val();
-		$('#contacts').load('subpages/contacts.php?user_id=' + $user_id);
-		$('#toContacts').css({'opacity': '0.9'});
-	};
 });

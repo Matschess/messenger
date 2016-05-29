@@ -12,7 +12,23 @@
 
     include("db_connect.php");
 
-    $friend_id = $_GET["friend_id"];
+    if ($_COOKIE["chat_id"]) {
+        $chat_id = $_COOKIE["chat_id"];
+        $result = mysqli_query($db, "SELECT user_left_id, user_right_id FROM chats WHERE id = $chat_id");
+        if($row = mysqli_fetch_object($result)) {
+            $user_left_id = $row->user_left_id;
+            $user_right_id = $row->user_right_id;
+            if($user_left_id == $user_id) {
+                $friend_id = $user_right_id;
+            }
+            else {
+                $friend_id = $user_left_id;
+            }
+        }
+    }
+    else {
+        $friend_id = $_COOKIE["friend_id"];
+    }
     $result = mysqli_query($db, "SELECT id, username, firstname, lastname, portrait, statustext, isPublic FROM users WHERE id = '$friend_id'");
     $row = mysqli_fetch_object($result);
     if ($row->isPublic) {

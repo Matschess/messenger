@@ -36,7 +36,7 @@ while (true) {
         unset($changed[$found_socket]);
     }
     //loop through all connected sockets
-    foreach ($changed as $changed_socket) {
+    foreach ($changed as $key => $changed_socket) {
         //check for any incomming data
         while (socket_recv($changed_socket, $buf, 1024, 0) >= 1) {
             $received_text = unmask($buf); //unmask data
@@ -47,13 +47,35 @@ while (true) {
                     $found_socket = array_search($changed_socket, $clients);
                     $userHasClients[$user_id][] = $found_socket;
                     $clientIsUser[$found_socket] = $user_id;
+                    // I'm online
+                    $insert = mysqli_query($db, "UPDATE users SET last_seen = now() WHERE id = $user_id");
                     print_r($clientIsUser);
                 } elseif ($tst_msg->type === "message") {
-                    $chat_id = $tst_msg->chat_id;
+                    $subtype = '';
+                    $chat_id = '';
+                    $friend_id = '';
+                    $subtype = $tst_msg->subtype;
+                    if ($subtype == 'chat') {
+                        $chat_id = $tst_msg->chat_id;
+                        echo "chat";
+                    } elseif($subtype == 'friend') {
+                        $friend_id = $tst_msg->friend_id;
+                        echo "friend";
+                    }
                     $message = $tst_msg->message;
                     $message = trim(str_replace('&nbsp;', '', $message)); // first prepare &nbsp;'s, than trim
                     $socketPosition = array_search($changed_socket, $clients);
                     $user_id = $clientIsUser[$socketPosition];
+                    if ($friend_id) {
+                        mysqli_query($db, "INSERT INTO chats (user_left_id, user_right_id) VALUES ($user_id, $friend_id)");
+                        $chat_id = mysqli_insert_id($db);
+                        if (isset($userHasClients[$user_id])) {
+                            foreach ($userHasClients[$user_id] as $client) {
+                                $response = mask(json_encode(array('type' => 'updateCookies', 'chat_id' => $chat_id, 'friend_id' => $friend_id))); //prepare json data
+                                send($clients[$client], $response);
+                            }
+                        }
+                    }
                     $result = mysqli_query($db, "SELECT groupname, user_left_id, user_right_id FROM chats WHERE id = $chat_id");
                     $row = mysqli_fetch_object($result);
                     if ($row) {
@@ -228,6 +250,9 @@ while (true) {
                         }
                     }
                 }
+            }
+            if ($user_id = $clientIsUser[$key]) {
+                $insert = mysqli_query($db, "UPDATE users SET last_seen = now() WHERE id = $user_id");
             }
             break 2;
             /*

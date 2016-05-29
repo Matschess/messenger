@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    onlineStatusRevert();
+
     // on is required for new videos
     // play video and audio
     $('#content').on('mouseover', '.mediaVideo, .mediaAudio', function () {
@@ -46,16 +48,20 @@ $(document).ready(function () {
         }
         $(this).children('.videoControls').addClass('animated zoomIn');
     });
-    var $chat_id = $.cookie('chat_id');
+
+    var $chat_id, $friend_id;
+    reloadCookies();
 
     // Send read
-    var msg = {
-        type: 'read',
-        chat_id: $chat_id
-    };
+    if ($chat_id) {
+        var msg = {
+            type: 'read',
+            chat_id: $chat_id
+        };
 
-    //convert and send data to server
-    websocket.send(JSON.stringify(msg));
+        //convert and send data to server
+        websocket.send(JSON.stringify(msg));
+    }
 
     // Remove message bubble in currentChats
 
@@ -68,22 +74,48 @@ $(document).ready(function () {
 
     $(document).keypress(function (e) {
         if (e.keyCode == 13) { // Char-code for enter
-            send();
             event.preventDefault();
+            send();
             return false;
         }
     });
 
+
+    function onlineStatusRevert() {
+        if ($('#userstatus').html() == 'Online') {
+            $currentTime = new Date();
+            $hours = ("0" + $currentTime.getHours()).slice(-2);
+            $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
+            window.setTimeout(function () {
+                $('#userstatus').slideUp(200);
+                window.setTimeout(function () {
+                    $('#userstatus').html('Zuletzt online um ' + $hours + ":" + $minutes);
+                    $('#userstatus').slideDown(400);
+                }, 200)
+            }, 10000)
+        }
+    }
+
+    var $timeLocked = false;
     $('.chatTextBox').keypress(function (e) {
         // Send typing
 
-        var msg = {
-            type: 'typing',
-            chat_id: $chat_id
-        };
+        if (e.keyCode != 13 != $timeLocked) { // Char-code for enter
+            $timeLocked = true;
+            if ($chat_id) {
+                var msg = {
+                    type: 'typing',
+                    chat_id: $chat_id
+                };
 
-        //convert and send data to server
-        websocket.send(JSON.stringify(msg));
+                //convert and send data to server
+                websocket.send(JSON.stringify(msg));
+
+                window.setTimeout(function () {
+                    $timeLocked = false;
+                }, 2000); // to avoid a flood of "I'm typing" to the server
+            }
+        }
     });
 
     $('#send').click(function () {
@@ -91,17 +123,34 @@ $(document).ready(function () {
     });
 
     function send() {
-        $chat_id = $.cookie('chat_id');
-        if ($chat_id) {
+        if ($chat_id || $friend_id) {
             $message = $('.chatTextBox').html().replace(/&nbsp;/g, ''); // replace &nbsp;'s
             $.trim($message);
 
             if ($message) {
-                var msg = {
-                    type: 'message',
-                    chat_id: $chat_id,
-                    message: $message
-                };
+                $friend_id, $chat_id = '';
+                if ($.cookie('chat_id')) {
+                    $chat_id = $.cookie('chat_id');
+                }
+                else {
+                    $friend_id = $.cookie('friend_id');
+                }
+                if ($chat_id) {
+                    var msg = {
+                        type: 'message',
+                        subtype: 'chat',
+                        chat_id: $chat_id,
+                        message: $message
+                    };
+                }
+                else {
+                    var msg = {
+                        type: 'message',
+                        subtype: 'friend',
+                        friend_id: $friend_id,
+                        message: $message
+                    };
+                }
 
                 //convert and send data to server
                 websocket.send(JSON.stringify(msg));
@@ -182,11 +231,6 @@ $(document).ready(function () {
         }
     }
 
-    $('.linkToMember').click(function () {
-        $friend_id = this.id.substr(6);
-        $('.content').load('subpages/friendsProfile.php?friend_id=' + $friend_id);
-    });
-
     $('.moreGroupMembers').click(function () {
         $('.content').load('subpages/groupSettings.php');
     });
@@ -202,10 +246,10 @@ $(document).ready(function () {
 
     $('.toProfile').click(function () {
         $user_id = $('#currentUser').val();
-        $friend_id = this.id;
+        $toFriend_id = this.id;
         $('#overlay').fadeOut(200);
         $('#popup').fadeOut(200);
-        $('.content').load('subpages/friendsProfile.php?user_id=' + $user_id + '&friend_id=' + $friend_id);
+        $('.content').load('subpages/friendsProfile.php?user_id=' + $user_id + '&friend_id=' + $toFriend_id);
     });
 
     $('#smiley').click(function () {
@@ -320,11 +364,20 @@ $(document).ready(function () {
                     $mediaType = data.substr(data.lastIndexOf('.') + 1);
 
                     //insert media
-                    var msg = {
-                        type: 'media',
-                        chat_id: $chat_id,
-                        media: $media
-                    };
+                    if ($chat_id) {
+                        var msg = {
+                            type: 'media',
+                            chat_id: $chat_id,
+                            media: $media
+                        };
+                    }
+                    else {
+                        var msg = {
+                            type: 'media',
+                            friend_id: $friend_id,
+                            media: $media
+                        };
+                    }
 
                     //convert and send data to server
                     websocket.send(JSON.stringify(msg));
@@ -440,6 +493,15 @@ $(document).ready(function () {
         theme: 'tooltipster-custom',
         trigger: 'hover'
     });
+
+    function reloadCookies() {
+        if ($.cookie('chat_id')) {
+            $chat_id = $.cookie('chat_id');
+        }
+        else {
+            $friend_id = $.cookie('friend_id');
+        }
+    }
 
     adjustColors();
     // Scroll to bottom

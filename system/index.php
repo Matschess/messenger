@@ -70,7 +70,7 @@
                 echo "<div id='enquiries' style='display: none'></div>";
             }
             ?>
-            <i class="material-icons tooltip" title="Freundschaftsanfragen">people</i>
+            <i class="material-icons tooltip" title="Freundschaftsanfragen">mail_outline</i>
         </div>
         <div id="add" class="meOption">
             <i class="material-icons tooltip" title="Freund hinzufügen">add</i>

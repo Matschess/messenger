@@ -15,9 +15,15 @@ $(document).ready(function () {
         // Auto activate loading effects
         $('#containerRight .content .contentLoaderPattern').show();
 
-        $chat_id = this.id;
+        if ($(this).hasClass('friendHasChat')) {
+            $chatParams = 'chat_id=' + this.id;
+        }
+        else {
+            $chatParams = 'friend_id=' + this.id;
+        }
+
         $('#containerRight .content').hide();
-        $('#containerRight .content').load('subpages/chat.php?chat_id=' + $chat_id);
+        $('#containerRight .content').load('subpages/chat.php?' + $chatParams);
         $('#chat').ready(function () {
             $('#containerRight .content').show();
             clearTabsRight();

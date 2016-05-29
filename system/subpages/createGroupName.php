@@ -36,7 +36,7 @@
 		
 	</div>
 	<div id="popupFooter">
-		<input type="button" class="popupButton groupCancel" value="Abbrechen"/>
+		<input type="button" class="popupButton popupClose" value="Abbrechen"/>
 		<input type="button" class="popupButton groupNameDone" value="Weiter"/>
 	</div>
 </BODY>

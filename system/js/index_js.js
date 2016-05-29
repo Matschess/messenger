@@ -22,18 +22,18 @@ $(document).ready(function () {
     });
 
     // Notloesung auf zeit !!!!!!!!!!!!!!!!
-    window.setTimeout(function() {
+    window.setTimeout(function () {
         $mePositionX = $('#me').position().left;
         $('#meOptions').offset({left: $mePositionX});
     }, 1000);
 
 
     // Connect to websocket
-    var wsUri = "ws://localhost:1414/websocket/server.php";
+    var wsUri = "ws://10.0.0.17:1414/websocket/server.php";
     websocket = new WebSocket(wsUri);
 
     // refresh on error
-    $('#somethingsWrong').click(function() {
+    $('#somethingsWrong').click(function () {
         location.reload();
     });
 
@@ -62,7 +62,7 @@ $(document).ready(function () {
             }
         });
         vague.blur();
-     }
+    }
 
     websocket.onmessage = function (ev) {
         var fullMsg = JSON.parse(ev.data); //PHP sends Json data
@@ -89,7 +89,14 @@ $(document).ready(function () {
                     $('#enquiries').html($requests).show();
                 }
                 break;
+            case 'updateCookies':
+                $friend_id = fullMsg.friend_id;
+                $chat_id = fullMsg.chat_id;
+                $.get('php/setCookies.php?friend_id=' + $friend_id + '&chat_id=' + $chat_id)
+                reloadCurrentChats();
+                break;
             case 'message':
+                onlineStatus();
                 var $chat_id = fullMsg.chat_id; // id of chat with new message
                 $('#chatSound').get(0).play();
 
@@ -139,13 +146,13 @@ $(document).ready(function () {
                     $content.scrollTop($content.prop("scrollHeight"));
 
                     // Send read
-                    var msg = {
+                    var sendMsg = {
                         type: 'read',
                         chat_id: $chat_id
                     };
 
                     //convert and send data to server
-                    websocket.send(JSON.stringify(msg));
+                    websocket.send(JSON.stringify(sendMsg));
                 }
                 else {
                     $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html();
@@ -187,6 +194,7 @@ $(document).ready(function () {
                 $('#' + $chat_id + ' .contactInfo .contactLastMessage').html(msg + " <span class='contactLastMessageSent'>" + $hours + ":" + $minutes + "</span>");
                 break;
             case 'media':
+                onlineStatus();
                 var $chat_id = fullMsg.chat_id; // id of chat with new message
                 var $media = fullMsg.media; //message text
                 $mediaType = $media.substr($media.lastIndexOf('.') + 1);
@@ -218,10 +226,33 @@ $(document).ready(function () {
                     else if ($mediaType == 'mp3') {
                         $mediaOutput = "<div class='mediaAudio'><div class='audioControls'><div class='audioPlayButton'><i class='material-icons'>play_arrow</i></div></div><audio><source src='" + $media + "' type='audio/mp3'>Your browser does not support the video tag.</audio></div>";
                     }
+                    else if ($mediaType == 'docx') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/word_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'xlsx') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/excel_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'pptx') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/powerpoint_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'pdf') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/pdf_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'zip') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/zip_thn.png'/></a>";
+                    }
+                    else if ($mediaType == 'exe') {
+                        $media_id = $media.substr(0, $media.lastIndexOf('.'));
+                        $mediaOutput = "<a class='exeHint' href='php/download_media.php?media_id=" + $media_id + "'><img class='mediaDocumentThn' src='img/application_thn.png'/></a>";
+                    }
                     else {
                         $mediaOutput = "<img src='" + $media + "'/>";
                     }
-
 
                     if ($member_name) { // checks if incoming is groupmessage
                         if (!$member_portrait) {
@@ -297,6 +328,7 @@ $(document).ready(function () {
                 $('#' + $chat_id + ' .contactInfo .contactLastMessage').html("<i class='material-icons-tiny doneAll'>attachment</i> Datei <span class='contactLastMessageSent'>" + $hours + ":" + $minutes + "</span>");
                 break;
             case 'read':
+                onlineStatus();
                 var $chat_id = fullMsg.chat_id; // id of chat with new message
 
                 $currentChat = $.cookie('chat_id');
@@ -314,13 +346,57 @@ $(document).ready(function () {
 
                 // If chat window opened
                 if ($currentChat && $('.content #chat').length && $chat_id == $currentChat) {
-                    $('#typing').html('tippt gerade...');
-                    $('#userstatus').hide();
-                    $('#typing').show();
+                    typingStatus();
                 }
                 break;
         }
     };
+
+    var $onlineStatusChanges = 0;
+
+    function onlineStatus() {
+        if ($('#userstatus').html() != 'Online') {
+            $('#userstatus').slideUp(200);
+            window.setTimeout(function () {
+                $('#userstatus').html('Online');
+                $('#userstatus').slideDown(400);
+            }, 200)
+            $onlineStatusChanges++;
+
+            $currentTime = new Date();
+            $hours = ("0" + $currentTime.getHours()).slice(-2);
+            $minutes = ("0" + $currentTime.getMinutes()).slice(-2);
+            window.setTimeout(function () {
+                if ($onlineStatusChanges == 1) {
+                    $('#userstatus').slideUp(200);
+                    window.setTimeout(function () {
+                        $('#userstatus').html('Zuletzt online um ' + $hours + ":" + $minutes);
+                        $('#userstatus').slideDown(400);
+                    }, 200)
+                }
+                $onlineStatusChanges--;
+            }, 10000)
+        }
+    }
+
+    var $typingStatusChanges = 0;
+
+    function typingStatus() {
+        $typingStatusChanges++;
+        if ($('#userstatus').html() != 'tippt gerade...') {
+            $('#userstatus').slideUp(200);
+            window.setTimeout(function () {
+                $('#userstatus').html('tippt gerade...');
+                $('#userstatus').slideDown(400);
+            }, 200)
+        }
+        window.setTimeout(function () {
+            if ($typingStatusChanges == 1) {
+                onlineStatus();
+            }
+            $typingStatusChanges--;
+        }, 3000)
+    }
 
     history.pushState(null, null, location.href);
     window.onpopstate = function (event) {
@@ -374,9 +450,8 @@ $(document).ready(function () {
 
         $user_id = $('#currentUser').val();
         $('#containerLeft #contacts').hide();
-        $('#containerLeft #contacts').load('subpages/contacts.php?user_id=' + $user_id + '&searchTag=' + $searchTag);
-        $('#containerLeft #contacts').ready(function () {
-            $('#containerLeft #contacts').show();
+        $('#containerLeft #contacts').load('subpages/contacts.php?user_id=' + $user_id + '&searchTag=' + $searchTag, function () {
+            $('#containerLeft #contacts').show().addClass('animated fadeInUp');
         });
     };
 
@@ -427,7 +502,7 @@ $(document).ready(function () {
         }, 500);
     };
 
-    $('#toContacts').click(function () {
+    $('#containerLeft').on('click', '#toContacts', function () {
         clearTabsLeft();
         $('#toContacts').addClass('navigationActive');
 
@@ -488,6 +563,26 @@ $(document).ready(function () {
                 $('#containerRight .content').show();
                 clearTabsRight();
                 $('#toMedia').addClass('navigationActive');
+            });
+        }, 500);
+    });
+    $('#toProfile').click(function () {
+        // Prepare loading effect
+        $('#containerRight .content').html('');
+        $('.contentLoaderPattern').clone().appendTo($('#containerRight .content'));
+
+        // Auto activate loading effects
+        window.setTimeout(function () {
+            $('#containerRight .content .contentLoaderPattern').show();
+        }, 100);
+
+        window.setTimeout(function () {
+            $('#containerRight .content').hide();
+            $('#containerRight .content').load('subpages/friendsProfile.php');
+            $('#containerRight .content').ready(function () {
+                $('#containerRight .content').show();
+                clearTabsRight();
+                $('#toProfile').addClass('navigationActive');
             });
         }, 500);
     });
@@ -574,12 +669,20 @@ $(document).ready(function () {
 
     //add
     $('#add').click(function () {
+        toAddContact();
+    });
+
+    $('#containerLeft').on('click', '#toAddContact', function () {
+        toAddContact();
+    });
+
+    function toAddContact() {
         $('#popupHeader').html("Kontaktsuche");
         $('#popupContent').load('subpages/addContact.php', function () {
             $('#overlay').fadeIn(200);
             $('#popup').fadeIn(200);
         });
-    });
+    }
 
     $('#popupClose').click(function () {
         $('#overlay').fadeOut(200);
@@ -629,4 +732,27 @@ $(document).ready(function () {
             }, 2000);
         });
     });
+
+    function reloadCurrentChats() {
+        clearTabsLeft();
+        $('#toChats').addClass('navigationActive');
+
+        // Prepare loading effect
+        $('#containerLeft #contacts').html('');
+        $('.contentLoaderPattern').clone().appendTo($('#containerLeft #contacts'));
+
+        // Auto activate loading effects
+        window.setTimeout(function () {
+            $('#containerLeft #contacts .contentLoaderPattern').show();
+        }, 100);
+
+        window.setTimeout(function () {
+            $user_id = $('#currentUser').val();
+            $('#containerLeft #contacts').hide();
+            $('#containerLeft #contacts').load('subpages/currentChats.php?user_id=' + $user_id);
+            $('#chat').ready(function () {
+                $('#containerLeft #contacts').show();
+            });
+        }, 500);
+    };
 });

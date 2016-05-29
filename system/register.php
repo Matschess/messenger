@@ -24,7 +24,7 @@
 		</div>
 		<div id="loginboxContent">
 			<div id="loginboxContentMargin">
-				<p>Zum Registrieren bitte alle Felder ausfüllen.</p>
+				<p>Registrieren und los starten!</p>
 				<br/>
 				<input id="email" class="loginTextbox" type="text" title="Email">
 					<i id="iconEmail" class="material-icons-animated margin-left">email</i>

@@ -68,8 +68,6 @@ if ($job == "validateGroupName") {
         echo "error";
     }
 } elseif ($job == "cancelGroup") {
-
-
     // get chat_id from SESSION
     session_start();
     if (isset($_SESSION["newGroupChatId"])) {

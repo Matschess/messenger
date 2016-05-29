@@ -8,7 +8,7 @@ $username = mysqli_real_escape_string($db, htmlspecialchars(trim($_POST["usernam
 $password = mysqli_real_escape_string($db, htmlspecialchars($_POST["password"]));
 
 include("user_exists.php");
-if (emailExistsCheck($email) == "available" && $firstname && $lastname && usernameExistsCheck($username) == "available" && passwordCheck($password)) {
+if (emailExistsCheck($email) == "available" && usernameExistsCheck($username) == "available" && passwordCheck($password)) {
     $password_hashed = "pw" . substr(md5($password), 2);
     $insert = mysqli_query($db, "INSERT INTO users (email, username, firstname, lastname, password) VALUES ('$email', '$username', '$firstname', '$lastname', '$password_hashed')");
     if ($insert) {
