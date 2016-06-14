@@ -2,10 +2,12 @@
 <HTML lang="de">
 <HEAD>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"">
     <link rel="stylesheet" href="css/index_style.css">
-    <link rel="stylesheet" href="css/popup.css">
     <link rel="stylesheet" href="css/chat_style.css">
     <link rel="stylesheet" href="css/profile_style.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" type="text/css" href="css/index_mobile.css" media="screen and (max-width: 600px)" />
     <link rel="stylesheet" href="css/special/ripple_effect_style.css">
     <link rel="stylesheet" href="css/special/loading_style.css">
     <link rel="stylesheet" type="text/css" href="plugins/tooltipster/css/tooltipster.css"/>

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <HTML lang="de" spellcheck="false">
 <HEAD>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Messenger</title>
     <meta name="theme-color" content="#22303f"/>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/login_style.css">
-    <link rel="stylesheet" type="text/css"
-          media="only screen and (max-width: 480px), only screen and (max-device-width: 480px)"
-          href="login_mobile.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login_mobile.css" media="screen and (max-width: 600px)" />
     <link rel="stylesheet" href="css/popup.css">
     <!-- Extern Stylesheets -->
     <link rel="stylesheet" type="text/css" href="plugins/tooltipster/css/tooltipster.css"/>
@@ -22,7 +21,7 @@
     <!-- Latest jQuery -->
     <script type="text/javascript" src="js/login_js.js"></script>
     <script type="text/javascript" src="plugins/tooltipster/js/jquery.tooltipster.min.js"></script>
-
+    <script src="plugins/jqueryCookies/jquery.cookie.js"></script>
 </HEAD>
 <BODY>
 <div id="overlay"></div>
@@ -37,11 +36,11 @@ if (isset($_COOKIE['messenger'])) {
     <div id="loginboxHeader">Messenger</div>
     <div id="loginboxContent">
         <div id="loginboxContentMargin">
-            <input id="username" class="loginTextbox" type="text" title="Benutzername"/>
+            <input id="username" class="loginTextbox" type="text" placeholder="Benutername" title="Benutzername"/>
             <i id="iconUsername" class="material-icons-animated margin-left">face</i>
             <br/>
             <br/>
-            <input id="password" class="loginTextbox" type="password" title="Passwort"/>
+            <input id="password" class="loginTextbox" type="password" placeholder="Passwort" title="Passwort"/>
             <i id="iconPassword" class="material-icons-animated margin-left">lock_outline</i>
             <br/>
             <br/>
@@ -86,15 +85,3 @@ if (isset($_COOKIE['messenger'])) {
 </div>
 </BODY>
 </HTML>
-
-<script>
-    $(document).ready(function () {
-        $('.tooltip').tooltipster({
-            contentAsHTML: true,
-            animation: 'grow',
-            delay: 250,
-            theme: 'tooltipster-custom',
-            trigger: 'hover'
-        });
-    });
-</script>

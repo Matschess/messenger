@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Mute or unmute the chat
-    if ($.cookie('messengerMute') == 'false') {
+    if (!$.cookie('messengerMute') || $.cookie('messengerMute') == 'false') {
         $('#notifications i').html('volume_up');
     }
     else {
@@ -9,7 +9,7 @@ $(document).ready(function () {
     }
 
     $('#notifications').click(function () {
-        if ($.cookie('messengerMute') == 'false') {
+        if (!$.cookie('messengerMute') || $.cookie('messengerMute') == 'false') {
             $.cookie('messengerMute', 'true');
             $('#notifications i').html('volume_off');
             $('*').prop('volume', 0);
@@ -50,18 +50,20 @@ $(document).ready(function () {
     }
 
     websocket.onclose = function (ev) { // connection is open
-        $('#somethingsWrong').fadeIn(200);
-        $('#somethingsWrongMessage').addClass('animated zoomIn');
-        $('#somethingsWrongMessage').load('subpages/connectionLost.html');
-        var vague = $('#blur').Vague({
-            intensity: 4,      // Blur Intensity
-            forceSVGUrl: false,   // Force absolute path to the SVG filter,
-            animationOptions: {
-                duration: 200,
-                easing: 'linear' // here you can use also custom jQuery easing functions
-            }
-        });
-        vague.blur();
+        /*
+         $('#somethingsWrong').fadeIn(200);
+         $('#somethingsWrongMessage').addClass('animated zoomIn');
+         $('#somethingsWrongMessage').load('subpages/connectionLost.html');
+         var vague = $('#blur').Vague({
+         intensity: 4,      // Blur Intensity
+         forceSVGUrl: false,   // Force absolute path to the SVG filter,
+         animationOptions: {
+         duration: 200,
+         easing: 'linear' // here you can use also custom jQuery easing functions
+         }
+         });
+         vague.blur();
+         */
     }
 
     websocket.onmessage = function (ev) {
@@ -187,6 +189,7 @@ $(document).ready(function () {
                         $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
                         $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomOut');
                     }
+                    vibrate();
                 }
                 if (msg.length > 33) {
                     msg = msg.substr(0, 30) + "..."; // cut to long message
@@ -407,19 +410,22 @@ $(document).ready(function () {
         window.setTimeout(function () {
             // Place vertical middle
             $totalWidth = $(document).width();
-            $totalHeight = $(document).height();
-            $containerHeight = $('#container').height();
+            if ($totalWidth > 600) {
+                $totalHeight = $(document).height();
+                $containerHeight = $('#container').height();
 
-            $marginTop = ($totalHeight - $containerHeight) / 2;
-            $marginTopPercent = 100 * $marginTop / $totalWidth;
+                $marginTop = ($totalHeight - $containerHeight) / 2;
+                $marginTopPercent = 100 * $marginTop / $totalWidth;
 
-            $('#container').css('margin-top', $marginTopPercent + '%').ready(function () {
-                $('body').css('overflow', 'hidden');
-                $('.bodyBefore').addClass('bodyVisible');
-                window.setTimeout(function () {
-                    $('body').css('overflow', 'auto');
-                }, 600);
-            });
+                $('#container').css('margin-top', $marginTopPercent + '%').ready(function () {
+                    $('body').css('overflow', 'hidden');
+
+                    window.setTimeout(function () {
+                        $('body').css('overflow', 'auto');
+                    }, 600);
+                });
+            }
+            $('.bodyBefore').addClass('bodyVisible');
         }, 100);
     });
 
@@ -459,6 +465,7 @@ $(document).ready(function () {
         $('#logout, #notifications, #enquiry, #add, #profileSettings').fadeToggle(200);
     });
     $('#logout').click(function () {
+        $.cookie('cookieLoggedIn', '');
         window.location = 'logout.php';
     });
 
@@ -755,4 +762,33 @@ $(document).ready(function () {
             });
         }, 500);
     };
+
+    // Mobile variant
+    $('#containerLeft').on('click', '.contact', function () {
+        $totalWidth = $(document).width();
+        if ($totalWidth <= 600) {
+
+            $('#containerLeft').hide();
+            $('#containerRight').show();
+        }
+    })
+
+    $('#containerRight').on('click', '.back', function () {
+        if (this.id == 'backToOverview') {
+            $('#containerRight').hide();
+            $('#containerLeft').show();
+        }
+        else if (this.id == 'backToChat') {
+            $('#containerRight .content').load('subpages/chat.php');
+        }
+    })
+
+    function vibrate() {
+        try {
+            navigator.vibrate([300, 100, 300]);
+        }
+        catch (err) {
+        }
+
+    }
 });

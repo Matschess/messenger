@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <HTML lang="de">
 <HEAD>
-    <link rel="stylesheet" href="css/profile_style.css">
     <script src="js/friendsProfile_js.js"></script>
 </HEAD>
 <BODY>
@@ -11,6 +10,8 @@
     include($toRoot . "variables/user_id.php");
 
     include("db_connect.php");
+
+    echo "<i id='backToChat' class='material-icons hover back'>arrow_back</i>";
 
     if ($_COOKIE["chat_id"]) {
         $chat_id = $_COOKIE["chat_id"];

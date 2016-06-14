@@ -47,6 +47,7 @@
     $color = $profileDataRows->color;
     $isPublic = $profileDataRows->isPublic;
 
+    echo "<i id='backToChat' class='material-icons hover back'>arrow_back</i>";
     echo "<div id='portrait'>";
     echo "<div class='loader portraitLoader'>";
     echo "<svg class='circular' viewBox='25 25 50 50'>";

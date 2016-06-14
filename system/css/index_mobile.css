@@ -1,0 +1,83 @@
+#container {
+    width: 100%;
+}
+
+#containerLeft {
+    width: 100%;
+}
+
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#containerRight {
+    display: none;
+    clear: left;
+    width: 100%;
+}
+
+#blur, .bodyBefore, #container, .content, #chat {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#containerLeft, #containerRight, .content {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+.button {
+    position: relative;
+}
+
+#containerRight .tableNavigation {
+    display: none;
+}
+
+.bubble img, .bubbleManuallyLeft img, .bubbleManuallyRight img, .bubble video, .bubbleManuallyLeft video, .bubbleManuallyRight video {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.messageText img {
+    width: 25px;
+    height: 25px;
+}
+
+#popup {
+    width: auto;
+    margin: 0;
+    left: 8%;
+    right: 8%;
+}
+
+#back {
+    display: inline;
+}
+
+#chatToMedia {
+    visibility: visible;
+}
+
+.chatTextBox {
+    width: 60%;
+}
+
+.bodyBefore {
+    opacity: 1;
+    transform: none;
+}
+
+#content {
+    height: calc(100% - 40px - 19px - 44px - 12px - 13px);
+}
+
+#chatInput {
+    bottom: 0px;
+}
+

@@ -215,6 +215,7 @@
         } else {
             $link = "toProfile";
         }
+        echo "<i id='backToOverview' class='material-icons hover back'>arrow_back</i>";
         echo "<span id='$friend_id' class='$link'><img src='../data/$portrait' id='imgForBackground' class='img_round_flat' style='margin-right: 10px;'/></span>";
         ?>
         <div id="userInfo">
@@ -233,11 +234,11 @@
             <div id="optionsIcon">
                 <i class="material-icons hover" style="margin-right: 10px">more_vert</i>
             </div>
+            <div id="chatToMedia" class="option">
+                Medien
+            </div>
             <div id="deleteChat" class="option">
                 Chatverlauf löschen
-            </div>
-            <div id="endFriends" class="option">
-                In Gruppe konvertieren
             </div>
         </div>
     </div>

@@ -69,7 +69,7 @@
     border-radius: 2px 2px 0px 0px;
 }
 
-#endFriends, #downloadAllMedia {
+#chatToMedia, #downloadAllMedia {
     margin-top: 8px;
     border-radius: 0px 0px 2px 2px;
 }
@@ -112,8 +112,8 @@
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
-    background: #fff;
+    width: 5px;
+    background: rgba(0,0,0,0);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -162,6 +162,11 @@
     width: 300px;
     border-radius: 3px 3px 0 0;
     display: block; /* to line break */
+}
+
+.messageText img {
+    width: 25px;
+    height: 25px;
 }
 
 .bubble video, .bubbleManuallyLeft video, .bubbleManuallyRight video {

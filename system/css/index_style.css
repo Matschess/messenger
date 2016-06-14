@@ -751,3 +751,13 @@ color: #fff;
     margin-left: 10px;
     vertical-align: middle;
 }
+
+
+#chatToMedia {
+    visibility: hidden;
+}
+
+.back {
+    display: none;
+    margin-right: 10px;
+}

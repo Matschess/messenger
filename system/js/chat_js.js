@@ -193,7 +193,10 @@ $(document).ready(function () {
         }
     }
 
-    $('.chatTextBox').focus();
+    $totalWidth = $(document).width();
+    if ($totalWidth > 600) {
+        $('.chatTextBox').focus();
+    }
 
     $('.chatTextBox').keydown(function () {
         getKeyCode();
@@ -485,6 +488,31 @@ $(document).ready(function () {
         $('#overlay').fadeOut(200);
         $('#popup').fadeOut(200);
     });
+
+    $('#chatToMedia').click(function() {
+        // Prepare loading effect
+        $('#containerRight .content').html('');
+        $('.contentLoaderPattern').clone().appendTo($('#containerRight .content'));
+
+        // Auto activate loading effects
+        window.setTimeout(function () {
+            $('#containerRight .content .contentLoaderPattern').show();
+        }, 100);
+
+        window.setTimeout(function () {
+            $user_id = $('#currentUser').val();
+            $friend_id = this.id;
+            $chat_id = $('#currentChat').val();
+            $('#currentChat').val($friend_id);
+            $('#containerRight .content').hide();
+            $('#containerRight .content').load('subpages/mediabox.php?chat_id=' + $chat_id);
+            $('#containerRight .content').ready(function () {
+                $('#containerRight .content').show();
+                clearTabsRight();
+                $('#toMedia').addClass('navigationActive');
+            });
+        }, 500);
+    })
 
     $('.tooltip').tooltipster({
         contentAsHTML: true,
