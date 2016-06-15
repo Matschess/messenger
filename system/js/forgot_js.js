@@ -53,6 +53,7 @@ $(document).ready(function(){
 	});
 	
 	function startReset() {
+		$('#okNow').removeClass('wiggle');
 		$email = $('#email').val();
 		$.post("php/forgot_check.php",
 		{
@@ -68,7 +69,7 @@ $(document).ready(function(){
 				$('#popup').fadeIn(200);
 			}
 			else {
-				wiggle('#okNow');
+				$('#okNow').addClass('wiggle');
 			}
 		});
 	};
@@ -80,6 +81,7 @@ $(document).ready(function(){
 	});
 	
 	function authorize() {
+		$('#authorizeNow').removeClass('wiggle');
 		$email = $('#emailConfirmed').val();
 		$pin = $('#pin').val();
 		$.post("php/authorize_check.php",
@@ -117,7 +119,7 @@ $(document).ready(function(){
 				enter = 'restartForgot';
 			}
 			else {
-				wiggle('#authorizeNow');
+				$('#authorizeNow').addClass('wiggle');
 			}
 		});
 	};

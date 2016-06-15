@@ -64,20 +64,17 @@
     cursor: pointer;
 }
 
-#deleteChat, #uploadNewMedia {
+#deleteChat {
     margin-top: -25px;
     border-radius: 2px 2px 0px 0px;
 }
 
-#chatToMedia, #downloadAllMedia {
+#chatToMedia {
     margin-top: 8px;
     border-radius: 0px 0px 2px 2px;
 }
 
-#deleteAllMedia {
-    margin-top: 41px;
-    border-radius: 0px 0px 2px 2px;
-}
+
 
 #chatInput {
     position: absolute;

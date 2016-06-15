@@ -196,6 +196,14 @@ $(document).ready(function () {
     $totalWidth = $(document).width();
     if ($totalWidth > 600) {
         $('.chatTextBox').focus();
+
+        $('.tooltip').tooltipster({
+            contentAsHTML: true,
+            animation: 'grow',
+            delay: 250,
+            theme: 'tooltipster-custom',
+            trigger: 'hover'
+        });
     }
 
     $('.chatTextBox').keydown(function () {
@@ -513,14 +521,6 @@ $(document).ready(function () {
             });
         }, 500);
     })
-
-    $('.tooltip').tooltipster({
-        contentAsHTML: true,
-        animation: 'grow',
-        delay: 250,
-        theme: 'tooltipster-custom',
-        trigger: 'hover'
-    });
 
     function reloadCookies() {
         if ($.cookie('chat_id')) {

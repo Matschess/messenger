@@ -11,8 +11,6 @@
 
     include("db_connect.php");
 
-    echo "<i id='backToChat' class='material-icons hover back'>arrow_back</i>";
-
     if ($_COOKIE["chat_id"]) {
         $chat_id = $_COOKIE["chat_id"];
         $result = mysqli_query($db, "SELECT user_left_id, user_right_id FROM chats WHERE id = $chat_id");
@@ -38,21 +36,21 @@
     $result3 = mysqli_query($db, "SELECT * FROM contacts WHERE user_id = '$friend_id' && friend_id = '$user_id' && NOT accepted");
     $row3 = mysqli_fetch_object($result3);
     if ($row3) {
-        echo "<div id='$friend_id' class='button waitFriends'><i class='material-icons-small'>done</i> Hinzugefügt</div>";
+        $button = "<span id='$friend_id' class='button waitFriends'><i class='material-icons-small'>done</i> Hinzugefügt</span>";
     } else {
         $result2 = mysqli_query($db, "SELECT id FROM contacts WHERE user_id = $user_id && friend_id = $friend_id && NOT accepted");
         $row2 = mysqli_fetch_object($result2);
         $contacts_id = $row2->id;
         if ($row2) {
-            echo "<div id='$contacts_id' class='button acceptFriends'><i class='material-icons-small'>done</i> Freundschaftsanfrage akzeptieren</div>";
+            $button = "<span id='$contacts_id' class='button acceptFriends'><i class='material-icons-small'>done</i> Freundschaftsanfrage akzeptieren</span>";
         } else {
             $result2 = mysqli_query($db, "SELECT id FROM contacts WHERE ((user_id = '$user_id' && friend_id = '$friend_id') || (user_id = '$friend_id' && friend_id = '$user_id')) && accepted");
             $row2 = mysqli_fetch_object($result2);
             if ($row2) {
-                echo "<div id='$friend_id' class='button endFriends'><i class='material-icons-small'>close</i> Freundschaft beenden</div>";
+                $button = "<span id='$friend_id' class='button endFriends'><i class='material-icons-small'>close</i> Freundschaft beenden</span>";
                 $visibility = 1;
             } else {
-                echo "<div id='$friend_id' class='button getFriends'><i class='material-icons-small'>people</i> Freundschaftsanfrage</div>";
+                $button = "<span id='$friend_id' class='button getFriends'><i class='material-icons-small'>people</i> Freundschaftsanfrage</span>";
             }
         }
     }
@@ -103,8 +101,12 @@
         echo "<span id='myStatus' class='status'>$status</span>";
         echo "<input type='text' id='myStatusEdit' placeholder='Status...' value='$status'/>";
     }
+
+    echo "<br/>";
+    echo $button;
     ?>
 </div>
-
+</div>
+<i id="backToChat" class="material-icons hover back">arrow_back</i>
 </BODY>
 </HTML>

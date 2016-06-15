@@ -234,11 +234,11 @@
             <div id="optionsIcon">
                 <i class="material-icons hover" style="margin-right: 10px">more_vert</i>
             </div>
-            <div id="chatToMedia" class="option">
-                Medien
-            </div>
             <div id="deleteChat" class="option">
                 Chatverlauf löschen
+            </div>
+            <div id="chatToMedia" class="option">
+                Medien
             </div>
         </div>
     </div>

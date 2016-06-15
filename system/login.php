@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/login_style.css">
     <link rel="stylesheet" type="text/css" href="css/login_mobile.css" media="screen and (max-width: 600px)" />
     <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/special/wiggle_style.css">
     <!-- Extern Stylesheets -->
     <link rel="stylesheet" type="text/css" href="plugins/tooltipster/css/tooltipster.css"/>
     <link rel="stylesheet" type="text/css" href="plugins/tooltipster/css/themes/tooltipster-custom.css"/>
@@ -60,6 +61,7 @@ if (isset($_COOKIE['messenger'])) {
 
         </div>
     </div>
+    <span id="versioning" class="versioningPre">Version 0.0.0.1, &copy Matthias Lang</span>
 </div>
 <div id="popup">
     <div id="popupHeader"><span id="popupTitle">Konto gesperrt</span></div>

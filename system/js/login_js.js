@@ -40,6 +40,9 @@ $(document).ready(function () {
         $('#loginbox').fadeIn(200);
         setTimeout(function () {
             $('#loginbox').removeClass('loginboxPre');
+            setTimeout(function () {
+                $('#versioning').removeClass('versioningPre');
+            }, 150);
         }, 50);
     });
 
@@ -57,7 +60,7 @@ $(document).ready(function () {
     });
 
     function loginNow() {
-        $('#loginNow').removeClass('loginNowWiggle');
+        $('#loginNow').removeClass('wiggle');
         $username = $('#username').val();
         $password = $('#password').val();
         if ($username.trim() && $password.trim()) {
@@ -78,7 +81,7 @@ $(document).ready(function () {
                         $('#popup').fadeIn(200);
                     }
                     else {
-                        $('#loginNow').addClass('loginNowWiggle');
+                        $('#loginNow').addClass('wiggle');
                     }
                 });
         }

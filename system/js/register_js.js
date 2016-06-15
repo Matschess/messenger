@@ -31,6 +31,7 @@ $(document).ready(function(){
 	});
 
 	function registerNow() {
+		$('#registerNow').removeClass('wiggle');
 		$email = $('#email').val();
 		$username = $('#username').val();
 		$firstname = $('#firstname').val();
@@ -55,7 +56,7 @@ $(document).ready(function(){
 					}, 10000);
 				}
 				else {
-					wiggle();
+					$('#registerNow').addClass('wiggle');
 				}
 			});
 		}

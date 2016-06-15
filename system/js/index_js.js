@@ -157,37 +157,42 @@ $(document).ready(function () {
                     websocket.send(JSON.stringify(sendMsg));
                 }
                 else {
-                    $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html();
-                    $animateFlash = false;
-                    if ($currentNewMessages) {
-                        if ($.isNumeric($currentNewMessages)) {
-                            $newMessages = parseInt($currentNewMessages) + 1;
-                            if ($newMessages > 1) {
-                                $animateFlash = true;
+                    if ($('#' + $chat_id + ' .currentChatsBubble span').length) {
+                        $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html();
+                        $animateFlash = false;
+                        if ($currentNewMessages) {
+                            if ($.isNumeric($currentNewMessages)) {
+                                $newMessages = parseInt($currentNewMessages) + 1;
+                                if ($newMessages > 1) {
+                                    $animateFlash = true;
+                                }
+                            }
+                            else {
+                                $newMessages = 1;
                             }
                         }
                         else {
                             $newMessages = 1;
                         }
+
+                        $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html($newMessages);
+                        $('#' + $chat_id + ' .currentChatsBubble').show();
+                        if ($animateFlash) {
+                            setTimeout(function () {
+                                $('#' + $chat_id + ' .currentChatsBubble span').addClass('animated flash');
+                            }, 250);
+                            $('#' + $chat_id + ' .currentChatsBubble span').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                                $('#' + $chat_id + ' .currentChatsBubble span').removeClass('animated flash');
+
+                            });
+                        }
+                        else {
+                            $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
+                            $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomOut');
+                        }
                     }
                     else {
-                        $newMessages = 1;
-                    }
-
-                    $currentNewMessages = $('#' + $chat_id + ' .currentChatsBubble span').html($newMessages);
-                    $('#' + $chat_id + ' .currentChatsBubble').show();
-                    if ($animateFlash) {
-                        setTimeout(function () {
-                            $('#' + $chat_id + ' .currentChatsBubble span').addClass('animated flash');
-                        }, 250);
-                        $('#' + $chat_id + ' .currentChatsBubble span').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                            $('#' + $chat_id + ' .currentChatsBubble span').removeClass('animated flash');
-
-                        });
-                    }
-                    else {
-                        $('#' + $chat_id + ' .currentChatsBubble').addClass('animated zoomIn');
-                        $('#' + $chat_id + ' .currentChatsBubble').removeClass('animated zoomOut');
+                        reloadCurrentChats();
                     }
                     vibrate();
                 }

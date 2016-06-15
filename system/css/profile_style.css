@@ -90,7 +90,7 @@
 }
 
 #Content {
-    text-align: left;
+text-align: center;
     position: relative;
     padding: 15px;
 }
@@ -237,4 +237,11 @@
 .waitFriends:hover {
     background-color: #666;
     cursor: default;
+}
+
+#backToChat {
+    color: #fff;
+    position: absolute;
+    top: 17px;
+    left: 7px;
 }

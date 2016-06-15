@@ -93,6 +93,8 @@ if (mysqli_num_rows($contactsQuery)) {
             $friend_name = $groupname;
         }
 
+        // clear last_message, because an otherwise it would be used for empty char
+        $last_message = "";
         $messagesQuery = mysqli_query($db, "SELECT user_id, message, sent FROM messages WHERE chat_id = $chat_id ORDER BY sent DESC");
         if (mysqli_num_rows($messagesQuery)) {
             $messagesRows = mysqli_fetch_object($messagesQuery);

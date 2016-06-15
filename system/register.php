@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/register_style.css"/>
     <link rel="stylesheet" type="text/css" href="css/login_mobile.css" media="screen and (max-width: 600px)" />
     <link rel="stylesheet" href="css/popup.css"/>
+    <link rel="stylesheet" href="css/special/wiggle_style.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="plugins/tooltipster/css/tooltipster.css"/>

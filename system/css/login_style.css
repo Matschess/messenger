@@ -103,12 +103,15 @@ body {
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color: #fff;
 }
+
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: #fff;
 }
+
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
     color: #fff;
 }
+
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: #fff;
 }
@@ -139,12 +142,15 @@ body {
     ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
         opacity: 0;
     }
+
     :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
         opacity: 0;
     }
+
     ::-moz-placeholder { /* Mozilla Firefox 19+ */
         opacity: 0;
     }
+
     :-ms-input-placeholder { /* Internet Explorer 10-11 */
         opacity: 0;
     }
@@ -161,34 +167,6 @@ body {
     font-weight: 400;
     color: #fff;
 
-}
-
-.loginNowWiggle{
-    -webkit-animation: shake .6s linear;
-}
-
-@-webkit-keyframes shake {
-    0% {
-        margin-left:-10px;
-    }
-    16% {
-        margin-left:9px;
-    }
-    33% {
-        margin-left:-6px;
-    }
-    50% {
-        margin-left:5px;
-    }
-    66% {
-        margin-left:-2px;
-    }
-    83% {
-        margin-left:1px;
-    }
-    100% {
-        margin-left: 0px;
-    }
 }
 
 .loginButton:hover {
@@ -285,3 +263,21 @@ label.label {
 }
 
 /* Material Icons ENDE */
+
+/* Additive Infos */
+
+#versioning {
+    font-size: 14px;
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 5px;
+    -webkit-transition: opacity 0.4s;
+    -moz-transition: opacity 0.4s;
+    -ms-transition: opacity 0.4s;
+    -o-transition: opacity 0.4s;
+    transition: opacity 0.4s;
+}
+
+.versioningPre {
+    opacity: 0;
+}

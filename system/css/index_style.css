@@ -337,6 +337,7 @@ input {
 /*Buttons in Container left Ende*/
 
 #containerLeftSearch {
+    text-align: center;
     padding: 12px;
     background-color: #2ecc71;
     color: #fff;
@@ -757,7 +758,7 @@ color: #fff;
     visibility: hidden;
 }
 
-.back {
+#backToOverview, #backToChat {
     display: none;
     margin-right: 10px;
 }

@@ -21,6 +21,7 @@
 
             include("db_connect.php");
 
+            echo "<i id='backToChat' class='material-icons hover back'>arrow_back</i>";
 
             $result = mysqli_query($db, "SELECT * FROM media WHERE chat_id = $chat_id");
             $countMedias = mysqli_num_rows($result);
