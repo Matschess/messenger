@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.example.messengerApp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="Vibration">
+        <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="BackgroundMode">
+        <param name="android-package" value="de.appplant.cordova.plugin.background.BackgroundMode" />
+    </feature>
+    <preference name="KeepRunning" value="true" />
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="AutoStart">
+        <param name="android-package" value="com.tonikorin.cordova.plugin.autostart.AutoStart" />
+    </feature>
+    <allow-intent href="market:*" />
+    <name>lets.chat</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <preference name="StatusBarBackgroundColor" value="#333333" />
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-navigation href="http://10.0.0.17/messenger/*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+</widget>

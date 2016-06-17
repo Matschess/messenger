@@ -1,0 +1,68 @@
+{
+    "cordova-plugin-whitelist": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-whitelist@1"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-inappbrowser"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-vibration": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-vibration"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-background-mode": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/katzer/cordova-plugin-background-mode.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-device": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-device"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-statusbar": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-statusbar"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-autostart": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ToniKorin/cordova-plugin-autostart.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-app-event": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-app-event"
+        },
+        "is_top_level": false,
+        "variables": {}
+    }
+}

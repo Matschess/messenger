@@ -1,0 +1,34 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.example.messengerApp"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.example.messengerApp"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.example.messengerApp"
+        },
+        "cordova-plugin-background-mode": {
+            "PACKAGE_NAME": "com.example.messengerApp"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.example.messengerApp"
+        },
+        "cordova-plugin-autostart": {
+            "PACKAGE_NAME": "com.example.messengerApp"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.example.messengerApp"
+        }
+    }
+}
