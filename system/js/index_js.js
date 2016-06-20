@@ -90,6 +90,9 @@ $(document).ready(function () {
                     }
                     $('#enquiries').html($requests).show();
                 }
+                else if (msg == 'enquiryAccepted') {
+                   reloadCurrentChats();
+                }
                 break;
             case 'updateCookies':
                 $friend_id = fullMsg.friend_id;
@@ -282,11 +285,14 @@ $(document).ready(function () {
                             $('.content #chat #content').append("<div class='chatLeft chatMe'>" + $portrait + "<div class='bubble'>" + $mediaOutput + "<span class='time'>" + $hours + ":" + $minutes + "</span></div></div>");
                         }
                     }
+
                     $('.chatMe').addClass('animated zoomIn');
                     $('.chatMe').removeClass('chatMe');
-                    // Scroll to bottom
-                    $content = $('#content');
-                    $content.scrollTop($content.prop("scrollHeight"));
+                    $('img, video, audio').load(function() {
+                        // Scroll to bottom
+                        $content = $('#content');
+                        $content.scrollTop($content.prop("scrollHeight"));
+                    })
 
                     // Send read
                     var msg = {
@@ -504,14 +510,11 @@ $(document).ready(function () {
             $('#containerLeft #contacts .contentLoaderPattern').show();
         }, 100);
 
-        window.setTimeout(function () {
-            $user_id = $('#currentUser').val();
             $('#containerLeft #contacts').hide();
-            $('#containerLeft #contacts').load('subpages/currentChats.php?user_id=' + $user_id);
-            $('#chat').ready(function () {
+            $('#containerLeft #contacts').load('subpages/currentChats.php', function() {
                 $('#containerLeft #contacts').show();
             });
-        }, 500);
+
     };
 
     $('#containerLeft').on('click', '#toContacts', function () {

@@ -58,7 +58,11 @@ if (isset($_COOKIE["chat_id"])) {
         echo "</div>";
 
         $groupMembers = mysqli_query($db, "SELECT users.id, users.firstname, users.lastname, users.portrait FROM groupmembers LEFT JOIN users ON users.id = groupmembers.user_id WHERE groupmembers.chat_id = $chat_id && groupmembers.admin ORDER BY users.firstname, users.lastname");
-        echo "<div id='$friend_id' class='button buttonEnd leaveGroup'><i class='material-icons-small'>close</i> Gruppe verlassen</div>";
+
+        echo "<div id='settings'>";
+        echo "<span id='$contacts_id' class='button leaveGroup'><i class='material-icons-small'>close</i> Gruppe verlassen</span>";
+
+        echo "</div>";
         $groupAdministratorsNumber = mysqli_num_rows($groupMembers);
         if ($groupAdministratorsNumber) {
             echo "<br/>";
@@ -126,7 +130,7 @@ if (isset($_COOKIE["chat_id"])) {
             $defaultPortrait = "../data/portraits/default.png";
             echo "<div class='memberAdd'>";
             echo "<div class='chip chipMemberAdd'><img src='" . $defaultPortrait . "'/> <span>Mitglied hinzufügen</span></div>";
-            echo "<input type='text' id='groupMemberSearch' placeholder='Tippe zum Suchen' autofocus/>";
+            echo "<input type='text' id='groupMemberSearch' placeholder='Schreiben zum Suchen' autofocus/>";
             echo "<div id='friendSuggestions'></div>";
             echo "</div>";
             echo "</div>";

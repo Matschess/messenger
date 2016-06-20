@@ -164,8 +164,8 @@ text-align: center;
 
 #settings {
     position: absolute;
-    top: 5px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     text-align: left;
 }
 
@@ -207,13 +207,6 @@ text-align: center;
     cursor: pointer;
 }
 
-.getFriends, .acceptFriends, .endFriends, .waitFriends, .buttonEnd {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    vertical-align: middle;
-}
-
 .getFriends, .acceptFriends {
     background-color: #27ae60;
 }
@@ -222,11 +215,11 @@ text-align: center;
     background-color: #2ecc71;
 }
 
-.endFriends, .buttonEnd {
+.endFriends, .leaveGroup {
     background-color: #c0392b;
 }
 
-.endFriends:hover, .buttonEnd {
+.endFriends:hover, .leaveGroup {
     background-color: #e74c3c;
 }
 

@@ -52,8 +52,9 @@
         }
     } elseif (isset($_COOKIE["friend_id"])) {
         $friend_id = $_COOKIE["friend_id"];
+    } else {
+        echo "<div id='noChatActive'><i class='material-icons'>chat_bubble_outline</i> Kein Freund ausgewählt</div>";
     }
-
     if (!$isGroup) {
         $isFriend = mysqli_query($db, "SELECT id FROM contacts WHERE user_id = $user_id && friend_id = $friend_id && accepted");
         if (mysqli_num_rows($isFriend)) {
@@ -401,16 +402,8 @@
         <i id="attach" class="material-icons hover tooltip" title="Datei teilen">attach_file</i>
         <i id="send" class="material-icons hover tooltip" title="Senden" style="margin-left: 20px;">send</i>
     </div>
-
-    <?php
-    /*
-    ?>
-    } else {
-        echo "<div id='noChatActive'><i class='material-icons'>chat_bubble_outline</i> Kein Freund ausgewählt</div>";
-    }
-    */
-    ?>
 </div>
+
 </BODY>
 </HTML>
 

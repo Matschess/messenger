@@ -11,7 +11,10 @@
 
     include("db_connect.php");
 
-    if ($_COOKIE["chat_id"]) {
+    if($_GET["friend_id"]) {
+        $friend_id = $_GET["friend_id"];
+    }
+    elseif ($_COOKIE["chat_id"]) {
         $chat_id = $_COOKIE["chat_id"];
         $result = mysqli_query($db, "SELECT user_left_id, user_right_id FROM chats WHERE id = $chat_id");
         if($row = mysqli_fetch_object($result)) {
@@ -25,9 +28,10 @@
             }
         }
     }
-    else {
+    elseif($_COOKIE["friend_id"]) {
         $friend_id = $_COOKIE["friend_id"];
     }
+    
     $result = mysqli_query($db, "SELECT id, username, firstname, lastname, portrait, statustext, isPublic FROM users WHERE id = '$friend_id'");
     $row = mysqli_fetch_object($result);
     if ($row->isPublic) {
@@ -103,7 +107,9 @@
     }
 
     echo "<br/>";
+    echo "<div id='settings'>";
     echo $button;
+    echo "</div>";
     ?>
 </div>
 </div>

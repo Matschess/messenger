@@ -260,7 +260,7 @@ $(document).ready(function () {
         $toFriend_id = this.id;
         $('#overlay').fadeOut(200);
         $('#popup').fadeOut(200);
-        $('.content').load('subpages/friendsProfile.php?user_id=' + $user_id + '&friend_id=' + $toFriend_id);
+        $('.content').load('subpages/friendsProfile.php');
     });
 
     $('#smiley').click(function () {
@@ -497,7 +497,7 @@ $(document).ready(function () {
         $('#popup').fadeOut(200);
     });
 
-    $('#chatToMedia').click(function() {
+    $('#chatToMedia').click(function () {
         // Prepare loading effect
         $('#containerRight .content').html('');
         $('.contentLoaderPattern').clone().appendTo($('#containerRight .content'));
@@ -522,6 +522,13 @@ $(document).ready(function () {
         }, 500);
     })
 
+    $('.linkToMember').click(function () {
+        $toFriend_id = this.id.substr(6);
+        $('#overlay').fadeOut(200);
+        $('#popup').fadeOut(200);
+        $('.content').load('subpages/friendsProfile.php?friend_id=' + $toFriend_id);
+    });
+
     function reloadCookies() {
         if ($.cookie('chat_id')) {
             $chat_id = $.cookie('chat_id');
@@ -533,6 +540,11 @@ $(document).ready(function () {
 
     adjustColors();
     // Scroll to bottom
-    $content = $('#content');
-    $content.scrollTop($content.prop("scrollHeight"));
+
+    $('img').load(function () {
+        $content = $('#content');
+        $content.scrollTop($content.prop("scrollHeight"));
+        $('#chat').show();
+    });
+
 });

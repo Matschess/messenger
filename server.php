@@ -58,7 +58,7 @@ while (true) {
                     if ($subtype == 'chat') {
                         $chat_id = $tst_msg->chat_id;
                         echo "chat";
-                    } elseif($subtype == 'friend') {
+                    } elseif ($subtype == 'friend') {
                         $friend_id = $tst_msg->friend_id;
                         echo "friend";
                     }
@@ -247,6 +247,19 @@ while (true) {
                         foreach ($userHasClients[$friend_id] as $client) {
                             $response = mask(json_encode(array('type' => 'note', 'message' => 'newFriendRequest'))); //prepare json data
                             send($clients[$client], $response);
+                        }
+                    }
+                } elseif ($tst_msg->type === "enquiryAccepted") {
+                    $enquiry_id = $tst_msg->enquiry_id;
+                    $result = mysqli_query($db, "SELECT friend_id FROM contacts WHERE id = $enquiry_id");
+                    $row = mysqli_fetch_object($result);
+                    if ($row) {
+                        $friend_id = $row->friend_id;
+                        if (isset($userHasClients[$friend_id])) {
+                            foreach ($userHasClients[$friend_id] as $client) {
+                                $response = mask(json_encode(array('type' => 'note', 'message' => 'enquiryAccepted'))); //prepare json data
+                                send($clients[$client], $response);
+                            }
                         }
                     }
                 }

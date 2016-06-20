@@ -43,7 +43,14 @@ $(document).ready(function () {
             },
             function (data) {
                 if (data == 'changed') {
-                    $('#popupContent').load('subpages/enquiry.php')
+                    var msg = {
+                        type: 'enquiryAccepted',
+                        enquiry_id: $id
+                    };
+
+                    //convert and send data to server
+                    websocket.send(JSON.stringify(msg));
+                    $('#popupContent').load('subpages/enquiry.php');
                 }
             });
     });

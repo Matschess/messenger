@@ -101,6 +101,10 @@
     height: 550px;
 }
 
+#chat {
+    display: none;
+}
+
 #content {
     text-align: left;
     padding: 2%;
